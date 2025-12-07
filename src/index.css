@@ -5,13 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   touch-action: none;
+  overscroll-behavior: none !important;
+
 }
 
 
-*{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 }
 
