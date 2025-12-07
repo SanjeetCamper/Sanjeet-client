@@ -9,12 +9,14 @@ import DailyUser from "./pages/DailyUser";
 import { useUser } from "@clerk/clerk-react";
 import Setting from "./pages/Setting";
 import NavBar from "./components/Navbar.jsx"
+import InstallPWA from "./InstallPWA.jsx";
 
 const App = () => {
   const { user } = useUser();
 
   return (
     <>
+    <InstallPWA />
       <NavBar />
       <div className="pt-16 pb-20 px-4">
         <Routes>
