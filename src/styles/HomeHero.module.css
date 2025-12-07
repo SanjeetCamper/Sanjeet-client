@@ -1,0 +1,143 @@
+.hero {
+    background: linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #14b8a6 100%);
+    color: white;
+    padding: 90px 20px;
+    height: 73vh;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    clip-path: polygon(0 50%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.logoCircle {
+    width: 120px;
+    height: 120px;
+    /* background: rgb(197, 119, 2); */
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+
+
+.logoIcon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #06b6d4, #056a83);
+    border-radius: 50%;
+    position: relative;
+}
+
+.logoIcon::after {
+    content: '💧';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.btnOrder {
+    background: white;
+    color: #099faf;
+    /* border: 1px solid rgb(0, 213, 255); */
+    padding: 18px 40px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btnOrder:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Animated Waves */
+@keyframes wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1);
+    }
+
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55);
+    }
+
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1);
+    }
+}
+
+.waves {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 200%;
+    height: 150px;
+    animation: wave 10s linear infinite;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.3)"/></svg>');
+    background-size: 1200px 120px;
+    opacity: 0.4;
+}
+
+.wave:nth-child(2) {
+    animation: wave 7s linear infinite;
+    opacity: 0.3;
+}
+
+.wave:nth-child(3) {
+    animation: wave 5s linear infinite;
+    opacity: 0.5;
+}
