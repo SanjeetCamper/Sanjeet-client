@@ -11,8 +11,8 @@ import {
 
 const Footer = () => {
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-white z-50 px-4 pt-3 pb-4">
-      <div className="flex justify-between items-center py-2 bg-white border border-gray-500/50 rounded-full text-sm fixed bottom-2 left-1/2 -translate-x-1/2 w-full max-w-sm">
+    <div className="fixed bottom-0 left-0 w-full bg-white z-50 px-4 pt-3">
+      <div className="flex justify-between items-center py-1 bg-white border border-gray-500/50 rounded-full text-sm fixed bottom-2 left-1/2 -translate-x-1/2 w-full max-w-sm">
         <NavLink
           to={"/"}
           className={({ isActive }) =>

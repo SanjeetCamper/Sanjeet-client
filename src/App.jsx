@@ -10,6 +10,7 @@ import { useUser } from "@clerk/clerk-react";
 import Setting from "./pages/Setting";
 import NavBar from "./components/Navbar.jsx"
 import InstallPWA from "./InstallPWA.jsx";
+// import AboutUs from "./components/AboutUs.jsx";
 
 const App = () => {
   const { user } = useUser();

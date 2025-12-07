@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "../styles/HomeHero.module.css";
+import AboutUs from "./AboutUs";
 
 const HomeHero = () => {
   return (
-    <div class={styles.hero}>
+    <div>
+      <div class={styles.hero}>
       <div class={styles.waves}>
         <div class={styles.wave}></div>
         <div class={styles.wave}></div>
@@ -23,6 +25,9 @@ const HomeHero = () => {
         <p className="text-white">Pure Water, Pure Trust.</p>
       </div>
       <button class={styles.btnOrder}>Order Now</button>
+    </div>
+
+    <AboutUs />
     </div>
   );
 };

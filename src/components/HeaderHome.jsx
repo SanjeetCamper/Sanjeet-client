@@ -1,20 +1,21 @@
 import { useClerk } from "@clerk/clerk-react";
-import React from "react";
+import React  from "react";
 import styles from "../styles/HomeHero.module.css";
+import AboutUs from "./AboutUs";
+import RobotSpeech from "./RobotAnimation";
 
 const HeaderHome = () => {
   const { openSignIn } = useClerk();
+  
 
   return (
     <div className="flex flex-col items-center mt-0 sm:mt-0 px-4 text-center text-gray-800 mt-15">
 
-      <p className="flex items-center text-sm text-gray-500 sm:text-3xl mb-5">ARE YOU THURSTY</p>
-
-      <img
-        src={"/header_img.png"}
-        alt=""
-        className={`${styles.headerImg} w-36  h-36 rounded-full mb-6`}
-      />
+      <div className="text-center mt-6">
+        
+        <RobotSpeech />
+        <img src="/header_img.png" className={`${styles.headerImg} w-52 mx-auto mt-6`} />
+      </div>
 
       <h1 className="flex items-center text-xl text-gray-500 sm:text-3xl font-medium mb-2">
         Hey Sanjeet Walo ! &nbsp;
@@ -69,6 +70,8 @@ const HeaderHome = () => {
           </button>
         </div>
       </div>
+
+      <AboutUs />
     </div>
   );
 };
