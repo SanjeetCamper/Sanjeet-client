@@ -37,31 +37,35 @@
 
 
 .hero {
-    background: linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #14b8a6 100%);
+    background: linear-gradient(135deg, #4fc9eb 0%, #06b6d4 50%, #14b8a6 100%);
     color: white;
-    padding: 100px 20px;
-    height: 73vh;
+    padding: 20px;
+    /* height: 100vh; */
+    /* margin-top: 100px; */
     text-align: center;
     position: relative;
     overflow: hidden;
-    border-radius: 3px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.hero::after {
+/* .hero::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height:60px;
     background: white;
     clip-path: polygon(0 50%, 100% 0, 100% 100%, 0% 100%);
-}
+} */
 
-.logoCircle {
+/* .logoCircle {
     width: 120px;
     height: 120px;
-    /* background: rgb(197, 119, 2); */
+    background: rgb(197, 119, 2);
     border-radius: 50%;
     margin: 0 auto 30px;
     padding: 0px;
@@ -72,7 +76,7 @@
     animation: float 3s ease-in-out infinite;
     position: relative;
     z-index: 2;
-}
+} */
 
 @keyframes float {
 

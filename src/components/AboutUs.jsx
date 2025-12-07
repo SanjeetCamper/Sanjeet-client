@@ -1,6 +1,8 @@
+import React from "react";
+
 export default function AboutUs() {
   return (
-    <div>
+    <div className="mt-7">
       <h1 className="text-3xl font-semibold text-center mx-auto">
         About our apps
       </h1>

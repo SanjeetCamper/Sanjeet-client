@@ -9,12 +9,12 @@ const HeaderHome = () => {
   
 
   return (
-    <div className="flex flex-col items-center mt-0 sm:mt-0 px-4 text-center text-gray-800 mt-15">
+    <div className="flex flex-col items-center sm:mt-0 px-4 text-center text-gray-800 mt-13">
 
       <div className="text-center mt-6">
         
         <RobotSpeech />
-        <img src="/header_img.png" className={`${styles.headerImg} w-52 mx-auto mt-6`} />
+        <img src="/header_img.png" className={`${styles.robotImg} w-52 mx-auto mt-6`} />
       </div>
 
       <h1 className="flex items-center text-xl text-gray-500 sm:text-3xl font-medium mb-2">
@@ -28,7 +28,7 @@ const HeaderHome = () => {
 
       <div className="mt-10 mb-15 bg-gradient-to-br from-[#2563eb] via-[#06b6d4] to-[#14b8a6] text-white rounded-xl p-5">
         <h2 className="text-2xl sm:text-5xl font-semibold my-4 text-gray-100">
-          Welcome To Saneej Water Supplier 🚰
+          Welcome To Sanjeet Water Supplier 🚰
         </h2>
 
         <p className="mb-8 max-w-md text-gray-250">

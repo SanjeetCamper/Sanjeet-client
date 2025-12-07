@@ -10,7 +10,7 @@ import { useUser } from "@clerk/clerk-react";
 import Setting from "./pages/Setting";
 import NavBar from "./components/Navbar.jsx"
 import InstallPWA from "./InstallPWA.jsx";
-// import AboutUs from "./components/AboutUs.jsx";
+import AboutUs from "./components/AboutUs.jsx";
 
 const App = () => {
   const { user } = useUser();
@@ -19,7 +19,7 @@ const App = () => {
     <>
     <InstallPWA />
       <NavBar />
-      <div className="pt-16 pb-20 px-4">
+      <div className="pt-15 pb-0 px-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />

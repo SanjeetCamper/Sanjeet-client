@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import styles from '../styles/HomeHero.module.css'
 
 export default function RobotSpeech() {
   const messages = [
@@ -10,19 +9,60 @@ export default function RobotSpeech() {
   ];
 
   const [index, setIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [charIndex, setCharIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex(prev => (prev + 1) % messages.length);
-    }, 3000); // speed 1.8s
+    // typing effect
+    if (charIndex < messages[index].length) {
+      const timeout = setTimeout(() => {
+        setDisplayText((prev) => prev + messages[index][charIndex]);
+        setCharIndex(charIndex + 1);
+      }, 70); // typing speed
 
-    return () => clearInterval(timer);
-  }, []);
+      return () => clearTimeout(timeout);
+    }
+
+    // hold completed line then next
+    const hold = setTimeout(() => {
+      setDisplayText("");
+      setCharIndex(0);
+      setIndex((prev) => (prev + 1) % messages.length);
+    }, 1500); // hold 1.5s
+
+    return () => clearTimeout(hold);
+  }, [charIndex, index]);
 
   return (
-    <div className="text-center mt-6">
-      <div className={`${styles.headerImg} mx-auto bg-white px-4 py-2 rounded-2xl shadow-sm text-[13px] text-gray-700 font-medium inline-block relative `}>
-        {messages[index]}
+    <div className="text-center">
+      <style>{`
+        @keyframes bubbleFade {
+          0% { opacity: 0; transform: translateY(6px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes cursorBlink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+      `}</style>
+
+      <div
+        className="mx-auto bg-white px-4 py-2 rounded-2xl shadow-sm text-[13px] font-medium inline-block relative"
+        style={{ animation: "bubbleFade 0.4s ease" }}
+      >
+        {displayText}
+        <span
+          style={{
+            display: "inline-block",
+            width: "6px",
+            marginLeft: "2px",
+            animation: "cursorBlink 0.7s infinite",
+          }}
+        >
+          |
+        </span>
+
         <div className="absolute left-1/2 -bottom-2 transform -translate-x-1/2 w-3 h-3 bg-white rotate-45 shadow-sm"></div>
       </div>
     </div>
