@@ -39,7 +39,7 @@ export default function InstallPWA() {
       style={{
         width: "90%",
         position: "fixed",
-        bottom: "16px",
+        bottom: "46px",
         left: "50%",
         transform: "translateX(-50%)",
         padding: "12px 16px",
@@ -47,6 +47,8 @@ export default function InstallPWA() {
         background: "#ecfeff",
         boxShadow: "0 4px 10px rgba(0,0,0,0.12)",
         display: "flex",
+        alignItems:"center",
+        justifyContent: "center",
         gap: "8px",
         alignItems: "center",
         zIndex: 9999,
