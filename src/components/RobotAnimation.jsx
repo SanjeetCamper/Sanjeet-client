@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from '../styles/HomeHero.module.css'
 
 export default function RobotSpeech() {
   const messages = [
@@ -65,6 +66,34 @@ export default function RobotSpeech() {
 
         <div className="absolute left-1/2 -bottom-2 transform -translate-x-1/2 w-3 h-3 bg-white rotate-45 shadow-sm"></div>
       </div>
+
+      <div>
+        <div className="text-center mt-6">
+          <RobotSpeech />
+          <img
+            src="/header_img.png"
+            className={`${styles.robotImg} w-52 mx-auto mt-6`}
+          />
+        </div>
+
+        <h1 className="flex items-center text-xl text-gray-500 sm:text-3xl font-medium mb-2">
+          Hey Sanjeet Walo ! &nbsp;
+          <img
+            src={"/hand_wave.png"}
+            alt=""
+            className={`w-8 aspect-square ${styles.handImg}`}
+          />
+        </h1>
+
+        {/* <button
+          onClick={openSignIn}
+          className="bg-gradient-to-br from-[#2563eb] via-[#06b6d4] to-[#14b8a6] text-white rounded-full px-8 py-2.5 mt-5  transition-all cursor-pointer"
+        >
+          Get Started
+        </button> */}
+      </div>
     </div>
+
+    
   );
 }
