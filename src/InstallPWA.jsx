@@ -37,6 +37,7 @@ export default function InstallPWA() {
   return (
     <div
       style={{
+        width: "90%",
         position: "fixed",
         bottom: "16px",
         left: "50%",

@@ -18,8 +18,10 @@ const HomeHero = () => {
 
       
 
-      <h1>Saneet Water Supplier</h1>
-      <p>Pure Water, Pure Trust.</p>
+      {/* <h1>Saneet <p>Water Supplier</p></h1> */}
+      <div className="py-4 px-1 my-10 rounded-full border flex justify-center items-center">
+        <p className="text-white">Pure Water, Pure Trust.</p>
+      </div>
       <button class={styles.btnOrder}>Order Now</button>
     </div>
   );

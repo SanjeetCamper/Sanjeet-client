@@ -1,7 +1,41 @@
+.headerImg {
+    animation: popInWave 3s ease-in-out infinite;
+
+}
+
+.handImg {
+    animation: handWave  3s ease-in-out infinite;
+
+}
+
+@keyframes handWaveBounce {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(10deg) translateY(-4px); }
+}
+
+@keyframes popInWave {
+  0% { opacity: 0; transform: scale(0.8) rotate(-10deg); }
+  50% { opacity: 1; transform: scale(1.05) rotate(8deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+
+
+@keyframes handWave {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(12deg); }
+  30% { transform: rotate(-10deg); }
+  45% { transform: rotate(8deg); }
+  60% { transform: rotate(-6deg); }
+  75% { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
 .hero {
     background: linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #14b8a6 100%);
     color: white;
-    padding: 90px 20px;
+    padding: 100px 20px;
     height: 73vh;
     text-align: center;
     position: relative;
@@ -37,12 +71,15 @@
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 
@@ -65,16 +102,11 @@
 }
 
 .hero h1 {
-    font-size: 2.5rem;
+    font-size: 4rem;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-.hero p {
-    font-size: 2rem;
-    font-weight: 300;
-    margin-bottom: 40px;
-}
 
 .btnOrder {
     background: white;
