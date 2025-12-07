@@ -8,6 +8,10 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
 
+      workbox: {
+        cleanupOutdatedCaches: true, // 👈 सबसे जरूरी
+      },
+
       includeAssets: [
         "logo.png",
         "bg_img.png",
