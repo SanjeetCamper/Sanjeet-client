@@ -1,12 +1,15 @@
 import { useClerk } from "@clerk/clerk-react";
 import React from "react";
-import styles from '../styles/HomeHero.module.css'
+import styles from "../styles/HomeHero.module.css";
 
 const HeaderHome = () => {
   const { openSignIn } = useClerk();
 
   return (
-    <div className="flex flex-col items-center mt-0 sm:mt-0 px-4 text-center text-gray-800 mt-10">
+    <div className="flex flex-col items-center mt-0 sm:mt-0 px-4 text-center text-gray-800 mt-15">
+
+      <p className="flex items-center text-sm text-gray-500 sm:text-3xl mb-5">ARE YOU THURSTY</p>
+
       <img
         src={"/header_img.png"}
         alt=""
@@ -15,18 +18,22 @@ const HeaderHome = () => {
 
       <h1 className="flex items-center text-xl text-gray-500 sm:text-3xl font-medium mb-2">
         Hey Sanjeet Walo ! &nbsp;
-        <img src={"/hand_wave.png"} alt="" className={`w-8 aspect-square ${styles.handImg}`} />
+        <img
+          src={"/hand_wave.png"}
+          alt=""
+          className={`w-8 aspect-square ${styles.handImg}`}
+        />
       </h1>
 
-       <div className="my-10  bg-gradient-to-br from-[#2563eb] via-[#06b6d4] to-[#14b8a6] text-white rounded-xl p-5">
-         <h2 className="text-2xl sm:text-5xl font-semibold my-4 text-gray-100">
-        Welcome To Saneej Water Supplier 🚰
-      </h2>
+      <div className="mt-10 mb-15 bg-gradient-to-br from-[#2563eb] via-[#06b6d4] to-[#14b8a6] text-white rounded-xl p-5">
+        <h2 className="text-2xl sm:text-5xl font-semibold my-4 text-gray-100">
+          Welcome To Saneej Water Supplier 🚰
+        </h2>
 
-      <p className="mb-8 max-w-md text-gray-250">
-        Pure water delivered fresh, clean and on time — every single day.
-      </p>
-       </div>
+        <p className="mb-8 max-w-md text-gray-250">
+          Pure water delivered fresh, clean and on time — every single day.
+        </p>
+      </div>
 
       <button
         onClick={openSignIn}
