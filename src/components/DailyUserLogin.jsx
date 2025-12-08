@@ -8,7 +8,7 @@ const DailyUserLogin = () => {
         <div className={styles.logo}>
           <img src="/logo.png" alt="" />
         </div>
-        <h1>Daily User Login</h1>
+        <h1 className={styles.h1h1}>Daily User Login</h1>
         <p className={styles.subtitle}>Welcome back! Please login to continue</p>
 
         <form>

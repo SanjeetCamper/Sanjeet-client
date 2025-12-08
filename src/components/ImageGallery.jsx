@@ -4,14 +4,15 @@ import Banner from "../CloudinaryStorage/Banner";
 const ImageGallery = () => {
   const images = [
     "/Campers.png",
+    "/RO.png",
     // "https://res.cloudinary.com/dsjr8tatb/image/upload/v1765184508/IMG_20250908_181626_utl5tt.jpg",
-    "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide1.png",
-    "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide2.png",
+    // "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide1.png",
+    // "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide2.png",
     // "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide3.png",
 
   ];
 
-  const [mainImg, setMainImg] = useState(images[1]);
+  const [mainImg, setMainImg] = useState(images[0]);
 
   useEffect(() => {
   const interval = setInterval(() => {
@@ -20,7 +21,7 @@ const ImageGallery = () => {
       const nextIndex = (currentIndex + 1) % images.length;
       return images[nextIndex];
     });
-  }, 4000); // 3 seconds auto change
+  }, 3000); // 3 seconds auto change
 
   return () => clearInterval(interval);
 }, [images]);
@@ -32,7 +33,7 @@ const ImageGallery = () => {
         <img
           src={mainImg}
           alt="Main"
-          className="w-full rounded-lg transition duration-500"
+          className="w-full h-60 mx:h-80 rounded-lg transition duration-500"
         />
       </div>
 
@@ -43,7 +44,7 @@ const ImageGallery = () => {
             key={i}
             src={src}
             onClick={() => setMainImg(src)}
-            className={`rounded-lg md:h-24 h-14 object-cover cursor-pointer hover:opacity-80 border ${
+            className={`w-full h-16 rounded-lg md:w-24 md:h-24 object-cover object-center cursor-pointer hover:opacity-80 border ${
               mainImg === src ? "border-blue-500" : "border-transparent"
             }`}
             alt={`Thumb ${i}`}

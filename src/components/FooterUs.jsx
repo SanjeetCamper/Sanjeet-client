@@ -4,9 +4,9 @@ import WaveEffect from "./WaveEffect";
 const FooterUs = () => {
   return (
     <>
-      <footer className="mt-5 flex flex-col items-center justify-center rounded py-5 px-1 border border-gray-300">
-        <p className="mt-4 text-center text-gray-500">
-          Copyright © 2025 Sanjeet Water Supplier. All Rights Reservered.
+      <footer className="mt-15 flex flex-col items-center justify-center rounded-full py-1 pb-3 px-1 border border-gray-300">
+        <p className="mt-4 text-center text-xs text-gray-500">
+          Copyright © 2025 Sanjeet Water Supplier. <br /> All Rights Reservered.
         </p>
         <div className="flex items-center gap-4 mt-5">
           <a
