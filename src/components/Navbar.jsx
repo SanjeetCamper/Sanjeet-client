@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
+import NotchNotification from "./NotchNotification.";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -19,10 +20,7 @@ const NavBar = () => {
         />
 
         {user ? (
-          <div className="absolute left-1/2 -translate-x-1/2 text-1 sm:text-sm overflow-y-auto max-h-10 no-scrollbar">
-            {"Hey " + user.firstName} <br />
-            🔔 Your Noticfication Panel
-          </div>
+          <NotchNotification />
         ) : (
           ""
         )}

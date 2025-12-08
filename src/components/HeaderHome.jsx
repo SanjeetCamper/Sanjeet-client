@@ -4,6 +4,8 @@ import React from "react";
 import AboutUs from "./AboutUs.jsx";
 // import RobotSpeech from "./RobotAnimation";
 import HomeHero from "./HomeHero.jsx";
+import FooterUs from "./FooterUs.jsx";
+import ImageGallery from "./ImageGallery.jsx";
 
 const HeaderHome = () => {
   const { openSignIn } = useClerk();
@@ -43,7 +45,11 @@ const HeaderHome = () => {
         </div> */}
       </div>
 
-      <AboutUs />
+      {/* <AboutUs /> */}
+
+      <ImageGallery />
+
+      <FooterUs />
     </div>
   );
 };
