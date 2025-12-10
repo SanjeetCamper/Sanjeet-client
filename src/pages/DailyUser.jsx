@@ -14,7 +14,7 @@ const DailyUser = () => {
     if (!email) return;
 
     // 👇 now allowed only exact clean name
-    if (email === "altamasma064@gmail.com") {
+    if (email === "sanjeethelpline@gmail.com") {
       navigate("/dailyuser/app");
     }else{
       navigate('/dailyuser');
@@ -22,8 +22,8 @@ const DailyUser = () => {
   }, [email, navigate]);
 
   return (
-    <div className='mx-auto w-full max-w-md px-2 pt-27 text-justify pb-20 overflow-y-auto'>
-      {email !== "altamasma064@gmail.com" && <DailyUserLogin />}
+    <div className='mx-auto w-full max-w-md px-4 pt-27 text-justify pb-20 overflow-y-auto'>
+      {email !== "sanjeethelpline@gmail.com" && <DailyUserLogin />}
     </div>
   );
 };

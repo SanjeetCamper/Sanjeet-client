@@ -1,9 +1,16 @@
 import React from 'react'
+import {  ArrowLeft } from "lucide-react";
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const DailyUserOut = () => {
+
+  // const navigate = useNavigate();
+
   return (
-    <div >
-      hello
+    <div className='fixed left-2 top-4 rounded-full w-10 h-10 flex justify-center items-center hover:bg-gray-200 active:bg-gray-200 cursor-pointer'>
+      <NavLink to={'/'}>
+        <ArrowLeft className='text-black'/>
+      </NavLink>
     </div>
   )
 }
