@@ -6,7 +6,9 @@ const FooterUs = () => {
     <>
       <footer className="mt-15 flex flex-col items-center justify-center rounded-full py-1 pb-3 px-1 border border-gray-300">
         <p className="mt-4 text-center text-xs text-gray-500">
-          Copyright © 2025 Sanjeet Water Supplier. <br /> All Rights Reservered.
+          Developed By : Altamash Mansuri <br /><br />
+          Copyright © 2025 Sanjeet Water Supplier. <br />
+           All Rights Reservered.
         </p>
         <div className="flex items-center gap-4 mt-5">
           <a
@@ -50,6 +52,7 @@ const FooterUs = () => {
           </a>
         </div>
       </footer>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde accusamus amet deserunt voluptates vero asperiores itaque perferendis odio illo aliquid, tempore optio iusto, iure assumenda quas nam vitae rerum porro!
     </>
   );
 };

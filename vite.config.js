@@ -17,9 +17,12 @@ export default defineConfig({
       includeAssets: [
         "logo.png",
         "bg_img.png",
-        "hand_wave.png",
-        "header_img.png",
+        // "hand_wave.png",
+        // "header_img.png",
         "favicon.ico",
+        "Campers.png",
+        "RO.png"
+
       ],
 
       manifest: {
@@ -27,7 +30,7 @@ export default defineConfig({
         short_name: "SWS",
         start_url: "/",
         display: "standalone",
-        background_color: "#ffffff", // splash background
+        background_color: "#64dceaff", // splash background
         theme_color: "#a5f3fc", // light aqua
         icons: [
           {

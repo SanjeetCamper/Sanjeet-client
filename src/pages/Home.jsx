@@ -10,7 +10,7 @@ const Home = () => {
   const {user} = useUser();
 
   return (
-    <div className="mx-auto w-full max-w-md px-2 pt-10 text-justify pb-20 overflow-y-auto">
+    <div className="mx-auto w-full max-w-md px-4 pt-27 text-justify pb-20 overflow-y-auto">
       {
         user ? <HomeUser />: <HeaderHome />
       }

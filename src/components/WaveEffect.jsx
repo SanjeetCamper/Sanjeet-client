@@ -4,10 +4,10 @@ import styles from "../styles/HomeHero.module.css";
 const WaveEffect = () => {
   return (
     <div>
-      <div class={styles.waves}>
-        <div class={styles.wave}></div>
-        <div class={styles.wave}></div>
-        <div class={styles.wave}></div>
+      <div className={styles.waves}>
+        <div className={styles.wave}></div>
+        <div className={styles.wave}></div>
+        <div className={styles.wave}></div>
       </div>
     </div>
   );

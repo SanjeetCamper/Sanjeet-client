@@ -10,7 +10,7 @@ const NavBar = () => {
   const { user } = useUser();
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-white z-50 px-4 pt-2 pb-3">
+    <div className="fixed top-0 left-0 w-full bg-white z-50 px-4 pt-2 pb-3 shadow-sm">
       <div className="max-w-md sm:mx-8 rounded-full border flex justify-between items-center text-center p-2 px-3 mt-2 sm:p-6 sm:px-24">
         <img
           src={"/logo.png"}
