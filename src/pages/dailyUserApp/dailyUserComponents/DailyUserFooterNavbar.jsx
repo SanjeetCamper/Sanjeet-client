@@ -24,7 +24,7 @@ const DailyUserFooterNavbar = () => {
             }`
           }
         >
-          <LayoutDashboardIcon />
+          <LayoutDashboardIcon className="w-5" />
           <label htmlFor="" className="font-serif">
             Dashboard
           </label>
@@ -38,7 +38,7 @@ const DailyUserFooterNavbar = () => {
             }`
           }
         >
-          <HistoryIcon />
+          <HistoryIcon className="w-5" />
           <label htmlFor="" className="font-serif">
             History
           </label>
@@ -52,7 +52,7 @@ const DailyUserFooterNavbar = () => {
             }`
           }
         >
-          <BellIcon />
+          <BellIcon  className="w-5"/>
           <label htmlFor="" className="font-serif">
             Notification
           </label>
@@ -66,7 +66,7 @@ const DailyUserFooterNavbar = () => {
             }`
           }
         >
-          <Settings />
+          <Settings className="w-5" />
           <label htmlFor="" className="font-serif">
             Setting
           </label>

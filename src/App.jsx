@@ -11,7 +11,8 @@ import Setting from "./pages/Setting";
 import NavBar from "./components/Navbar.jsx";
 import InstallPWA from "./InstallPWA.jsx";
 import IndexDailyUser from "./pages/dailyUserApp/indexDailyUser.jsx";
-import { AnimatePresence } from "framer-motion";
+import Notification from "./pages/Notification.jsx";
+// import { AnimatePresence } from "framer-motion";
 
 const App = () => {
   const { user } = useUser();
@@ -75,12 +76,11 @@ const App = () => {
 
       {!noFrame && <NavBar />}
 
-      <AnimatePresence mode="wait">
         <div className="pb-0">
-          <Routes location={location} key={location.pathname}>
+          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/history" element={<History />} />
+            <Route path="/notification" element={<Notification />} />
             <Route path="/dailyuser" element={<DailyUser />} />
             <Route path="/setting" element={<Setting />} />
 
@@ -88,7 +88,6 @@ const App = () => {
             <Route path="/dailyuser/app/*" element={<IndexDailyUser />} />
           </Routes>
         </div>
-      </AnimatePresence>
 
       {!noFrame && user && <Footer />}
     </>

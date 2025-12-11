@@ -1,11 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, replace } from "react-router-dom";
 import {
   LayoutDashboard,
   HomeIcon,
   CalendarCheck,
   Handshake,
   Settings,
+  BellIcon,
 } from "lucide-react";
 
 const Footer = () => {
@@ -14,6 +15,7 @@ const Footer = () => {
       <div className="flex py-1 justify-between items-center bg-white border border-gray-500/50 rounded-full text-sm fixed bottom-2 left-1/2 -translate-x-1/2 w-full max-w-sm">
         <NavLink
           to={"/"}
+          replace={'/'}
           className={({ isActive }) =>
             `rounded-full flex flex-col items-center justify-center gap-0.5 w-22 h-13 text-xs sm:text-sm ml-1 ${
               isActive ? "bg-gray-200 text-black" : "text-gray-500"
@@ -28,6 +30,7 @@ const Footer = () => {
 
         <NavLink
           to={"/dashboard"}
+          replace={'/'}
           className={({ isActive }) =>
             `rounded-full flex flex-col items-center justify-center gap-0.5 w-25 h-14 text-xs sm:text-sm ${
               isActive ? "bg-gray-200 text-black" : "text-gray-500"
@@ -41,21 +44,23 @@ const Footer = () => {
         </NavLink>
 
         <NavLink
-          to={"/history"}
+          to={"/notification"}
+          replace={'/'}
           className={({ isActive }) =>
-            `rounded-full flex flex-col items-center justify-center gap-0.5 w-23 h-13 text-xs sm:text-sm ${
+            `rounded-full flex flex-col items-center justify-center gap-0.5 w-25 h-13 mt-1 pb-1 text-xs sm:text-sm ${
               isActive ? "bg-gray-200 text-black" : "text-gray-500"
             }`
           }
         >
-          <CalendarCheck className="w-5" />
+          <BellIcon className="w-5" />
           <label htmlFor="" className="font-serif">
-            History
+            Notification
           </label>
         </NavLink>
 
         <NavLink
           to={"/dailyuser"}
+          replace={'/'}
           className={({ isActive }) =>
             `rounded-full flex flex-col items-center justify-center gap-0.5 w-25 h-13 text-xs sm:text-sm ${
               isActive ? "bg-gray-200 text-black" : "text-gray-500"
@@ -70,6 +75,7 @@ const Footer = () => {
 
         <NavLink
           to={"/setting"}
+          replace
           className={({ isActive }) =>
             `flex flex-col items-center justify-center gap-0.5 w-22 h-13 text-xs sm:text-sm mr-1 rounded-full ${
               isActive ? "bg-gray-200 text-black" : "text-gray-500"

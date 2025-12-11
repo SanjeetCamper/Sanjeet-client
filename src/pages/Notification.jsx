@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Dashboard = () => {
+const Notification = () => {
   return (
     <div className='mx-auto w-full max-w-md px-4 pt-27 text-justify pb-20 overflow-y-auto'>
-      <h1>Dashboard Page</h1>
+      <h1>Notification Panel</h1>
     </div>
   )
 }
 
-export default Dashboard
+export default Notification
