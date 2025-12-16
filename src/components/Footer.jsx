@@ -11,14 +11,25 @@ import {
 
 const Footer = () => {
   return (
-    <div className="fixed bottom-0 left-0 w-full h-20 shadow-lg bg-white z-50 px-4 pt-3">
-      <div className="flex py-1 justify-between items-center bg-white border border-gray-500/50 rounded-full text-sm fixed bottom-2 left-1/2 -translate-x-1/2 w-full max-w-sm">
+    <div className="fixed bottom-0 left-0 w-full h-20 bg-white z-50 pt-3">
+      <div
+        className="
+          flex items-center gap-2
+          bg-white border border-gray-500/50 rounded-full
+          fixed bottom-2 left-1/2 -translate-x-1/2
+          px-2 py-1
+          overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+          whitespace-nowrap
+          w-xs   /* 👈 mobile me 4 icons */
+        "
+      >
         <NavLink
           to={"/"}
-          replace={'/'}
+          replace={"/"}
           className={({ isActive }) =>
-            `rounded-full flex flex-col items-center justify-center gap-0.5 w-22 h-13 text-xs sm:text-sm ml-1 ${
-              isActive ? "bg-gray-200 text-black" : "text-gray-500"
+            `flex-shrink-0 w-20 flex flex-col items-center justify-center py-2 text-xs
+            ${
+              isActive ? "bg-gray-200 text-black rounded-full" : "text-gray-500"
             }`
           }
         >
@@ -30,10 +41,11 @@ const Footer = () => {
 
         <NavLink
           to={"/dashboard"}
-          replace={'/'}
+          replace={"/"}
           className={({ isActive }) =>
-            `rounded-full flex flex-col items-center justify-center gap-0.5 w-25 h-14 text-xs sm:text-sm ${
-              isActive ? "bg-gray-200 text-black" : "text-gray-500"
+            `flex-shrink-0 w-20 flex flex-col items-center justify-center py-2 text-xs
+            ${
+              isActive ? "bg-gray-200 text-black rounded-full" : "text-gray-500"
             }`
           }
         >
@@ -45,10 +57,11 @@ const Footer = () => {
 
         <NavLink
           to={"/notification"}
-          replace={'/'}
+          replace={"/"}
           className={({ isActive }) =>
-            `rounded-full flex flex-col items-center justify-center gap-0.5 w-25 h-13 mt-1 pb-1 text-xs sm:text-sm ${
-              isActive ? "bg-gray-200 text-black" : "text-gray-500"
+            `flex-shrink-0 w-20 flex flex-col items-center justify-center py-2 text-xs
+            ${
+              isActive ? "bg-gray-200 text-black rounded-full" : "text-gray-500"
             }`
           }
         >
@@ -60,10 +73,11 @@ const Footer = () => {
 
         <NavLink
           to={"/dailyuser"}
-          replace={'/'}
+          replace={"/"}
           className={({ isActive }) =>
-            `rounded-full flex flex-col items-center justify-center gap-0.5 w-25 h-13 text-xs sm:text-sm ${
-              isActive ? "bg-gray-200 text-black" : "text-gray-500"
+            `flex-shrink-0 w-20 flex flex-col items-center justify-center py-2 text-xs
+            ${
+              isActive ? "bg-gray-200 text-black rounded-full" : "text-gray-500"
             }`
           }
         >
@@ -77,8 +91,9 @@ const Footer = () => {
           to={"/setting"}
           replace
           className={({ isActive }) =>
-            `flex flex-col items-center justify-center gap-0.5 w-22 h-13 text-xs sm:text-sm mr-1 rounded-full ${
-              isActive ? "bg-gray-200 text-black" : "text-gray-500"
+            `flex-shrink-0 w-20 flex flex-col items-center justify-center py-2 text-xs
+            ${
+              isActive ? "bg-gray-200 text-black rounded-full" : "text-gray-500"
             }`
           }
         >

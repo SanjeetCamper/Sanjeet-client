@@ -4,7 +4,7 @@ import WaveEffect from "./WaveEffect";
 const FooterUs = () => {
   return (
     <>
-      <footer className="mt-15 pb-1 flex flex-col items-center justify-center rounded-full border border-gray-300">
+      <footer className="mt-15 pb-1 flex flex-col items-center justify-center rounded border border-gray-300">
         
         <p className="mt-2 text-center text-xs text-gray-500">
           Developed By :  &nbsp;@Altamash

@@ -12,6 +12,8 @@ import NavBar from "./components/Navbar.jsx";
 import InstallPWA from "./InstallPWA.jsx";
 import IndexDailyUser from "./pages/dailyUserApp/indexDailyUser.jsx";
 import Notification from "./pages/Notification.jsx";
+import MembershipCheck from "./components/MembershipCheck .jsx";
+import CashLogin from "./components/CashLogin .jsx";
 // import { AnimatePresence } from "framer-motion";
 
 const App = () => {
@@ -81,7 +83,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/notification" element={<Notification />} />
-            <Route path="/dailyuser" element={<DailyUser />} />
+            <Route path="/dailyuser/*" element={<DailyUser />} />
             <Route path="/setting" element={<Setting />} />
 
             {/* 🎯 animated screen */}
