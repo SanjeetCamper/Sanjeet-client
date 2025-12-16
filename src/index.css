@@ -5,12 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
+/* html,
 body {
   touch-action: none;
   overscroll-behavior: none !important;
 
-}
+} */
 
 
 * {
@@ -18,6 +18,21 @@ body {
 
 }
 
+html, body {
+  touch-action: pan-x pan-y; /* ✅ scroll allowed */
+  overscroll-behavior: none; /* pull-to-refresh off */
+   -webkit-user-select: none; /* Safari */
+  -ms-user-select: none;     /* IE/Edge */
+  user-select: none;         /* Chrome, Firefox */
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+input,
+textarea {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
