@@ -13,10 +13,10 @@ body {
 } */
 
 
-* {
+/* * {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
-}
+} */
 
 html, body {
   touch-action: pan-x pan-y; /* ✅ scroll allowed */
@@ -25,6 +25,24 @@ html, body {
   -ms-user-select: none;     /* IE/Edge */
   user-select: none;         /* Chrome, Firefox */
 }
+
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+img, svg {
+  -webkit-touch-callout: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;

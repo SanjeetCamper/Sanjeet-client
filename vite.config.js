@@ -30,7 +30,7 @@ export default defineConfig({
         short_name: "SWS",
         start_url: "/",
         display: "standalone",
-        background_color: "#64dceaff", // splash background
+        background_color: "#ffffffff", // splash background
         theme_color: "#a5f3fc", // light aqua
         icons: [
           {
