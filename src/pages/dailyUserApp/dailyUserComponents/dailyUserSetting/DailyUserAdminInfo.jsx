@@ -1,5 +1,5 @@
 import React from "react";
-import DailyUserSettingSection from "./dailyUserSettingSection";
+import DailyUserSettingSection from "./DailyUserSettingSection";
 import DailyUserSettingItems from "./DailyUserSettingItems";
 import {Info} from "lucide-react";
 
