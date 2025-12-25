@@ -1,29 +1,20 @@
-import React, { useEffect } from 'react';
-import DailyUserLogin from '../components/DailyUserLogin.jsx';
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import DailyUserLogin from "../components/DailyUserLogin";
 
 const DailyUser = () => {
   const navigate = useNavigate();
-  const { user } = useUser();
-  // const firstname = user?.firstName?.toLowerCase()?.trim(); // 👈 important
-  const email = user?.primaryEmailAddress?.emailAddress; // 👈 important
 
   useEffect(() => {
-    // agar match nahi → do nothing
-    if (!email) return;
-
-    // 👇 now allowed only exact clean name
-    if (email === "sanjeethelpline@gmail.com") {
+    const token = localStorage.getItem("dailyUserToken");
+    if (token) {
       navigate("/dailyuser/app");
-    }else{
-      navigate('/dailyuser');
     }
-  }, [email, navigate]);
+  }, [navigate]);
 
   return (
-    <div className='mx-auto w-full max-w-md px-4 pt-27 text-justify pb-20 overflow-y-auto'>
-      {email !== "sanjeethelpline@gmail.com" && <DailyUserLogin />}
+    <div className="mx-auto w-full max-w-md px-4 my-27">
+      <DailyUserLogin />
     </div>
   );
 };

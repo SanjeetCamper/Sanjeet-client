@@ -1,90 +1,163 @@
-// import React from "react";
-// import styles from '../styles/DailyUserLogin.module.css'
-
-// const DailyUserLogin = () => {
-//   return (
-//     <div>
-//       <div className={styles.loginContainer}>
-//         <div className={styles.logo}>
-//           <img src="/logo.png" alt="" />
-//         </div>
-//         <h1 className={styles.h1h1}>Daily User Login</h1>
-//         <p className={styles.subtitle}>Welcome back! Please login to continue</p>
-
-//         <form>
-//           <div className={styles.formGroup}>
-//             <label htmlFor="username">Username</label>
-//             <input
-//               type="text"
-//               id="username"
-//               placeholder="Enter your username"
-//               required
-//             />
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label htmlFor="password">Password</label>
-//             <input
-//               type="password"
-//               id="password"
-//               placeholder="Enter your password"
-//               required
-//             />
-//           </div>
-
-//           <button type="submit" className={styles.loginBtn}>
-//             Login
-//           </button>
-//         </form>
-
-//         <div className={styles.divider}>Not a Daily User?</div>
-
-//         <div className={styles.adminInfo}>
-//           <p>
-//             <strong>📌 Note:</strong> Username and password can only be obtained
-//             from the admin or memberShip-plan. No signup option available.
-//           </p>
-//         </div>
-
-//         <button className={styles.createUserBtn}>Request Daily User Access</button>
-
-//         <p className={styles.footerText}>© 2025 Sanjeet Water Supplier. All rights reserved.</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DailyUserLogin;
-
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "@clerk/clerk-react";
+import {
+  User,
+  Lock,
+  CreditCard,
+  Wallet,
+  Eye,
+  EyeClosed,
+  EyeOff,
+} from "lucide-react";
+import dailyUserApi from "../utils/dailyUserApi.js";
+import { useToast } from "../context/ToastContext.jsx";
 
 const DailyUserLogin = () => {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { showToast } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async () => {
+    // 🔒 basic validation
+    if (!form.username) {
+      showToast("Username Invalide", "warning");
+      return;
+    }
+
+    if (!form.password) {
+      showToast("Password Invalide", "warning");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await dailyUserApi.post("/login", {
+        username: form.username,
+        password: form.password,
+      });
+
+      // ✅ token save
+      localStorage.setItem("dailyUserToken", res.data.token);
+
+      showToast("Login successful", "success");
+
+      // ✅ mini app open
+      navigate("/dailyuser/app");
+    } catch (error) {
+      showToast(
+        error?.response?.data?.message || "Invalid username or password",
+        "error"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 pt-10 pb-20">
+    <div className="bg-white flex items-center justify-center px-4">
+      <div className="w-full max-w-md space-y-6">
+        {/* LOGIN CARD */}
+        <div className="bg-white border border-gray-200 rounded-2xl p-5">
+          <h2 className="text-lg font-semibold text-gray-800 mb-1">
+            Daily User Login
+          </h2>
+          <p className="text-xs text-gray-500 mb-4">
+            If you are a daily water customer, login to view your entries
+          </p>
 
-      <h1 className="text-xl font-bold mb-6">Daily User Login</h1>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 border rounded-xl px-4 py-3">
+              <User size={18} className="text-gray-400" />
+              <input
+                name="username"
+                placeholder="Username"
+                value={form.username}
+                onChange={handleChange}
+                className="w-full outline-none text-sm"
+              />
+            </div>
 
-      {/* Membership User */}
-      <button
-        onClick={() => navigate("/dailyuser/membership-check")}
-        className="w-full py-3 bg-blue-500 text-white rounded-xl mb-4"
-      >
-        Membership User
-      </button>
+            <div className="flex items-center gap-3 border rounded-xl px-4 py-3">
+              <Lock size={18} className="text-gray-400" />
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleChange}
+                className="w-full outline-none text-sm"
+              />
+              <span onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+            </div>
 
-      {/* Cash User */}
-      <button
-        onClick={() => navigate("/dailyuser/cash-login")}
-        className="w-full py-3 bg-gray-800 text-white rounded-xl"
-      >
-        Cash User Login
-      </button>
+            <button
+              onClick={handleLogin}
+              disabled={loading}
+              className="w-full bg-[#21c4cc] text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition disabled:opacity-60"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </div>
+        </div>
 
+        {/* DIVIDER */}
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-px bg-gray-300" />
+          <span className="text-xs text-gray-500">OR</span>
+          <div className="flex-1 h-px bg-gray-300" />
+        </div>
+
+        {/* OPTIONS */}
+        <div className="bg-white border border-gray-200 rounded-2xl p-5 space-y-4">
+          <h3 className="text-sm font-semibold text-gray-800">
+            Not a Daily User?
+          </h3>
+
+          <button
+            onClick={() => navigate("/setting/dailyuser/cash-info")}
+            className="w-full flex items-center gap-3 border rounded-xl px-4 py-3 active:bg-gray-50"
+          >
+            <Wallet size={18} className="text-green-600" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-gray-800">
+                Continue as Cash User
+              </p>
+              <p className="text-xs text-gray-500">
+                Ask admin to enable your daily account
+              </p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => navigate("/setting/dailyuser/plans")}
+            className="w-full flex items-center gap-3 border rounded-xl px-4 py-3 active:bg-gray-50"
+          >
+            <CreditCard size={18} className="text-purple-600" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-gray-800">
+                Buy Online Plan
+              </p>
+              <p className="text-xs text-gray-500">
+                Get discounts & auto entries
+              </p>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

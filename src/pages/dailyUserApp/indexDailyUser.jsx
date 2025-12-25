@@ -8,9 +8,12 @@ import DailyUserDashboard from "./dailyUserPages/DailyUserDashboard.jsx";
 import DailyUserHistory from "./dailyUserPages/DailyUserHistory.jsx";
 import DailyUserNotification from "./dailyUserPages/DailyUserNotification.jsx";
 import DailyUserSetting from "./dailyUserPages/DailyUserSetting.jsx";
+import useDailyUserGuard from "../../hooks/useDailyUserGaurd.js";
+import {DailyUserProvider} from "./dailyUserContext/DailyUserContext.jsx";
+import DailyUserAdminInfo from "./dailyUserComponents/dailyUserSetting/DailyUserAdminInfo.jsx";
 
 const IndexDailyUser = () => {
-
+  useDailyUserGuard();
   const [animateOnce, setAnimateOnce] = useState(true);
 
   useEffect(() => {
@@ -25,17 +28,21 @@ const IndexDailyUser = () => {
       transition={{ duration: 0.35, ease: "easeOut" }}
       className={styles.miniAppWrapper}
     >
-      <DailyUserOut />
+      <DailyUserProvider>
+        <DailyUserOut />
 
-      <Routes>
-        <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="dashboard" element={<DailyUserDashboard />} />
-        <Route path="history" element={<DailyUserHistory />} />
-        <Route path="notification" element={<DailyUserNotification />} />
-        <Route path="setting" element={<DailyUserSetting />} />
-      </Routes>
+        <Routes>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<DailyUserDashboard />} />
+          <Route path="history" element={<DailyUserHistory />} />
+          <Route path="notification" element={<DailyUserNotification />} />
+          <Route path="setting" element={<DailyUserSetting />} />
 
-      <DailyUserFooterNavbar />
+          <Route path="setting/admin-info" element={<DailyUserAdminInfo />} />
+        </Routes>
+
+        <DailyUserFooterNavbar />
+      </DailyUserProvider>
     </motion.div>
   );
 };

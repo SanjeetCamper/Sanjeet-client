@@ -5,6 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 
 import { registerSW } from "virtual:pwa-register"; // 👈 add this
+import { UserProvider } from "./context/UserContext.jsx";
+import { ToastProvider } from "./context/ToastContext.jsx";
 
 registerSW(); // 👈 call once, बस
 
@@ -15,10 +17,25 @@ if (!PUBLISHABLE_KEY) {
   throw new Error("Add your Clerk Publishable Key to the .env file");
 }
 
+document.addEventListener("contextmenu", (e) => {
+  if (
+    e.target.tagName === "IMG" ||
+    e.target.tagName === "SVG" ||
+    e.target.closest("svg") ||
+    e.target.closest("a")
+  ) {
+    e.preventDefault();
+  }
+});
+
 createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <ToastProvider>
+          <App />
+        </ToastProvider>
+      </BrowserRouter>
+    </UserProvider>
   </ClerkProvider>
 );

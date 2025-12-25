@@ -1,4 +1,4 @@
-import { FacebookIcon, GithubIcon, InstagramIcon, Mail, MessageCircle, MessageCircleDashedIcon, Phone, Send, WheatIcon, Youtube, YoutubeIcon } from "lucide-react";
+import { FacebookIcon, GithubIcon, InstagramIcon, Linkedin, Send , YoutubeIcon } from "lucide-react";
 import WaveEffect from "./WaveEffect";
 
 const FooterUs = () => {
@@ -16,7 +16,7 @@ const FooterUs = () => {
         </p>
         <div className="flex items-center gap-4 mt-1">
           <a
-            href="https://instagram.com/yourpage"
+            href="https://www.youtube.com/@altamashdev"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -24,7 +24,7 @@ const FooterUs = () => {
           </a>
 
           <a
-            href="https://instagram.com/yourpage"
+            href="https://www.youtube.com/@altamashdev"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -32,7 +32,7 @@ const FooterUs = () => {
           </a>
 
           <a
-            href="https://instagram.com/yourpage"
+            href="https://www.youtube.com/@altamashdev"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -40,7 +40,7 @@ const FooterUs = () => {
           </a>
 
           <a
-            href="https://instagram.com/yourpage"
+            href="https://www.youtube.com/@altamashdev"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -48,11 +48,11 @@ const FooterUs = () => {
           </a>
           
           <a
-            href="https://instagram.com/yourpage"
+            href="https://www.linkedin.com/in/altamashmansuri/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Send className="text-slate-500 w-4 hover:text-blue-500 active:text-blue-500"/>
+            <Linkedin className="text-slate-500 w-4 hover:text-blue-500 active:text-blue-500"/>
           </a>
         </div>
       </footer>

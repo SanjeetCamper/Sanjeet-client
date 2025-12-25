@@ -42,7 +42,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full h-18 pt-1 bg-white z-50">
+    <div className="fixed bottom-0 left-0 w-full h-20 pt-1 bg-white z-50">
       {/* RELATIVE wrapper for arrow */}
       <div className="relative max-w-[280px] mx-auto">
         {/* SCROLLABLE NAV */}

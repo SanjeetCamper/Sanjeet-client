@@ -10,7 +10,7 @@ const HomeUser = () => {
   return (
     <div>
       <HomeHero />
-      
+            
       <ImageGallery />
       {/* <AboutUs /> */}
       <FooterUs />

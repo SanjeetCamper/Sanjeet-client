@@ -1,97 +1,170 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./index.css";
-import Footer from "./components/Footer";
-import { Route, Routes, useLocation, Navigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import History from "./pages/History";
 import DailyUser from "./pages/DailyUser";
-import { useUser } from "@clerk/clerk-react";
 import Setting from "./pages/Setting";
-import NavBar from "./components/Navbar.jsx";
-import InstallPWA from "./InstallPWA.jsx";
+import Notification from "./pages/Notification";
 import IndexDailyUser from "./pages/dailyUserApp/indexDailyUser.jsx";
-import Notification from "./pages/Notification.jsx";
-import MembershipCheck from "./components/MembershipCheck .jsx";
-import CashLogin from "./components/CashLogin .jsx";
-// import { AnimatePresence } from "framer-motion";
+import CompleteProfile from "./pages/CompleteProfile.jsx";
+
+import NavBar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import InstallPWA from "./InstallPWA.jsx";
+
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import PublicRoute from "./routes/PublicRoute.jsx";
+import HeaderHome from "./components/HeaderHome.jsx";
+
+import { useUser } from "@clerk/clerk-react";
+import ProfileSettings from "./components/settingsComponents/ProfileSettings.jsx";
+import ChangePassword from "./components/settingsComponents/ChangePassword.jsx";
+import NotificationSettings from "./components/settingsComponents/NotificationSettings.jsx";
+// import ProfileImageChange from "./components/settingsComponents/ProfileImageChange.jsx";
+import EditProfileMainBox from "./components/settingsComponents/EditProfileMainBox.jsx";
+
 
 const App = () => {
-  const { user } = useUser();
-
   const location = useLocation();
-
   const noFrame = location.pathname.startsWith("/dailyuser/app");
-
-  // const [showGlobalPopup, setShowGlobalPopup] = useState(false);
-
-  // const location = useLocation();
-
-  // const [profileChecked, setProfileChecked] = useState(false);
-  // const [isProfileComplete, setIsProfileComplete] = useState(false);
-
-  // useEffect(() => {
-  //   const checkProfile = async () => {
-  //     if (!user) {
-  //       setIsProfileComplete(false);
-  //       setProfileChecked(true);
-  //       return;
-  //     }
-
-  //     try {
-  //       const res = await fetch(`/api/check-profile?clerkId=${user.id}`);
-  //       const data = await res.json();
-  //       setIsProfileComplete(!!data.completed);
-  //     } catch (err) {
-  //       console.error("Profile check failed", err);
-  //       // worst case: treat as incomplete so user fills it
-  //       setIsProfileComplete(false);
-  //     } finally {
-  //       setProfileChecked(true);
-  //     }
-  //   };
-
-  //   checkProfile();
-  // }, [user]);
-
-  // // loading state while checking profile
-  // if (!profileChecked) {
-  //   return null; // ya koi loader dikhाना ho to yaha
-  // }
-
-  // 🔒 Guard logic
-  // const isOnCompleteProfile = location.pathname === "/complete-profile";
-
-  // user logged in + profile incomplete → force /complete-profile
-  // if (user && !isProfileComplete && !isOnCompleteProfile) {
-  //   return <Navigate to="/complete-profile" />;
-  // }
-
-  // user logged in + profile complete + still on /complete-profile → redirect home
-  // if (user && isProfileComplete && isOnCompleteProfile) {
-  //   return <Navigate to="/" />;
-  // }
+  const {isSignedIn} = useUser();
+  const showHeaderHome = !noFrame && !isSignedIn; 
 
   return (
     <>
       <InstallPWA />
 
       {!noFrame && <NavBar />}
+      {showHeaderHome && <HeaderHome />}
 
-        <div className="pb-0">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/notification" element={<Notification />} />
-            <Route path="/dailyuser/*" element={<DailyUser />} />
-            <Route path="/setting" element={<Setting />} />
+      <div className="pb-0">
+        <Routes>
 
-            {/* 🎯 animated screen */}
-            <Route path="/dailyuser/app/*" element={<IndexDailyUser />} />
-          </Routes>
-        </div>
+          {/* 🔓 Public */}
+          <Route
+            path="/sign-in"
+            element={
+              <PublicRoute>
+                {/* Clerk SignIn page */}
+              </PublicRoute>
+            }
+          />
 
-      {!noFrame && user && <Footer />}
+          <Route
+            path="/sign-up"
+            element={
+              <PublicRoute>
+                {/* Clerk SignUp page */}
+              </PublicRoute>
+            }
+          />
+
+          {/* 📝 Profile completion */}
+          <Route path="/complete-profile" element={<CompleteProfile />} />
+
+          {/* 🔒 Protected App */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/notification"
+            element={
+              <ProtectedRoute>
+                <Notification />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dailyuser/*"
+            element={
+              <ProtectedRoute>
+                <DailyUser />
+              </ProtectedRoute>
+            }
+          />
+
+             {/* 🎯 Full screen app (still protected) */}
+          <Route
+            path="/dailyuser/app/*"
+            element={
+              <ProtectedRoute>
+                <IndexDailyUser />
+              </ProtectedRoute>
+            }
+          />
+
+
+          {/* Settings Maing Page */}
+          <Route
+            path="/setting"
+            element={
+              <ProtectedRoute>
+                <Setting />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Settings Sub Pages Started Here */}
+            
+            <Route //Setting ke andar Edit Profile Page
+            path="/setting/edit-profile"
+            element={
+              <ProtectedRoute>
+                <EditProfileMainBox />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route // Edit Profile ke andar 
+            path="/setting/open-change-profile-details"
+            element={
+              <ProtectedRoute>
+                <ProfileSettings />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route //Setting me change password 
+            path="/setting/change-password"
+            element={
+              <ProtectedRoute>
+                <ChangePassword />
+              </ProtectedRoute> 
+            }
+          />
+
+          <Route // setting me notification controller
+            path="/setting/notifications"
+            element={
+              <ProtectedRoute>
+                <NotificationSettings />
+              </ProtectedRoute> 
+            }
+          />
+        {/* Settings Sub Pages Ended Here */}
+
+        </Routes>
+      </div>
+
+      {!noFrame && <ProtectedRoute><Footer /></ProtectedRoute>}
     </>
   );
 };

@@ -5,18 +5,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* html,
-body {
-  touch-action: none;
-  overscroll-behavior: none !important;
+/* For Toaster or in any Components or Pages */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-} */
 
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
 
-/* * {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
-} */
 
 html, body {
   touch-action: pan-x pan-y; /* ✅ scroll allowed */
@@ -27,20 +32,21 @@ html, body {
 }
 
 * {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;
+  /* -webkit-touch-callout: none; iOS Safari */
+  /* -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /* font-weight: 300; */
 }
 
-img, svg {
+/* img, svg {
   -webkit-touch-callout: none;
   user-select: none;
   pointer-events: none;
-}
+} */
 
 
 
