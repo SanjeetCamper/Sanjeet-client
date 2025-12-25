@@ -50,7 +50,6 @@ export default function InstallPWA() {
         alignItems:"center",
         justifyContent: "center",
         gap: "8px",
-        alignItems: "center",
         zIndex: 9999,
       }}
     >

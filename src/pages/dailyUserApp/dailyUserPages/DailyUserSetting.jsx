@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { User, Shield, Bell, Info, LogOut, UserCog } from "lucide-react";
-import DailyUserSettingSection from "../dailyUserComponents/dailyUserSetting/dailyUserSettingSection.jsx";
+import DailyUserSettingSection from "../dailyUserComponents/dailyUserSetting/DailyUserSettingSection.jsx";
 import DailyUserSettingItems from "../dailyUserComponents/dailyUserSetting/DailyUserSettingItems.jsx";
 import { useDailyUser } from "../dailyUserContext/DailyUserContext.jsx";
 import { useNavigate } from "react-router-dom";
