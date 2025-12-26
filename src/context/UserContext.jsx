@@ -13,7 +13,6 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const syncUser = async () => {
       if (!isLoaded) return; // ⏳ wait for Clerk
 
@@ -60,8 +59,28 @@ export const UserProvider = ({ children }) => {
     syncUser();
   }, [isSignedIn, clerkUser]);
 
+  const refreshUser = async () => {
+    try {
+      const token = await getToken();
+      const res = await fetch(`${backendUrl}/api/users/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setUser(data.user); // 🔥 UI instantly update
+      }
+    } catch (err) {
+      console.error("User refresh failed");
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ user, loading, setUser,backendUrl }}>
+    <UserContext.Provider
+      value={{ user, loading, setUser, refreshUser, backendUrl }}
+    >
       {children}
     </UserContext.Provider>
   );

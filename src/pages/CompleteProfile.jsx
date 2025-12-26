@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useContextUser } from "../context/UserContext";
 import { useAuth, useUser as useClerkUser } from "@clerk/clerk-react";
 import {
@@ -10,14 +10,17 @@ import {
   Store,
   User,
 } from "lucide-react";
+import FullPageLoader from "../components/FullPageLoader";
+import { useNavigate } from "react-router-dom";
 
 const CompleteProfile = () => {
-  const { user, setUser, backendUrl } = useContextUser();
+  const { user, setUser, backendUrl , refreshUser } = useContextUser();
   const { getToken } = useAuth();
   const { user: clerkUser } = useClerkUser();
+  const navigate = useNavigate();
 
   // STATES (same logic)
-  const [name, setName] = useState(user.name || "");
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [shop, setShop] = useState("");
   const [village, setVillage] = useState("");
@@ -25,11 +28,20 @@ const CompleteProfile = () => {
   const [birthday, setBirthday] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (user?.name) {
+      setName(user.name);
+    }
+  }, [user]);
+
+  if (!user) return <FullPageLoader />;
+
   // SUBMIT HANDLER (UNCHANGED LOGIC)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (phone.length !== 10) {
+      alert("Enter valid 10 digit mobile number");
       alert("Enter valid 10 digit mobile number");
       return;
     }
@@ -39,10 +51,17 @@ const CompleteProfile = () => {
 
       const parts = name.trim().split(/\s+/);
 
-      await clerkUser.update({
+      const payload = {
         firstName: parts[0],
-        lastName: parts.length > 1 ? parts.slice(1).join(" ") : " ",
-      });
+      };
+
+      if (parts.length > 1) {
+        payload.lastName = parts.slice(1).join(" ");
+      }
+
+      if (clerkUser) {
+        await clerkUser.update(payload);
+      }
 
       const token = await getToken();
 
@@ -60,10 +79,20 @@ const CompleteProfile = () => {
           address,
           birthday,
         }),
+        body: JSON.stringify({
+          phone,
+          name,
+          shop,
+          village,
+          address,
+          birthday,
+        }),
       });
 
       const data = await res.json();
-      if (data.success) setUser(data.user);
+      if (data.success) {
+        await refreshUser();
+      }
     } catch (err) {
       console.error("Profile update failed");
     } finally {
@@ -74,7 +103,6 @@ const CompleteProfile = () => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-end">
       <div className="bg-white w-full max-w-md mx-auto rounded-t-2xl p-5 pb-6 max-h-[92vh] overflow-y-auto">
-
         {/* HEADER */}
         <div className="mb-4">
           <h2 className="text-lg font-semibold text-gray-800">
@@ -87,7 +115,6 @@ const CompleteProfile = () => {
 
         {/* FORM */}
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <Input
             icon={User}
             label="Full Name"
@@ -96,20 +123,13 @@ const CompleteProfile = () => {
             required
           />
 
-          <Input
-            icon={Mail}
-            label="Email"
-            value={user.email}
-            disabled
-          />
+          <Input icon={Mail} label="Email" value={user.email} disabled />
 
           <Input
             icon={Phone}
             label="Mobile Number"
             value={phone}
-            onChange={(e) =>
-              setPhone(e.target.value.replace(/\D/g, ""))
-            }
+            onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
             maxLength={10}
             required
             placeholder="0123456789"
@@ -129,6 +149,7 @@ const CompleteProfile = () => {
             value={village}
             onChange={(e) => setVillage(e.target.value)}
             required
+            placeholder="Sanjeet"
           />
 
           <Input
@@ -137,6 +158,7 @@ const CompleteProfile = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
+            placeholder="Main Road Sadar Bazar"
           />
 
           <Input
@@ -150,6 +172,7 @@ const CompleteProfile = () => {
           <button
             disabled={loading}
             className="w-full bg-[#21c4cc] text-white py-3 rounded-xl text-sm font-medium disabled:opacity-60"
+            className="w-full bg-[#21c4cc] text-white py-3 rounded-xl text-sm font-medium disabled:opacity-60"
           >
             {loading ? "Saving..." : "Submit & Continue"}
           </button>
@@ -158,6 +181,32 @@ const CompleteProfile = () => {
     </div>
   );
 };
+
+/* 🔹 REUSABLE INPUT */
+const Input = ({
+  icon: Icon,
+  label,
+  value,
+  onChange,
+  type = "text",
+  disabled,
+  ...props
+}) => (
+  <div className="space-y-1">
+    <label className="text-xs text-gray-500">{label}</label>
+    <div className="flex items-center gap-3 border rounded-xl px-4 py-3 focus-within:border-[#21c4cc]">
+      <Icon size={18} className="text-gray-400" />
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        className="w-full outline-none text-sm bg-transparent disabled:text-gray-400"
+        {...props}
+      />
+    </div>
+  </div>
+);
 
 /* 🔹 REUSABLE INPUT */
 const Input = ({

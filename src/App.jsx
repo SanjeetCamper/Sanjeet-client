@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 
@@ -15,7 +15,7 @@ import Footer from "./components/Footer.jsx";
 import InstallPWA from "./InstallPWA.jsx";
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
-import PublicRoute from "./routes/PublicRoute.jsx";
+// import PublicRoute from "./routes/PublicRoute.jsx";
 import HeaderHome from "./components/HeaderHome.jsx";
 
 import { useUser } from "@clerk/clerk-react";
@@ -24,52 +24,41 @@ import ChangePassword from "./components/settingsComponents/ChangePassword.jsx";
 import NotificationSettings from "./components/settingsComponents/NotificationSettings.jsx";
 // import ProfileImageChange from "./components/settingsComponents/ProfileImageChange.jsx";
 import EditProfileMainBox from "./components/settingsComponents/EditProfileMainBox.jsx";
-
+import { useContextUser } from "./context/UserContext.jsx";
+import FullPageLoader from "./components/FullPageLoader.jsx";
+import ProfileGuard from "./routes/ProfileGaurd.jsx";
 
 const App = () => {
   const location = useLocation();
+  const { user , loading} = useContextUser();
   const noFrame = location.pathname.startsWith("/dailyuser/app");
-  const {isSignedIn} = useUser();
-  const showHeaderHome = !noFrame && !isSignedIn; 
+  const { isSignedIn } = useUser();
+  const showHeaderHome = !noFrame && !isSignedIn;
+
+
+  
 
   return (
     <>
       <InstallPWA />
 
-      {!noFrame && <NavBar />}
+      {!noFrame  && <NavBar />}
       {showHeaderHome && <HeaderHome />}
+
+          {/* 🔥 PROFILE BLOCKER */}
+      {user && !user.isProfileComplete && <CompleteProfile />}
 
       <div className="pb-0">
         <Routes>
-
-          {/* 🔓 Public */}
-          <Route
-            path="/sign-in"
-            element={
-              <PublicRoute>
-                {/* Clerk SignIn page */}
-              </PublicRoute>
-            }
-          />
-
-          <Route
-            path="/sign-up"
-            element={
-              <PublicRoute>
-                {/* Clerk SignUp page */}
-              </PublicRoute>
-            }
-          />
-
-          {/* 📝 Profile completion */}
-          <Route path="/complete-profile" element={<CompleteProfile />} />
 
           {/* 🔒 Protected App */}
           <Route
             path="/"
             element={
               <ProtectedRoute>
-                <Home />
+                <ProfileGuard>
+                  <Home />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -78,7 +67,9 @@ const App = () => {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <ProfileGuard>
+                  <Dashboard />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -87,7 +78,9 @@ const App = () => {
             path="/notification"
             element={
               <ProtectedRoute>
-                <Notification />
+                <ProfileGuard>
+                  <Notification />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -96,58 +89,69 @@ const App = () => {
             path="/dailyuser/*"
             element={
               <ProtectedRoute>
-                <DailyUser />
+                <ProfileGuard >
+                  <DailyUser />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-             {/* 🎯 Full screen app (still protected) */}
+          {/* 🎯 Full screen app (still protected) */}
           <Route
             path="/dailyuser/app/*"
             element={
               <ProtectedRoute>
-                <IndexDailyUser />
+                <ProfileGuard>
+                  <IndexDailyUser />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
-
 
           {/* Settings Maing Page */}
           <Route
             path="/setting"
             element={
               <ProtectedRoute>
-                <Setting />
+                <ProfileGuard>
+                  <Setting />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
           {/* Settings Sub Pages Started Here */}
-            
-            <Route //Setting ke andar Edit Profile Page
+
+          <Route //Setting ke andar Edit Profile Page
             path="/setting/edit-profile"
             element={
               <ProtectedRoute>
-                <EditProfileMainBox />
-              </ProtectedRoute>
-            }
-          />
-          
-          <Route // Edit Profile ke andar 
-            path="/setting/open-change-profile-details"
-            element={
-              <ProtectedRoute>
-                <ProfileSettings />
+                <ProfileGuard>
+                  <EditProfileMainBox />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-          <Route //Setting me change password 
+          <Route // Edit Profile ke andar
+            path="/setting/open-change-profile-details"
+            element={
+              <ProtectedRoute>
+                <ProfileGuard>
+                  <ProfileSettings />
+                </ProfileGuard>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route //Setting me change password
             path="/setting/change-password"
             element={
               <ProtectedRoute>
-                <ChangePassword />
-              </ProtectedRoute> 
+                <ProfileGuard>
+                  <ChangePassword />
+                </ProfileGuard>
+              </ProtectedRoute>
             }
           />
 
@@ -155,16 +159,23 @@ const App = () => {
             path="/setting/notifications"
             element={
               <ProtectedRoute>
-                <NotificationSettings />
-              </ProtectedRoute> 
+                <ProfileGuard>
+                  <NotificationSettings />
+                </ProfileGuard>
+              </ProtectedRoute>
             }
           />
-        {/* Settings Sub Pages Ended Here */}
-
+          {/* Settings Sub Pages Ended Here */}
         </Routes>
       </div>
 
-      {!noFrame && <ProtectedRoute><Footer /></ProtectedRoute>}
+      {!noFrame && (
+        <ProtectedRoute>
+          <ProfileGuard>
+            <Footer />
+          </ProfileGuard>
+        </ProtectedRoute>
+      )}
     </>
   );
 };

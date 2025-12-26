@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useClerk, UserButton } from "@clerk/clerk-react";
@@ -9,7 +9,6 @@ const NavBar = () => {
   const navigate = useNavigate();
   const { openSignIn } = useClerk();
   const { user } = useContextUser();
-  // const email = user.email;
 
   return (
     <div className="fixed top-0 left-0 w-full bg-white z-50 px-4 pt-2 pb-2">
@@ -22,13 +21,13 @@ const NavBar = () => {
           onClick={() => navigate("/")}
         />
 
-        {user ? (
+        {user && user?.isProfileComplete ? (
           <NotchNotification />
         ) : (
           ""
         )}
 
-        {user ? (
+        {user && user?.isProfileComplete ? (
           <UserButton
             appearance={{
               elements: {
