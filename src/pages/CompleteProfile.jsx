@@ -172,7 +172,6 @@ const CompleteProfile = () => {
           <button
             disabled={loading}
             className="w-full bg-[#21c4cc] text-white py-3 rounded-xl text-sm font-medium disabled:opacity-60"
-            className="w-full bg-[#21c4cc] text-white py-3 rounded-xl text-sm font-medium disabled:opacity-60"
           >
             {loading ? "Saving..." : "Submit & Continue"}
           </button>
@@ -181,32 +180,6 @@ const CompleteProfile = () => {
     </div>
   );
 };
-
-/* 🔹 REUSABLE INPUT */
-const Input = ({
-  icon: Icon,
-  label,
-  value,
-  onChange,
-  type = "text",
-  disabled,
-  ...props
-}) => (
-  <div className="space-y-1">
-    <label className="text-xs text-gray-500">{label}</label>
-    <div className="flex items-center gap-3 border rounded-xl px-4 py-3 focus-within:border-[#21c4cc]">
-      <Icon size={18} className="text-gray-400" />
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        className="w-full outline-none text-sm bg-transparent disabled:text-gray-400"
-        {...props}
-      />
-    </div>
-  </div>
-);
 
 /* 🔹 REUSABLE INPUT */
 const Input = ({
