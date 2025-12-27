@@ -37,7 +37,7 @@ const Setting = () => {
     // <div className='mx-auto w-full max-w-md px-4 pt-20 text-justify pb-20 overflow-y-auto' >
 
     <div className="mx-auto max-w-md min-h-screen bg-white px-4 py-27">
-      <h1 className="text-lg font-semibold text-gray-800 mb-4">Settings</h1>
+      {/* <h1 className="text-lg font-semibold text-gray-800 mb-4">Settings</h1> */}
 
       {/* ACCOUNTS */}
       <Section title="Accounts">
@@ -55,7 +55,7 @@ const Setting = () => {
       </Section>
 
       {/* NOTIFICATIONS */}
-      <Section title="Notifications">
+      <Section title="Controller">
         <Item
           icon={Bell}
           label="App Notifications"

@@ -6,7 +6,7 @@ import {Info} from "lucide-react";
 const DailyUserAdminInfo = () => {
   return (
     <div className=" px-4 pt-4 pb-20 bg-white min-h-screen overflow-auto">
-      <h1 className="text-lg font-semibold text-gray-800 mb-4">Admin/Owner Information</h1>
+      {/* <h1 className="text-lg font-semibold text-gray-800 mb-4">Admin/Owner Information</h1> */}
       {/* NOTIFICATIONS */}
       <DailyUserSettingSection title="Owner/Admin">
         <DailyUserSettingItems

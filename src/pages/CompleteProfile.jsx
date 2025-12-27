@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useContextUser } from "../context/UserContext";
+import { useToast } from "../context/ToastContext";
 import { useAuth, useUser as useClerkUser } from "@clerk/clerk-react";
 import {
   Calendar,
@@ -11,13 +12,14 @@ import {
   User,
 } from "lucide-react";
 import FullPageLoader from "../components/FullPageLoader";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const CompleteProfile = () => {
-  const { user, setUser, backendUrl , refreshUser } = useContextUser();
+  const { user, backendUrl , refreshUser } = useContextUser();
+  const {showToast} = useToast();
   const { getToken } = useAuth();
   const { user: clerkUser } = useClerkUser();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // STATES (same logic)
   const [name, setName] = useState("");
@@ -41,8 +43,7 @@ const CompleteProfile = () => {
     e.preventDefault();
 
     if (phone.length !== 10) {
-      alert("Enter valid 10 digit mobile number");
-      alert("Enter valid 10 digit mobile number");
+      showToast("Enter valid 10 digit mobile number" , "warning");
       return;
     }
 
@@ -71,14 +72,6 @@ const CompleteProfile = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          phone,
-          name,
-          shop,
-          village,
-          address,
-          birthday,
-        }),
         body: JSON.stringify({
           phone,
           name,

@@ -31,8 +31,8 @@ const Toggle = ({ label, description }) => {
 const NotificationSettings = () => {
   return (
     <div className="mx-auto max-w-md py-27 min-h-screen bg-white px-4 py-6">
-      <h1 className="text-lg font-semibold text-gray-800 mb-4">
-        Notifications
+      <h1 className="text-xs font-semibold text-gray-500 mb-4">
+        NOTIFICATIONS
       </h1>
 
       <div className="bg-white border border-gray-200 rounded-xl divide-y px-4">
