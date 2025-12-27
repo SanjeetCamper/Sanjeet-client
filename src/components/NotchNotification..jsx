@@ -2,7 +2,7 @@ import React from "react";
 import { useContextUser } from "../context/UserContext.jsx";
 const NotchNotification = () => {
   const { user } = useContextUser();
-  const firstName = user.name
+  const firstName = user?.name
     .trim()
     .split(/\s+/)[0]
     .toLowerCase()
@@ -10,7 +10,7 @@ const NotchNotification = () => {
 
   return (
     <div>
-      <div className="text-sm sm:text-sm overflow-y-auto max-h-10 no-scrollbar">
+      <div className="text-xs overflow-y-auto max-h-10 no-scrollbar">
         {"Hey " + firstName} <br />
         🔔 Your Noticfication Panel
       </div>
