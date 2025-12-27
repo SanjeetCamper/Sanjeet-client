@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const dailyEntryApi = axios.create({
-  baseURL: "http://10.123.5.106:5000/api/daily-entry",
+  // baseURL: "https://sanjeet-client.pages.dev/api/daily-entry",
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api/daily-user`,
 });
 
 export default dailyEntryApi;
