@@ -5,11 +5,14 @@ import FooterUs from "../components/FooterUs.jsx";
 import "../index.css";
 import ImageGallery from "../components/ImageGallery.jsx";
 import Banner from "../CloudinaryStorage/Banner.jsx";
+import BookCamperCard from "../components/dashboardComponents/BookCamperCard.jsx";
 
 const HomeUser = () => {
   return (
-    <div>
+    <div className="space-y-5">
       <HomeHero />
+
+      <BookCamperCard />
             
       <ImageGallery />
       {/* <AboutUs /> */}

@@ -27,31 +27,28 @@ import EditProfileMainBox from "./components/settingsComponents/EditProfileMainB
 import { useContextUser } from "./context/UserContext.jsx";
 import ProfileGuard from "./routes/ProfileGaurd.jsx";
 import NetworkListener from "./components/NetworkListener.jsx";
+import BookCamper from "./pages/BookCamper.jsx";
 
 const App = () => {
   const location = useLocation();
-  const { user , loading} = useContextUser();
+  const { user, loading } = useContextUser();
   const noFrame = location.pathname.startsWith("/dailyuser/app");
   const { isSignedIn } = useUser();
   const showHeaderHome = !noFrame && !isSignedIn;
-
-
-  
 
   return (
     <>
       <NetworkListener />
       <InstallPWA />
 
-      {!noFrame  && <NavBar />}
+      {!noFrame && <NavBar />}
       {showHeaderHome && <HeaderHome />}
 
-          {/* 🔥 PROFILE BLOCKER */}
+      {/* 🔥 PROFILE BLOCKER */}
       {user && !user.isProfileComplete && <CompleteProfile />}
 
       <div className="pb-0">
         <Routes>
-
           {/* 🔒 Protected App */}
           <Route
             path="/"
@@ -76,6 +73,17 @@ const App = () => {
           />
 
           <Route
+            path="/dashboard/book-camper"
+            element={
+              <ProtectedRoute>
+                <ProfileGuard>
+                  <BookCamper />
+                </ProfileGuard>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/notification"
             element={
               <ProtectedRoute>
@@ -90,7 +98,7 @@ const App = () => {
             path="/dailyuser/*"
             element={
               <ProtectedRoute>
-                <ProfileGuard >
+                <ProfileGuard>
                   <DailyUser />
                 </ProfileGuard>
               </ProtectedRoute>

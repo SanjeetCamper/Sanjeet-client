@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import { useDailyUser } from "../../dailyUserContext/DailyUserContext";
 import { MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
@@ -17,12 +17,27 @@ const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
   const [showNote, setShowNote] = useState(false);
   const CamperWala = entry.camperGiven + " campers × ₹" + entry.rate;
 
+  const touchX = useRef(0);
+
+  const onHoldTouchStart = (e) => {
+    touchX.current = e.touches[0].clientX;
+  };
+
+  const onHoldTouchEnd = (e) => {
+    const diff = e.changedTouches[0].clientX - touchX.current;
+
+    if (diff < -40) setShowNote(false); // swipe left → open
+    if (diff > 40) setShowNote(true); // swipe right → close
+  };
+
   return (
     <motion.div
-      layout
+      // layout
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
+      onTouchStart={onHoldTouchStart}
+      onTouchEnd={onHoldTouchEnd}
       className="bg-white border border-gray-200 rounded-xl p-3 space-y-2"
     >
       <div className="flex justify-between items-start gap-3">
@@ -30,7 +45,6 @@ const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
         <div className="flex flex-col gap-1">
           <p className="text-sm font-medium text-gray-800">
             {entry.camperGiven > 0 && CamperWala}
-
           </p>
           <p className="text-xs text-gray-500">
             Recieved: {entry.camperGiven} campers
@@ -85,18 +99,26 @@ const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
       {entry.note?.visibleToUser && entry.note?.text && (
         <div className="mt-2">
           <button
-            onClick={() => setShowNote(!showNote)}
-            className="flex items-center gap-1 text-xs text-blue-600 mb-2"
+            onClick={() => setShowNote((v) => !v)}
+            className="flex items-center gap-1 text-xs text-blue-600 mb-1"
           >
             <MessageSquare size={14} />
             {showNote ? "Hide note" : "View note"}
           </button>
 
-          {showNote && (
+          <motion.div
+            initial={false}
+            animate={{
+              height: showNote ? "auto" : 0,
+              opacity: showNote ? 1 : 0,
+            }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="overflow-hidden"
+          >
             <div className="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
               <p className="text-xs text-blue-700">{entry.note.text}</p>
             </div>
-          )}
+          </motion.div>
         </div>
       )}
     </motion.div>
