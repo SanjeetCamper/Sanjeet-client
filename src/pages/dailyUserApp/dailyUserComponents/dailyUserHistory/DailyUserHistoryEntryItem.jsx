@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 // import { useDailyUser } from "../../dailyUserContext/DailyUserContext";
 import { MessageSquare } from "lucide-react";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 const timeAgo = (date) => {
-  const diff = Math.floor((Date.now() - new Date(date)) / 1000);
+  const diff = Math.max(0, Math.floor((Date.now() - new Date(date)) / 1000));
+
   if (diff < 60) return `${diff}s ago`;
   if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
   if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
@@ -14,19 +15,22 @@ const timeAgo = (date) => {
 const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
   const entryPending = entry.totalAmount - (entry.paymentReceived || 0);
   const [showNote, setShowNote] = useState(false);
+  const CamperWala = entry.camperGiven + " campers × ₹" + entry.rate;
 
   return (
-<motion.div
-  initial={{ opacity: 0, y: 12 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.25, ease: "easeOut" }}
-  className="bg-white border border-gray-200 rounded-xl p-3 space-y-2"
->
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="bg-white border border-gray-200 rounded-xl p-3 space-y-2"
+    >
       <div className="flex justify-between items-start gap-3">
         {/* LEFT */}
         <div className="flex flex-col gap-1">
           <p className="text-sm font-medium text-gray-800">
-            {entry.camperGiven} campers × ₹{entry.rate}
+            {entry.camperGiven > 0 && CamperWala}
+
           </p>
           <p className="text-xs text-gray-500">
             Recieved: {entry.camperGiven} campers
@@ -39,10 +43,16 @@ const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
 
         {/* CENTER */}
         <div className="flex flex-col items-center">
-          <p className="text-sm font-semibold text-gray-800">
-            ₹ {entry.totalAmount}
-          </p>
-          <span className="text-xs text-gray-500">Total Amount</span>
+          {entry.camperGiven === 0 ? (
+            ""
+          ) : (
+            <div>
+              <p className="text-sm font-semibold text-gray-800">
+                ₹ {entry.totalAmount}
+              </p>
+              <span className="text-xs text-gray-500">Total Amount</span>
+            </div>
+          )}
         </div>
 
         {/* RIGHT */}
@@ -84,9 +94,7 @@ const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
 
           {showNote && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
-              <p className="text-xs text-blue-700">
-                {entry.note.text}
-              </p>
+              <p className="text-xs text-blue-700">{entry.note.text}</p>
             </div>
           )}
         </div>

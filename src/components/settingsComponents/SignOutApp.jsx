@@ -44,7 +44,7 @@ const SignOutApp = ({ open, onClose, onConfirm }) => {
               Logout
             </h2>
             <p className="text-sm text-gray-600 mb-4">
-              Are you sure you want to logout from Daily User app?
+              Are you sure you want to logout from the app?
             </p>
 
             <div className="flex gap-3">

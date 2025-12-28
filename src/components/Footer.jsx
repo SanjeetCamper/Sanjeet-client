@@ -42,7 +42,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full h-20 pt-1 bg-white z-50">
+    <div className="fixed bottom-0 left-0 w-full h-19 pt-1 bg-white z-50">
       {/* RELATIVE wrapper for arrow */}
       <div className="relative max-w-[280px] mx-auto">
         {/* SCROLLABLE NAV */}
@@ -66,8 +66,6 @@ const Footer = () => {
             { to: "/notification", label: "Notification", icon: BellIcon },
             { to: "/dailyuser", label: "Daily User", icon: Handshake },
             { to: "/setting", label: "Setting", icon: Settings },
-            // { to: "/payments", label: "Payments", icon: CreditCard },
-            // { to: "/setting", label: "Setting", icon: Settings },
           ].map((item, i) => {
             const Icon = item.icon;
             return (

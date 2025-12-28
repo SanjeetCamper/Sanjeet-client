@@ -18,7 +18,7 @@ const DailyUserSetting = () => {
 
   return (
     <div className="px-4 pt-4 pb-20 bg-white min-h-screen overflow-auto">
-      <h1 className="text-lg font-semibold text-gray-800 mb-4">Settings</h1>
+      {/* <h1 className="text-lg font-semibold text-gray-800 mb-4">Settings</h1> */}
 
       {/* ACCOUNT */}
       <DailyUserSettingSection title="Account">

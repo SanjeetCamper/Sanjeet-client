@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./dailyUserStyles/index.module.css";
-import DailyUserOut from "./dailyUserComponents/DailyUserOut.jsx";
+// import DailyUserOut from "./dailyUserComponents/DailyUserOut.jsx";
 import DailyUserFooterNavbar from "./dailyUserComponents/DailyUserFooterNavbar.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 import DailyUserDashboard from "./dailyUserPages/DailyUserDashboard.jsx";
@@ -9,8 +9,10 @@ import DailyUserHistory from "./dailyUserPages/DailyUserHistory.jsx";
 import DailyUserNotification from "./dailyUserPages/DailyUserNotification.jsx";
 import DailyUserSetting from "./dailyUserPages/DailyUserSetting.jsx";
 import useDailyUserGuard from "../../hooks/useDailyUserGaurd.js";
-import {DailyUserProvider} from "./dailyUserContext/DailyUserContext.jsx";
+import { DailyUserProvider } from "./dailyUserContext/DailyUserContext.jsx";
 import DailyUserAdminInfo from "./dailyUserComponents/dailyUserSetting/DailyUserAdminInfo.jsx";
+import DailyUserEntryHistory from "./dailyUserPages/DailyUserEntryHistory.jsx";
+import DailyUserMonthlyHistory from "./dailyUserPages/DailyUserMonthlyHistory.jsx";
 
 const IndexDailyUser = () => {
   useDailyUserGuard();
@@ -29,15 +31,21 @@ const IndexDailyUser = () => {
       className={styles.miniAppWrapper}
     >
       <DailyUserProvider>
-        <DailyUserOut />
-
         <Routes>
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<DailyUserDashboard />} />
           <Route path="history" element={<DailyUserHistory />} />
+          <Route
+            path="history/entry-page"
+            element={<DailyUserEntryHistory />}
+          />
+          <Route
+            path="history/month/:year/:month"
+            element={<DailyUserMonthlyHistory />}
+          />
+
           <Route path="notification" element={<DailyUserNotification />} />
           <Route path="setting" element={<DailyUserSetting />} />
-
           <Route path="setting/admin-info" element={<DailyUserAdminInfo />} />
         </Routes>
 

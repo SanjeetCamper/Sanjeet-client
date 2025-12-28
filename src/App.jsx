@@ -25,8 +25,8 @@ import NotificationSettings from "./components/settingsComponents/NotificationSe
 // import ProfileImageChange from "./components/settingsComponents/ProfileImageChange.jsx";
 import EditProfileMainBox from "./components/settingsComponents/EditProfileMainBox.jsx";
 import { useContextUser } from "./context/UserContext.jsx";
-import FullPageLoader from "./components/FullPageLoader.jsx";
 import ProfileGuard from "./routes/ProfileGaurd.jsx";
+import NetworkListener from "./components/NetworkListener.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -40,6 +40,7 @@ const App = () => {
 
   return (
     <>
+      <NetworkListener />
       <InstallPWA />
 
       {!noFrame  && <NavBar />}

@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import DailyUserOut from './DailyUserOut.jsx'
 import {
   LayoutDashboard,
   Settings,
@@ -40,9 +41,10 @@ const DailyUserFooterNavbar = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full h-20 pt-1 bg-white z-50">
+    <div className="fixed bottom-0 left-0 w-full h-20 flex justify-center items-center gap-3 bg-white z-50 px-2">
       {/* RELATIVE wrapper for arrow */}
-      <div className="relative max-w-[280px] mx-auto">
+      <DailyUserOut />
+      <div className="relative max-w-[280px]">
         {/* SCROLLABLE NAV */}
         <div
           ref={scrollRef}

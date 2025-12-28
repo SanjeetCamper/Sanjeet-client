@@ -1,169 +1,95 @@
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import React, { useMemo } from "react";
+import { NavLink } from "react-router-dom";
+import { ClipboardList, Lock } from "lucide-react";
 import { useDailyUser } from "../dailyUserContext/DailyUserContext.jsx";
-import DailyUserHistoryFilterBar from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryFilterBar.jsx";
-import DailyUserHistoryDateGroup from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryDateGroup.jsx";
-import {
-  isToday,
-  isThisWeek,
-  isThisMonth,
-} from "../../../utils/dateFilters.js";
-import FullPageLoader from '../../../components/FullPageLoader.jsx'
+import DailyUserMonthlySummaryCard from "../dailyUserComponents/dailyUserHistory/DailyUserMonthlySummaryCard.jsx";
+
+const timeAgo = (date) => {
+  if (!date) return "";
+  const diff = Math.floor((Date.now() - new Date(date)) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  return `${Math.floor(diff / 86400)}d ago`;
+};
 
 const DailyUserHistory = () => {
-  const { history, loading } = useDailyUser();
-  const [filter, setFilter] = useState("Today");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-  const [scrolled, setScrolled] = useState(false);
-  const [minuteTick, setMinuteTick] = useState(0);
-  const todayRef = useRef(null);
+  const { history } = useDailyUser();
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setMinuteTick((v) => v + 1);
-    }, 60000); // every 1 minute
+  // 🔹 entries today
+  const todayCount = useMemo(() => {
+    if (!history?.length) return 0;
+    const today = new Date().toDateString();
+    return history.filter(
+      (e) => new Date(e.date || e.createdAt).toDateString() === today
+    ).length;
+  }, [history]);
 
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // ✅ STEP A: FILTER
-  const filteredHistory = useMemo(() => {
-    if (!history) return [];
-
-    return history.filter((entry) => {
-      const entryTime = new Date(entry.date).getTime();
-
-      if (filter === "Today") return isToday(entry.date);
-      if (filter === "This Week") return isThisWeek(entry.date);
-      if (filter === "This Month") return isThisMonth(entry.date);
-
-      if (filter === "Custom") {
-        if (!fromDate || !toDate) return true;
-
-        const from = new Date(fromDate).setHours(0, 0, 0, 0);
-        const to = new Date(toDate).setHours(23, 59, 59, 999);
-
-        return entryTime >= from && entryTime <= to;
-      }
-
-      return true;
-    });
-  }, [history, filter, fromDate, toDate]);
-  // ✅ STEP B: SORT (latest first)
-  const sortedHistory = useMemo(() => {
-    return [...filteredHistory].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
-  }, [filteredHistory]);
-
-  // ✅ STEP C: GROUP by DATE
-  const groupedHistory = useMemo(() => {
-    return sortedHistory.reduce((acc, entry) => {
-      const dateKey = new Date(entry.date || entry.createdAt).toDateString();
-      acc[dateKey] = acc[dateKey] || [];
-      acc[dateKey].push(entry);
-      return acc;
-    }, {});
-  }, [sortedHistory]);
-
-  const sortedDateGroups = useMemo(() => {
-    return Object.entries(groupedHistory).sort(
-      ([dateA], [dateB]) => new Date(dateB) - new Date(dateA) // 👈 latest date first
-    );
-  }, [groupedHistory]);
-
-  if (loading) {
-    return <FullPageLoader />;
-  }
-
-  if (!history || history.length === 0) {
-    return <div className="px-4 pt-6 text-sm">No entries found</div>;
-  }
+  // 🔹 last updated
+  const lastUpdated = useMemo(() => {
+    if (!history?.length) return null;
+    return history[0].createdAt;
+  }, [history]);
 
   return (
     <div className="px-4 pt-4 pb-24 space-y-4">
-      <DailyUserHistoryFilterBar active={filter} onChange={setFilter} />
+      <h1 className="text-sm font-semibold text-gray-700">History</h1>
 
-      {filter === "Custom" && (
-        <div className="bg-white border rounded-xl p-3 flex gap-2">
-          <input
-            type="date"
-            value={fromDate}
-            onChange={(e) => setFromDate(e.target.value)}
-            className="flex-1 border rounded-lg px-3 py-2 text-sm"
-          />
-
-          <input
-            type="date"
-            value={toDate}
-            onChange={(e) => setToDate(e.target.value)}
-            className="flex-1 border rounded-lg px-3 py-2 text-sm"
-          />
-
-          {/* 🔄 CLEAR BUTTON */}
-          <button
-            onClick={() => {
-              setFromDate("");
-              setToDate("");
-              setFilter("Today");
-            }}
-            className="flex-1 text-xs text-gray-600 py-2 border rounded-lg active:bg-gray-50"
-          >
-            Clear Filter
-          </button>
-        </div>
-      )}
-
-      {/* {groupedHistory &&
-        sortedDateGroups.map(([date, entries]) => (
-        
-          <div>
-            <DailyUserHistoryDateGroup
-            key={date}
-            date={date}
-            entries={entries}
-            minuteTick={minuteTick}
-            scrolle={scrolled}
-          />
+      {/* ✅ ENTRY HISTORY */}
+      <NavLink
+        to="/dailyuser/app/history/entry-page"
+        className="block bg-white border border-gray-200 rounded-2xl p-4 active:scale-[0.98] transition"
+      >
+        <div className="flex items-start gap-3">
+          <div className="bg-[#21c4cc]/10 p-2 rounded-xl">
+            <ClipboardList size={18} className="text-[#21c4cc]" />
           </div>
-        ))} */}
 
-      {sortedDateGroups &&
-        sortedDateGroups.map(([date, entries]) => {
-          const isToday =
-            new Date(date).toDateString() === new Date().toDateString();
+          <div className="flex-1">
+            <p className="text-sm font-medium text-gray-800">Entry History</p>
 
-          return (
-            <div ref={isToday ? todayRef : null} key={date}>
-              <DailyUserHistoryDateGroup
-                date={date}
-                entries={entries}
-                minuteTick={minuteTick}
-                scrolle={scrolled}
-              />
+            <p className="text-xs text-gray-500 mt-1">
+              Daily camper entries & payments
+            </p>
 
-              <button
-                onClick={() =>
-                  todayRef.current?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
-                }
-                className="fixed bottom-24 right-4 bg-[#21c4cc] text-white text-xs px-4 py-2 rounded-full shadow-lg z-50"
-              >
-                Today
-              </button>
+            <div className="flex items-center gap-2 mt-2">
+              {todayCount > 0 && (
+                <span className="text-[10px] bg-[#21c4cc]/10 text-[#21c4cc] px-2 py-0.5 rounded-full">
+                  {todayCount} entries today
+                </span>
+              )}
+
+              {lastUpdated && (
+                <span className="text-[10px] text-gray-400">
+                  Updated {timeAgo(lastUpdated)}
+                </span>
+              )}
             </div>
-          );
-        })}
+          </div>
+        </div>
+      </NavLink>
+
+      <DailyUserMonthlySummaryCard history={history} />
+
+      {/* 🔒 COMING SOON CARD */}
+      <div className="relative bg-gray-100 border border-dashed border-gray-300 rounded-2xl p-4 opacity-70">
+        <div className="flex items-start gap-3">
+          <div className="bg-gray-200 p-2 rounded-xl">
+            <Lock size={18} className="text-gray-500" />
+          </div>
+
+          <div className="flex-1">
+            <p className="text-sm font-medium text-gray-600">Payment History</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Detailed payment & settlement logs
+            </p>
+
+            <span className="inline-block mt-2 text-[10px] bg-gray-300 text-gray-600 px-2 py-0.5 rounded-full">
+              Coming soon
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
