@@ -128,7 +128,7 @@ const DailyUserLogin = () => {
           </h3>
 
           <button
-            onClick={() => navigate("/setting/dailyuser/cash-info")}
+            onClick={() => showToast("Cooming Soon" , "info")}
             className="w-full flex items-center gap-3 border rounded-xl px-4 py-3 active:bg-gray-50"
           >
             <Wallet size={18} className="text-green-600" />
@@ -143,7 +143,7 @@ const DailyUserLogin = () => {
           </button>
 
           <button
-            onClick={() => navigate("/setting/dailyuser/plans")}
+            onClick={() => showToast("Cooming Soon" , "info")}
             className="w-full flex items-center gap-3 border rounded-xl px-4 py-3 active:bg-gray-50"
           >
             <CreditCard size={18} className="text-purple-600" />
