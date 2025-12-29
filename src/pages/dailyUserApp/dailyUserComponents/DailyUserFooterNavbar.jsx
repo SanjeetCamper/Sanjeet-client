@@ -41,7 +41,7 @@ const DailyUserFooterNavbar = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full h-20 flex justify-center items-center gap-4 bg-white/70 z-50 px-2">
+    <div className="fixed bottom-0 left-0 w-full h-19 flex justify-center items-center gap-4 bg-white z-50 px-2">
       {/* RELATIVE wrapper for arrow */}
       <DailyUserOut />
       <div className="relative max-w-[280px]">
