@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { exportCsv } from "./exportCsv";
 import { exportPdf } from "./exportPdf";
 import { useToast } from "../../../context/ToastContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ranges = [
   { label: "Last 7 Days", value: "week" },
@@ -9,8 +10,8 @@ const ranges = [
   { label: "Custom Range", value: "custom" },
 ];
 
-const ExportReportModal = ({ history = [], onClose }) => {
-  const {showToast} = useToast();
+const ExportReportModal = ({ history = [], onClose ,open }) => {
+  const { showToast } = useToast();
   const [range, setRange] = useState("week");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
@@ -69,7 +70,7 @@ const ExportReportModal = ({ history = [], onClose }) => {
   }, [filtered]);
 
   const handleExport = () => {
-    if (!filtered.length) return showToast("No Data Availbale" , "warning") 
+    if (!filtered.length) return showToast("No Data Availbale", "warning");
 
     if (type === "csv") {
       exportCsv(filtered, summary);
@@ -79,104 +80,117 @@ const ExportReportModal = ({ history = [], onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex items-end">
-      <div className="bg-white w-full rounded-t-2xl p-4 space-y-4">
-        <h2 className="text-sm font-semibold text-gray-700">Export Report</h2>
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-50 bg-black/40 flex items-end"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.div
+          className="bg-white w-full rounded-t-2xl p-4 space-y-4"
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 40, opacity: 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          <h2 className="text-sm font-semibold text-gray-700">Export Report</h2>
 
-        {/* RANGE */}
-        <div className="space-y-2">
-          <p className="text-xs text-gray-500">Select Range</p>
+          {/* RANGE */}
+          <div className="space-y-2">
+            <p className="text-xs text-gray-500">Select Range</p>
+            <div className="flex gap-2">
+              {ranges.map((r) => (
+                <button
+                  key={r.value}
+                  onClick={() => setRange(r.value)}
+                  className={`px-3 py-1.5 text-xs rounded-full ${
+                    range === r.value
+                      ? "bg-[#21c4cc] text-white"
+                      : "bg-gray-100 text-gray-600"
+                  }`}
+                >
+                  {r.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* CUSTOM DATE */}
+          {range === "custom" && (
+            <div className="flex gap-2">
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+                className="flex-1 border rounded-lg px-3 py-2 text-sm"
+              />
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+                className="flex-1 border rounded-lg px-3 py-2 text-sm"
+              />
+            </div>
+          )}
+
+          {/* SUMMARY PREVIEW */}
+          <div className="bg-gray-50 border rounded-xl p-3 grid grid-cols-2 gap-2 text-xs">
+            <div>
+              Entries: <b>{summary.entries}</b>
+            </div>
+            <div>
+              Campers: <b>{summary.campers}</b>
+            </div>
+            <div>
+              Total: <b>₹ {summary.total}</b>
+            </div>
+            <div>
+              Paid: <b>₹ {summary.paid}</b>
+            </div>
+            <div className="col-span-2">
+              Pending: <b>₹ {summary.pending}</b>
+            </div>
+          </div>
+
+          {/* TYPE */}
           <div className="flex gap-2">
-            {ranges.map((r) => (
-              <button
-                key={r.value}
-                onClick={() => setRange(r.value)}
-                className={`px-3 py-1.5 text-xs rounded-full ${
-                  range === r.value
-                    ? "bg-[#21c4cc] text-white"
-                    : "bg-gray-100 text-gray-600"
-                }`}
-              >
-                {r.label}
-              </button>
-            ))}
+            <button
+              onClick={() => setType("csv")}
+              className={`flex-1 py-2 text-xs rounded-lg ${
+                type === "csv" ? "bg-[#21c4cc] text-white" : "bg-gray-100"
+              }`}
+            >
+              CSV
+            </button>
+            <button
+              onClick={() => setType("pdf")}
+              className={`flex-1 py-2 text-xs rounded-lg ${
+                type === "pdf" ? "bg-[#21c4cc] text-white" : "bg-gray-100"
+              }`}
+            >
+              PDF
+            </button>
           </div>
-        </div>
 
-        {/* CUSTOM DATE */}
-        {range === "custom" && (
+          {/* ACTIONS */}
           <div className="flex gap-2">
-            <input
-              type="date"
-              value={fromDate}
-              onChange={(e) => setFromDate(e.target.value)}
-              className="flex-1 border rounded-lg px-3 py-2 text-sm"
-            />
-            <input
-              type="date"
-              value={toDate}
-              onChange={(e) => setToDate(e.target.value)}
-              className="flex-1 border rounded-lg px-3 py-2 text-sm"
-            />
+            <button
+              onClick={onClose}
+              className="flex-1 py-2 text-xs border rounded-lg"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleExport}
+              className="flex-1 py-2 text-xs bg-[#21c4cc] text-white rounded-lg"
+            >
+              Export
+            </button>
           </div>
-        )}
-
-        {/* SUMMARY PREVIEW */}
-        <div className="bg-gray-50 border rounded-xl p-3 grid grid-cols-2 gap-2 text-xs">
-          <div>
-            Entries: <b>{summary.entries}</b>
-          </div>
-          <div>
-            Campers: <b>{summary.campers}</b>
-          </div>
-          <div>
-            Total: <b>₹ {summary.total}</b>
-          </div>
-          <div>
-            Paid: <b>₹ {summary.paid}</b>
-          </div>
-          <div className="col-span-2">
-            Pending: <b>₹ {summary.pending}</b>
-          </div>
-        </div>
-
-        {/* TYPE */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setType("csv")}
-            className={`flex-1 py-2 text-xs rounded-lg ${
-              type === "csv" ? "bg-[#21c4cc] text-white" : "bg-gray-100"
-            }`}
-          >
-            CSV
-          </button>
-          <button
-            onClick={() => setType("pdf")}
-            className={`flex-1 py-2 text-xs rounded-lg ${
-              type === "pdf" ? "bg-[#21c4cc] text-white" : "bg-gray-100"
-            }`}
-          >
-            PDF
-          </button>
-        </div>
-
-        {/* ACTIONS */}
-        <div className="flex gap-2">
-          <button
-            onClick={onClose}
-            className="flex-1 py-2 text-xs border rounded-lg"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleExport}
-            className="flex-1 py-2 text-xs bg-[#21c4cc] text-white rounded-lg"
-          >
-            Export
-          </button>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

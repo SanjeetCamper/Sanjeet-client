@@ -51,7 +51,7 @@ const Footer = () => {
           onScroll={handleScroll}
           className="
             flex items-center gap-2
-            bg-white border border-gray-500/50 rounded-full
+            bg-white border border-gray-200 shadow-sm rounded-full
             px-2 py-1
             overflow-x-auto
             whitespace-nowrap
@@ -78,13 +78,13 @@ const Footer = () => {
                   `flex-shrink-0 w-20 flex flex-col items-center py-2 text-xs
                   ${
                     isActive
-                      ? "bg-gray-200 text-black rounded-full"
+                      ? "bg-[#21c4cc] text-white rounded-full"
                       : "text-gray-500"
                   }`
                 }
               >
-                <Icon className="w-5" />
-                {item.label}
+                <Icon className="w-4" />
+                <span className="text-[10px] leading-none">{item.label}</span>
               </NavLink>
             );
           })}

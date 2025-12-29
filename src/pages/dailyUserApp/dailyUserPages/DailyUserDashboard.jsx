@@ -38,7 +38,7 @@ const DailyUserDashboard = () => {
   if(loading)<FullPageLoader />
 
   return (
-    <div className="pt-4 px-4 pb-22">
+    <div className="pt-4 px-4 pb-22 mx-auto">
       <AddEntryButton onOpen={()=>setOpen(true)} />
       <DailyUserWelcomeCard dailyUser={dailyUser}/>
       <DashboardShowCard summary={summary}/>

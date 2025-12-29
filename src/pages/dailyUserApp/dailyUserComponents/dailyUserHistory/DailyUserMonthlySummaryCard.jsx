@@ -1,3 +1,4 @@
+import { Calendar1 } from "lucide-react";
 import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -36,36 +37,39 @@ const DailyUserMonthlySummaryCard = ({ history = [] }) => {
       onClick={() =>
         navigate(`/dailyuser/app/history/month/${year}/${month + 1}`)
       }
-      className="bg-white border border-gray-200 rounded-2xl p-4 cursor-pointer active:scale-[0.98] transition"
+      className="flex items-start gap-3 bg-white border border-gray-200 rounded-2xl p-4 cursor-pointer active:scale-[0.98] transition"
     >
-      <p className="text-xs text-gray-500 mb-2">This Month Summary</p>
+      <div className="bg-[#21c4cc]/10 p-2 rounded-xl">
+        <Calendar1 size={18} className="text-[#21c4cc]" />
+      </div>
+      <div className="w-full">
+        <p className="text-xs text-gray-500 mb-2">This Month Summary</p>
 
-      <div className="grid grid-cols-3 gap-3">
-        <div>
-          <p className="text-sm font-semibold text-gray-800">
-            {summary.totalEntries}
-          </p>
-          <p className="text-[11px] text-gray-500">Entries</p>
-        </div>
+        <div className="grid grid-cols-3 gap-3">
+          <div>
+            <p className="text-sm font-semibold text-gray-800">
+              {summary.totalEntries}
+            </p>
+            <p className="text-[11px] text-gray-500">Entries</p>
+          </div>
 
-        <div>
-          <p className="text-sm font-semibold text-green-600">
-            ₹ {summary.totalAmount}
-          </p>
-          <p className="text-[11px] text-gray-500">Total</p>
-        </div>
+          <div>
+            <p className="text-sm font-semibold text-green-600">
+              ₹ {summary.totalAmount}
+            </p>
+            <p className="text-[11px] text-gray-500">Total</p>
+          </div>
 
-        <div>
-          <p
-            className={`text-sm font-semibold ${
-              summary.pending > 0
-                ? "text-red-600"
-                : "text-gray-400"
-            }`}
-          >
-            ₹ {summary.pending}
-          </p>
-          <p className="text-[11px] text-gray-500">Pending</p>
+          <div>
+            <p
+              className={`text-sm font-semibold ${
+                summary.pending > 0 ? "text-red-600" : "text-gray-400"
+              }`}
+            >
+              ₹ {summary.pending}
+            </p>
+            <p className="text-[11px] text-gray-500">Pending</p>
+          </div>
         </div>
       </div>
     </div>

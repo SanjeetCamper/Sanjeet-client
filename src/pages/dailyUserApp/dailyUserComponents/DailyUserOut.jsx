@@ -8,8 +8,8 @@ const DailyUserOut = () => {
 
   return (
     <div>
-      <NavLink to={'/'}>
-        <ArrowLeft className='text-gray-500'/>
+      <NavLink to={'/dashboard'}>
+        <ArrowLeft className='text-gray-500 w-5'/>
       </NavLink>
     </div>
   )

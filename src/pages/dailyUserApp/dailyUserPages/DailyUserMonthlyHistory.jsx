@@ -113,7 +113,7 @@ const DailyUserMonthlyHistory = () => {
 
   return (
     <div
-      className="px-4 pt-4 pb-24 space-y-4"
+      className="px-4 pt-4 pb-24 space-y-4 mx-auto"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}

@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExportReportModal from "./ExportReportModal";
 
-const ExportButton = ({history}) => {
-    const [showExport, setShowExport] = useState(false);
+const ExportButton = ({ history }) => {
+  const [openExport, setOpenExport] = useState(false);
+
   return (
     <div className="fixed z-100 bottom-25 right-10">
-      <button onClick={() => setShowExport(true)} className="bg-[#21c4cc] text-white shadow border border-gray-300 py-2 px-5 rounded-full">Export</button>
+      <button
+        onClick={() => setOpenExport(true)}
+        className="bg-[#21c4cc] text-white shadow border border-gray-300 py-2 px-5 rounded-full"
+      >
+        Export
+      </button>
 
-      {showExport && (
+      {openExport && (
         <ExportReportModal
           history={history}
-          onClose={() => setShowExport(false)}
+          open={openExport}
+          onClose={() => setOpenExport(false)}
         />
       )}
     </div>

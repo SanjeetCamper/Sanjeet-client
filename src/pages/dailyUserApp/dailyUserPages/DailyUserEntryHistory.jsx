@@ -59,7 +59,7 @@ const DailyUserEntryHistory = () => {
 
   return (
     <div
-      className="h-screen px-4 pt-4 pb-24 space-y-4"
+      className="h-screen px-4 pt-4 pb-24 space-y-4 mx-auto"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
