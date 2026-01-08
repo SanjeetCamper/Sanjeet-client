@@ -94,7 +94,7 @@ const CompleteProfile = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-end">
+    <div className="fixed inset-0 z-100 bg-black/50 flex items-end">
       <div className="bg-white w-full max-w-md mx-auto rounded-t-2xl p-5 pb-6 max-h-[92vh] overflow-y-auto">
         {/* HEADER */}
         <div className="mb-4">

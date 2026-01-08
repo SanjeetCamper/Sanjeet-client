@@ -7,6 +7,8 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import { registerSW } from "virtual:pwa-register"; // 👈 add this
 import { UserProvider } from "./context/UserContext.jsx";
 import { ToastProvider } from "./context/ToastContext.jsx";
+import { MembershipProvider } from "./context/MembershipContext.jsx";
+import { DailyUserCredentialsProvider } from "./context/DailyUserCredentialsContext.jsx";
 
 registerSW(); // 👈 call once, बस
 
@@ -32,9 +34,13 @@ createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
     <UserProvider>
       <BrowserRouter>
-        <ToastProvider>
-          <App />
-        </ToastProvider>
+        <DailyUserCredentialsProvider>
+          <MembershipProvider>
+            <ToastProvider>
+              <App />
+            </ToastProvider>
+          </MembershipProvider>
+        </DailyUserCredentialsProvider>
       </BrowserRouter>
     </UserProvider>
   </ClerkProvider>

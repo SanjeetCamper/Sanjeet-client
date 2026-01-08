@@ -16,7 +16,7 @@ const StepReview = ({ form, back }) => {
         <button onClick={back} className="flex-1 border rounded-xl py-2 text-sm">
           Back
         </button>
-        <button className="flex-1 bg-[#21c4cc] text-white rounded-xl py-2 text-sm">
+        <button className="flex-1 bg-[#21c4cc] border active:bg-white active:text-black active:border-gray-300 active:shadow-md hover:bg-white hover:text-black hover:border-gray-300 hover:shadow-md text-white rounded-xl py-2 text-sm">
           Confirm Order
         </button>
       </div>

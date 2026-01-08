@@ -39,7 +39,7 @@ const DailyUserDashboard = () => {
 
   return (
     <div className="pt-4 px-4 pb-22 mx-auto">
-      <AddEntryButton onOpen={()=>setOpen(true)} />
+      {/* <AddEntryButton onOpen={()=>setOpen(true)} /> */}
       <DailyUserWelcomeCard dailyUser={dailyUser}/>
       <DashboardShowCard summary={summary}/>
       <DailyUserTodaySummaryCard todaySummary={todaySummary}/>

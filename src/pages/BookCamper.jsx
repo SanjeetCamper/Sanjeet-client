@@ -3,6 +3,7 @@ import StepOrder from "../components/bookCamper/StepOrder.jsx";
 import StepAddress from "../components/bookCamper/StepAddress.jsx";
 import StepPayment from "../components/bookCamper/StepPayments.jsx";
 import StepReview from "../components/bookCamper/StepReview.jsx";
+// import { useNavigate } from "react-router-dom";
 
 const BookCamper = () => {
   const [step, setStep] = useState(1);
@@ -19,7 +20,7 @@ const BookCamper = () => {
   const back = () => setStep((s) => s - 1);
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 pt-27 text-justify pb-22 space-y-5">
+    <div className="fixed top-0 left-0 z-[100] h-screen bg-white w-full max-w-md p-4 py-10 text-justify space-y-5">
       {step === 1 && <StepOrder form={form} setForm={setForm} next={next} />}
       {step === 2 && (
         <StepAddress form={form} setForm={setForm} next={next} back={back} />
@@ -28,6 +29,7 @@ const BookCamper = () => {
         <StepPayment form={form} setForm={setForm} next={next} back={back} />
       )}
       {step === 4 && <StepReview form={form} back={back} />}
+
     </div>
   );
 };

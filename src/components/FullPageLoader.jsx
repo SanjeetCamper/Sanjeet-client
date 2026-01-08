@@ -1,6 +1,6 @@
 import React from "react";
 
-const FullPageLoader = () => {
+const FullPageLoader = ({value}) => {
   return (
     <div className="fixed top-0 left-0 z-100">
       <div className="h-screen w-screen flex items-center justify-center bg-white">
@@ -9,7 +9,7 @@ const FullPageLoader = () => {
           <h1 className="text-lg font-semibold text-[#19a1a8]">
             Sanjeet Water Supplier
           </h1>
-          <p className="text-xs text-gray-500">Preparing your dashboard</p>
+          <p className="text-xs text-gray-500">{value}</p>
         </div>
       </div>
     </div>

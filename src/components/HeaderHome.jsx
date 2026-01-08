@@ -1,3 +1,5 @@
+// This is only for logout person
+
 import React from "react";
 // import styles from "../styles/HomeHero.module.css";
 import AboutUs from "./AboutUs.jsx";
@@ -5,6 +7,7 @@ import AboutUs from "./AboutUs.jsx";
 import HomeHero from "./HomeHero.jsx";
 import FooterUs from "./FooterUs.jsx";
 import ImageGallery from "./ImageGallery.jsx";
+import BannerScrollForDash from "./BannerScrollForDash.jsx";
 
 const HeaderHome = () => {
 

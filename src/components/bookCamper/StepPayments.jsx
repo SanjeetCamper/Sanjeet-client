@@ -25,7 +25,7 @@ const StepPayment = ({ form, setForm, next, back }) => {
         </button>
         <button
           onClick={next}
-          className="flex-1 bg-[#21c4cc] text-white rounded-xl py-2 text-sm"
+          className="flex-1 bg-[#21c4cc] border active:bg-white active:text-black active:border-gray-300 active:shadow-md hover:bg-white hover:text-black hover:border-gray-300 hover:shadow-md text-white rounded-xl py-2 text-sm"
         >
           Continue
         </button>

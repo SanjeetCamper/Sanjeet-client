@@ -8,6 +8,7 @@ import {
   Settings,
   BellIcon,
   ChevronRight,
+  Plane,
   // BarChart,
 } from "lucide-react";
 
@@ -63,6 +64,7 @@ const Footer = () => {
           {[
             { to: "/", label: "Home", icon: HomeIcon },
             { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+            // { to: "/membership/plans", label: "Membership", icon: Plane },
             { to: "/notification", label: "Notification", icon: BellIcon },
             { to: "/dailyuser", label: "Daily User", icon: Handshake },
             { to: "/setting", label: "Setting", icon: Settings },
@@ -78,7 +80,7 @@ const Footer = () => {
                   `flex-shrink-0 w-20 flex flex-col items-center py-2 text-xs
                   ${
                     isActive
-                      ? "bg-[#21c4cc] text-white rounded-full"
+                      ? "bg-[#21c4cc] text-white rounded-full transition-all duration-300 ease-out scale-105 shadow-md"
                       : "text-gray-500"
                   }`
                 }

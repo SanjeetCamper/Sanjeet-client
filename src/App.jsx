@@ -28,6 +28,8 @@ import { useContextUser } from "./context/UserContext.jsx";
 import ProfileGuard from "./routes/ProfileGaurd.jsx";
 import NetworkListener from "./components/NetworkListener.jsx";
 import BookCamper from "./pages/BookCamper.jsx";
+import MembershipPlans from "./pages/MembershipPlans.jsx";
+import CreateDailyUserCredentials from "./pages/CreateDailyUserCredentials.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -54,9 +56,25 @@ const App = () => {
             path="/"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <Home />
-                </ProfileGuard>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard/membership/plans"
+            element={
+              <ProtectedRoute>
+                <MembershipPlans />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/daily-user/create-credentials"
+            element={
+              <ProtectedRoute>
+                <CreateDailyUserCredentials />
               </ProtectedRoute>
             }
           />
@@ -65,9 +83,7 @@ const App = () => {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <Dashboard />
-                </ProfileGuard>
+                <Dashboard />
               </ProtectedRoute>
             }
           />
@@ -76,9 +92,7 @@ const App = () => {
             path="/dashboard/book-camper"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <BookCamper />
-                </ProfileGuard>
+                <BookCamper />
               </ProtectedRoute>
             }
           />
@@ -87,9 +101,7 @@ const App = () => {
             path="/notification"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <Notification />
-                </ProfileGuard>
+                <Notification />
               </ProtectedRoute>
             }
           />
@@ -98,9 +110,7 @@ const App = () => {
             path="/dailyuser/*"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <DailyUser />
-                </ProfileGuard>
+                <DailyUser />
               </ProtectedRoute>
             }
           />
@@ -110,9 +120,7 @@ const App = () => {
             path="/dailyuser/app/*"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <IndexDailyUser />
-                </ProfileGuard>
+                <IndexDailyUser />
               </ProtectedRoute>
             }
           />
@@ -122,9 +130,7 @@ const App = () => {
             path="/setting"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <Setting />
-                </ProfileGuard>
+                <Setting />
               </ProtectedRoute>
             }
           />
@@ -135,9 +141,7 @@ const App = () => {
             path="/setting/edit-profile"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <EditProfileMainBox />
-                </ProfileGuard>
+                <EditProfileMainBox />
               </ProtectedRoute>
             }
           />
@@ -146,9 +150,7 @@ const App = () => {
             path="/setting/open-change-profile-details"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <ProfileSettings />
-                </ProfileGuard>
+                <ProfileSettings />
               </ProtectedRoute>
             }
           />
@@ -157,9 +159,7 @@ const App = () => {
             path="/setting/change-password"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <ChangePassword />
-                </ProfileGuard>
+                <ChangePassword />
               </ProtectedRoute>
             }
           />
@@ -168,9 +168,7 @@ const App = () => {
             path="/setting/notifications"
             element={
               <ProtectedRoute>
-                <ProfileGuard>
-                  <NotificationSettings />
-                </ProfileGuard>
+                <NotificationSettings />
               </ProtectedRoute>
             }
           />
@@ -180,9 +178,7 @@ const App = () => {
 
       {!noFrame && (
         <ProtectedRoute>
-          <ProfileGuard>
-            <Footer />
-          </ProfileGuard>
+          <Footer />
         </ProtectedRoute>
       )}
     </>

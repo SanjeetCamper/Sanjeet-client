@@ -72,10 +72,32 @@ const ProfileSettings = () => {
       return;
     }
 
+    if (!form.name) {
+      showToast("Name Required", "warning");
+      return;
+    }
+    if (!form.phone) {
+      showToast("Mobile No. Required", "warning");
+      return;
+    }
+
+    if (form.phone.length !== 10) {
+      showToast("Enter valid 10 digit mobile number", "warning");
+      return;
+    }
+
+    if (!form.village) {
+      showToast("Village Required", "warning");
+      return;
+    }
+    if (!form.address) {
+      showToast("Address Required", "warning");
+      return;
+    }
+
     if (isSubmitting) return;
 
     try {
-
       setIsSubmitting(true);
 
       const token = await getToken();
@@ -131,6 +153,8 @@ const ProfileSettings = () => {
           label="Phone Number"
           name="phone"
           value={form.phone}
+          required
+          maxLength={10}
           onChange={handleChange}
         />
 
@@ -179,7 +203,11 @@ const ProfileSettings = () => {
       <div className="mt-6">
         <button
           onClick={handleSave}
-          className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition  ${isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-[#21c4cc] hover:bg-[#21c4cc]"}`}
+          className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition  ${
+            isSubmitting
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[#21c4cc] hover:bg-[#21c4cc]"
+          }`}
           disabled={isSubmitting}
         >
           {isSubmitting && <Loader2 className="animate-spin" size={18} />}
