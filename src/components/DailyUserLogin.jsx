@@ -31,12 +31,12 @@ const DailyUserLogin = () => {
   const handleLogin = async () => {
     // 🔒 basic validation
     if (!form.username) {
-      showToast("Username Invalide", "warning");
+      showToast("Username Required", "warning");
       return;
     }
 
     if (!form.password) {
-      showToast("Password Invalide", "warning");
+      showToast("Password Required", "warning");
       return;
     }
 

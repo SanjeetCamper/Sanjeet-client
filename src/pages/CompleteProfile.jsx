@@ -36,7 +36,7 @@ const CompleteProfile = () => {
     }
   }, [user]);
 
-  if (!user) return <FullPageLoader />;
+  if (!user) return <FullPageLoader value={"User Loading"} />;
 
   // SUBMIT HANDLER (UNCHANGED LOGIC)
   const handleSubmit = async (e) => {

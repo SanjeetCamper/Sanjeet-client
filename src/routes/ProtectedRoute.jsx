@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }) => {
   const { isLoaded, isSignedIn } = useUser();
   const { user, loading } = useContextUser();
 
-  if (!isLoaded || loading) return <FullPageLoader />;
+  if (!isLoaded || loading) return <FullPageLoader value="Completing Request" />;
 
   if (!isSignedIn || !user) {
     return null;

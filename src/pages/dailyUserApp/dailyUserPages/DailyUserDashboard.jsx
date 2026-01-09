@@ -35,7 +35,7 @@ const DailyUserDashboard = () => {
 };
 
 
-  if(loading)<FullPageLoader />
+  if(loading)<FullPageLoader value="User Loading" />
 
   return (
     <div className="pt-4 px-4 pb-22 mx-auto">

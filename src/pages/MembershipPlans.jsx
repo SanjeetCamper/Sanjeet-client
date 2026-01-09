@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMembership } from "../context/MembershipContext.jsx";
 import { useNavigate } from "react-router-dom";
+import FullPageLoader from  '../components/FullPageLoader.jsx'
 
 const DURATIONS = [
   { label: "1 Month", days: 30 },
@@ -37,11 +38,7 @@ const MembershipPlans = () => {
   }, [durationDays, campersPerDay]);
 
   if (loading) {
-    return (
-      <div className="fixed top-0 left-0 z-100 w-full h-screen bg-white p-4 text-sm text-gray-600">
-        Loading plans...
-      </div>
-    );
+    return <FullPageLoader value="Loading Plans...." /> ;
   }
 
   return (

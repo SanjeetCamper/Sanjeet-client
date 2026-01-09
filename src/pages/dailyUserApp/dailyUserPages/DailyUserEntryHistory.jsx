@@ -49,7 +49,7 @@ const DailyUserEntryHistory = () => {
 
   // ⏳ LOADING
   if (loading) {
-    return <FullPageLoader />;
+    return <FullPageLoader value="History Loading" />;
   }
 
   // ❌ NO HISTORY EVER

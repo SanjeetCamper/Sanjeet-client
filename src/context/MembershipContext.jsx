@@ -69,6 +69,9 @@ export const MembershipProvider = ({ children }) => {
     } catch (err) {
       const msg = err?.response?.data?.message || "Membership purchase failed";
       setError(msg);
+      setTimeout(()=>{
+        setError('');
+      },3000);
       throw err;
     } finally {
       setLoading(false);
