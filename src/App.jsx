@@ -30,6 +30,8 @@ import NetworkListener from "./components/NetworkListener.jsx";
 import BookCamper from "./pages/BookCamper.jsx";
 import MembershipPlans from "./pages/MembershipPlans.jsx";
 import CreateDailyUserCredentials from "./pages/CreateDailyUserCredentials.jsx";
+import DailyUserWrapper from "./pages/dailyUserApp/DailyUserWrapper.jsx";
+import ReloadAppButton from "./appReload/ReloadAppButton.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -120,7 +122,7 @@ const App = () => {
             path="/dailyuser/app/*"
             element={
               <ProtectedRoute>
-                <IndexDailyUser />
+                <DailyUserWrapper />
               </ProtectedRoute>
             }
           />
@@ -179,8 +181,11 @@ const App = () => {
       {!noFrame && (
         <ProtectedRoute>
           <Footer />
+          <ReloadAppButton />
         </ProtectedRoute>
       )}
+
+      
     </>
   );
 };

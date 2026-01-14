@@ -9,6 +9,8 @@ import ProfessionalEntryModal from "../dailyUserComponents/dailyUserDashboard/Pr
 import DashboardShowCard from "../dailyUserComponents/dailyUserDashboard/DashboardShowCard.jsx";
 import {useToast} from '../../../context/ToastContext.jsx'
 import dailyEntryApi from "../../../utils/dailyEntryApi.js";
+import ReloadMiniAppButton from "../dailyUserComponents/ReloadMiniAppButton.jsx";
+// import ReloadApp from "../ReloadApp.jsx";
 
 const DailyUserDashboard = () => {
   const {loading , dailyUser , summary , todaySummary , refreshHistory ,refreshToday ,refreshUserSummary} = useDailyUser();
@@ -44,6 +46,7 @@ const DailyUserDashboard = () => {
       <DashboardShowCard summary={summary}/>
       <DailyUserTodaySummaryCard todaySummary={todaySummary}/>
       <DailyUserInfoCard />
+      {/* <ReloadMiniAppButton /> */}
 
       {/* <AddEntryModal open={open} onClose={()=>setOpen(false)} /> */}
       <ProfessionalEntryModal open={open} onClose={()=>setOpen(false)} onSubmit={handleAddEntry}  />

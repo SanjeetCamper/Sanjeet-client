@@ -8,10 +8,14 @@ import {
   User,
   Cake,
   Loader2,
+  ArrowBigLeft,
+  MoveLeft,
+  ArrowLeftCircle,
 } from "lucide-react";
 import { useContextUser } from "../../context/UserContext.jsx";
 import { useToast } from "../../context/ToastContext.jsx";
 import { useAuth } from "@clerk/clerk-react";
+import {useNavigate} from 'react-router-dom'
 const safe = (v) => v ?? "";
 
 const InputField = ({ icon: Icon, label, value, ...props }) => (
@@ -30,6 +34,7 @@ const InputField = ({ icon: Icon, label, value, ...props }) => (
 
 const ProfileSettings = () => {
   const { user, backendUrl, refreshUser, loading } = useContextUser();
+  const navigate = useNavigate();
   const { showToast } = useToast();
   const [initialForm, setInitialForm] = useState({});
   const { getToken } = useAuth();
@@ -132,87 +137,105 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="mx-auto max-w-md py-27 min-h-screen bg-white px-4">
-      <h1 className="text-xs font-semibold text-gray-500 mb-4">
-        EDIT USER DETAILS
-      </h1>
-
-      <div className="space-y-4">
-        <InputField
-          icon={User}
-          label="Full Name"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-        />
-
-        <InputField icon={Mail} label="Email" value={user.email} disabled />
-
-        <InputField
-          icon={Phone}
-          label="Phone Number"
-          name="phone"
-          value={form.phone}
-          required
-          maxLength={10}
-          onChange={handleChange}
-        />
-
-        <InputField
-          icon={Store}
-          label="Shop Name"
-          name="shop"
-          value={form.shop}
-          onChange={handleChange}
-        />
-
-        <InputField
-          icon={MapPin}
-          label="Village / City"
-          name="village"
-          value={form.village}
-          onChange={handleChange}
-        />
-
-        <InputField
-          icon={MapPin}
-          label="Address"
-          name="address"
-          value={form.address}
-          onChange={handleChange}
-        />
-
-        <InputField
-          icon={Calendar}
-          label="Birthday"
-          type="date"
-          name="birthday"
-          value={form.birthday}
-          onChange={handleChange}
-        />
-
-        <InputField
-          icon={Cake}
-          label="Age"
-          disabled
-          value={user?.age ? user?.age : "Enter Birth Date"}
-        />
+    <div className="fixed left-0 top-0 z-100 w-full  h-screen bg-white p-4 py-2 pb-15 space-y-2 overflow-y-auto transition-all duration-300 ease-out">
+      <div 
+      onClick={()=>navigate(-1)}
+      className="text-gray-500">
+        <ArrowLeftCircle />
       </div>
+      <div>
+        <h1 className="text-xs font-semibold text-gray-500 mb-4">
+          EDIT USER DETAILS
+        </h1>
 
-      {/* Save Button */}
-      <div className="mt-6">
-        <button
-          onClick={handleSave}
-          className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition  ${
-            isSubmitting
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-[#21c4cc] hover:bg-[#21c4cc]"
-          }`}
-          disabled={isSubmitting}
-        >
-          {isSubmitting && <Loader2 className="animate-spin" size={18} />}
-          {isSubmitting ? "Submitting..." : "Submit Changes"}
-        </button>
+        <div className="space-y-4">
+          <InputField
+            icon={User}
+            label="Full Name"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+          />
+
+          <InputField icon={Mail} label="Email" value={user.email} disabled />
+
+          <InputField
+            icon={Phone}
+            label="Phone Number"
+            name="phone"
+            value={form.phone}
+            required
+            maxLength={10}
+            onChange={handleChange}
+          />
+
+          <InputField
+            icon={Store}
+            label="Shop Name"
+            name="shop"
+            value={form.shop}
+            onChange={handleChange}
+          />
+
+          <InputField
+            icon={MapPin}
+            label="Village / City"
+            name="village"
+            value={form.village}
+            onChange={handleChange}
+          />
+
+          <InputField
+            icon={MapPin}
+            label="Address"
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+          />
+
+          <InputField
+            icon={Calendar}
+            label="Birthday"
+            type="date"
+            name="birthday"
+            value={form.birthday}
+            onChange={handleChange}
+          />
+
+          <InputField
+            icon={Cake}
+            label="Age"
+            disabled
+            value={user?.age ? user?.age : "Enter Birth Date"}
+          />
+        </div>
+
+        {/* Save Button */}
+        <div className="mt-6">
+          <button
+            onClick={handleSave}
+            className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition  ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#21c4cc] hover:bg-[#21c4cc]"
+            }`}
+            disabled={isSubmitting}
+          >
+            {isSubmitting && <Loader2 className="animate-spin" size={18} />}
+            {isSubmitting ? "Submitting..." : "Submit Changes"}
+          </button>
+        </div>
+
+        {/* Back Button */}
+        {/* <div className="mt-3">
+          <button
+            className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition bg-gray-400 cursor-not-allowed`}
+            disabled={isSubmitting}
+          >
+            {isSubmitting && <Loader2 className="animate-spin" size={18} />}
+            {isSubmitting ? "Submitting..." : "Submit Changes"}
+          </button>
+        </div> */}
       </div>
     </div>
   );

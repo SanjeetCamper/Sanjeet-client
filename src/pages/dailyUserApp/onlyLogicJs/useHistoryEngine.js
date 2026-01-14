@@ -24,14 +24,14 @@ export const useHistoryEngine = (history = []) => {
     if (!history.length) return [];
 
     return history.filter((entry) => {
-      const entryTime = new Date(entry.date || entry.createdAt).getTime();
+      const entryTime = new Date(entry.entryDate || entry.createdAt).getTime();
 
-      if (filter === "Today") return isToday(entry.date);
-      if (filter === "This Week") return isThisWeek(entry.date);
-      if (filter === "This Month") return isThisMonth(entry.date);
+      if (filter === "Today") return isToday(entry.entryDate);
+      if (filter === "This Week") return isThisWeek(entry.entryDate);
+      if (filter === "This Month") return isThisMonth(entry.entryDate);
 
       if (filter === "Custom") {
-        if (!fromDate || !toDate) return true;
+        if (!fromDate || !toDate) return false;
 
         const from = new Date(fromDate).setHours(0, 0, 0, 0);
         const to = new Date(toDate).setHours(23, 59, 59, 999);
@@ -46,15 +46,18 @@ export const useHistoryEngine = (history = []) => {
   // ✅ SORT (latest first)
   const sortedHistory = useMemo(() => {
     return [...filteredHistory].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
+  (a, b) =>
+    new Date(b.entryDate || b.createdAt) -
+    new Date(a.entryDate || a.createdAt)
+)
+
   }, [filteredHistory]);
 
   // ✅ GROUP BY DATE
   const groupedHistory = useMemo(() => {
     return sortedHistory.reduce((acc, entry) => {
       const dateKey = new Date(
-        entry.date || entry.createdAt
+        entry.entryDate || entry.createdAt
       ).toDateString();
 
       acc[dateKey] = acc[dateKey] || [];

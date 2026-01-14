@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useToast } from "../../context/ToastContext.jsx";
 
 const Toggle = ({ label, description }) => {
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(false);
+  const { showToast } = useToast();
 
   return (
     <div>
@@ -12,8 +14,9 @@ const Toggle = ({ label, description }) => {
         </div>
 
         <button
-          onClick={() => setEnabled(!enabled)}
-          className={`w-11 h-6 flex items-center rounded-full p-1 transition ${
+          // onClick={() => setEnabled(!enabled)}
+          onClick={()=>showToast("Coming Soon" , "warning")}
+          className={`cursor-pointer w-11 h-6 flex items-center rounded-full p-1 transition ${
             enabled ? "bg-gradient-to-br from-[#40afff] via-[#06b6d4] to-[#14b8a6]" : "bg-gray-300"
           }`}
         >

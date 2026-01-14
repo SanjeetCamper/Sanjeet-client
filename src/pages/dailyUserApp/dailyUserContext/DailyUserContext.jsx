@@ -13,7 +13,7 @@ export const DailyUserProvider = ({ children }) => {
     pendingAmount: 0,
   });
   const [todaySummary, setTodaySummary] = useState({
-    totalQuantity: 0,
+    totalCampers: 0,
     totalAmount: 0,
   });
   const [history, setHistory] = useState([]);

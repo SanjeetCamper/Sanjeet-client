@@ -15,7 +15,7 @@ const timeAgo = (date) => {
 const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
   const entryPending = entry.totalAmount - (entry.paymentReceived || 0);
   const [showNote, setShowNote] = useState(false);
-  const CamperWala = entry.camperGiven + " campers × ₹" + entry.rate;
+  const CamperWala = entry.camperGiven + " campers × ₹" + entry.ratePerCamper;
 
   const touchX = useRef(0);
 
@@ -52,6 +52,7 @@ const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
           <p className="text-xs text-gray-500">
             Given: {entry.camperReceived} campers
           </p>
+          {entry.paymentReceived !== 0 && <span className="text-[11px] text-green-700">{entry.paymentMode}</span>}
           <p className="text-xs text-gray-500">{timeAgo(entry.createdAt)}</p>
         </div>
 
@@ -95,32 +96,32 @@ const DailyUserHistoryEntryItem = ({ entry, minuteTick }) => {
         </div>
       </div>
 
-      {/* NOTE ICON */}
-      {entry.note?.visibleToUser && entry.note?.text && (
-        <div className="mt-2">
-          <button
-            onClick={() => setShowNote((v) => !v)}
-            className="flex items-center gap-1 text-xs text-blue-600 mb-1"
-          >
-            <MessageSquare size={14} />
-            {showNote ? "Hide note" : "View note"}
-          </button>
+        {/* NOTE ICON */}
+        {entry.note?.visibleToUser && entry.note?.text && (
+          <div className="mt-2">
+            <button
+              onClick={() => setShowNote((v) => !v)}
+              className="flex items-center gap-1 text-xs text-blue-600 mb-1"
+            >
+              <MessageSquare size={14} />
+              {showNote ? "Hide note" : "View note"}
+            </button>
 
-          <motion.div
-            initial={false}
-            animate={{
-              height: showNote ? "auto" : 0,
-              opacity: showNote ? 1 : 0,
-            }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="overflow-hidden"
-          >
-            <div className="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
-              <p className="text-xs text-blue-700">{entry.note.text}</p>
-            </div>
-          </motion.div>
-        </div>
-      )}
+            <motion.div
+              initial={false}
+              animate={{
+                height: showNote ? "auto" : 0,
+                opacity: showNote ? 1 : 0,
+              }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="overflow-hidden"
+            >
+              <div className="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
+                <p className="text-xs text-blue-700">{entry.note.text}</p>
+              </div>
+            </motion.div>
+          </div>
+        )}
     </motion.div>
   );
 };

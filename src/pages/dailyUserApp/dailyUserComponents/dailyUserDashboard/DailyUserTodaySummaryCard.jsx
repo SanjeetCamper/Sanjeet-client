@@ -3,7 +3,7 @@ import { Droplets, IndianRupee } from "lucide-react";
 import { useDailyUser } from "../../dailyUserContext/DailyUserContext";
 
 const DailyUserTodaySummaryCard = () => {
-  const{ todaySummary = { totalQuantity: 0, totalAmount: 0 } , } = useDailyUser() ;
+  const{ todaySummary = { totalCampers: 0, totalAmount: 0 } , } = useDailyUser() ;
 
   if (!todaySummary) {
     return (
@@ -29,7 +29,7 @@ const DailyUserTodaySummaryCard = () => {
           <div>
             <p className="text-xs text-gray-500">Campers</p>
             <p className="text-sm font-semibold">
-              {todaySummary.totalQuantity}
+              {todaySummary.totalCampers}
             </p>
           </div>
         </div>

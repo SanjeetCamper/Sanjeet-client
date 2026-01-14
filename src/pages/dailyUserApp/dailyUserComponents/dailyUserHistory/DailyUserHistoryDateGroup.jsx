@@ -27,6 +27,12 @@ const item = {
 };
 
 const DailyUserHistoryDateGroup = ({ date, entries, minuteTick, scrolle }) => {
+  const sortedEntries = [...entries].sort(
+    (a, b) =>
+      new Date(b.entryDate || b.createdAt) -
+      new Date(a.entryDate || a.createdAt)
+  );
+
   return (
     <motion.div
       variants={container}
@@ -47,12 +53,9 @@ const DailyUserHistoryDateGroup = ({ date, entries, minuteTick, scrolle }) => {
         </span>
       </div>
       <div className="space-y-2">
-        {entries.map((entry) => (
+        {sortedEntries.map((entry) => (
           <motion.div key={entry._id} variants={item}>
-          <DailyUserHistoryEntryItem
-            entry={entry}
-            minuteTick={minuteTick}
-          />
+            <DailyUserHistoryEntryItem entry={entry} minuteTick={minuteTick} />
           </motion.div>
         ))}
       </div>

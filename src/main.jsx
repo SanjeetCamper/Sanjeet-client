@@ -9,6 +9,7 @@ import { UserProvider } from "./context/UserContext.jsx";
 import { ToastProvider } from "./context/ToastContext.jsx";
 import { MembershipProvider } from "./context/MembershipContext.jsx";
 import { DailyUserCredentialsProvider } from "./context/DailyUserCredentialsContext.jsx";
+import AppReloadProvider from "./appReload/AppReloadProvider.jsx";
 
 registerSW(); // 👈 call once, बस
 
@@ -37,7 +38,7 @@ createRoot(document.getElementById("root")).render(
         <DailyUserCredentialsProvider>
           <MembershipProvider>
             <ToastProvider>
-              <App />
+              <AppReloadProvider />
             </ToastProvider>
           </MembershipProvider>
         </DailyUserCredentialsProvider>

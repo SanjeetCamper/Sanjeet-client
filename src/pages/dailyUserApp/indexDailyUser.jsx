@@ -13,6 +13,7 @@ import { DailyUserProvider } from "./dailyUserContext/DailyUserContext.jsx";
 import DailyUserAdminInfo from "./dailyUserComponents/dailyUserSetting/DailyUserAdminInfo.jsx";
 import DailyUserEntryHistory from "./dailyUserPages/DailyUserEntryHistory.jsx";
 import DailyUserMonthlyHistory from "./dailyUserPages/DailyUserMonthlyHistory.jsx";
+import ReloadMiniAppButton from "./dailyUserComponents/ReloadMiniAppButton.jsx";
 
 const IndexDailyUser = () => {
   useDailyUserGuard();
@@ -50,6 +51,7 @@ const IndexDailyUser = () => {
         </Routes>
 
         <DailyUserFooterNavbar />
+        <ReloadMiniAppButton />
       </DailyUserProvider>
     </motion.div>
   );
