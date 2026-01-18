@@ -2,7 +2,7 @@ import React from 'react'
 import { useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, Image, User2 } from 'lucide-react';
-
+import BackButton from '../BackButton.jsx'
 const Section = ({ title, children }) => (
   <div className="mb-2">
     <h2 className="text-xs font-semibold text-gray-500 uppercase mb-2">
@@ -33,7 +33,10 @@ const EditProfileMainBox = () => {
     const navigate = useNavigate();
 
   return (
-    <div className='mx-auto max-w-md py-27 min-h-screen bg-white px-4 py-6'>
+    <div className='mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2'>
+
+      <BackButton />
+
       <Section title="Profile Details">
         <Item
           icon={Image}

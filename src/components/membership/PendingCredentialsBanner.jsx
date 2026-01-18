@@ -19,6 +19,7 @@ const PendingCredentialsBanner = () => {
 
   return (
     <div className="border border-orange-300 bg-orange-50 p-3 rounded-xl space-y-2">
+
       <p className="text-sm font-medium text-orange-800">
         Daily User login setup pending
       </p>

@@ -15,7 +15,10 @@ import {
 import { useContextUser } from "../../context/UserContext.jsx";
 import { useToast } from "../../context/ToastContext.jsx";
 import { useAuth } from "@clerk/clerk-react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import BackButton from "../BackButton.jsx";
+import { motion } from "framer-motion";
+
 const safe = (v) => v ?? "";
 
 const InputField = ({ icon: Icon, label, value, ...props }) => (
@@ -137,11 +140,17 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="fixed left-0 top-0 z-100 w-full  h-screen bg-white p-4 py-2 pb-15 space-y-2 overflow-y-auto transition-all duration-300 ease-out">
-      <div 
-      onClick={()=>navigate(-1)}
-      className="text-gray-500">
-        <ArrowLeftCircle />
+    <motion.div
+      // initial={{ opacity: 0, y: -200 }}
+      // animate={{ opacity: 1, y: 0 }}
+      // transition={{
+      //   duration: 0.1,
+      //   ease: [0.25, 0.25, 0.25, 0.25],
+      // }}
+      className="fixed left-0 top-0 z-100 w-full  h-screen bg-white p-4 pb-15 space-y-4 overflow-y-auto transition-all animate-pageUp"
+    >
+      <div className="text-gray-500">
+        <BackButton />
       </div>
       <div>
         <h1 className="text-xs font-semibold text-gray-500 mb-4">
@@ -237,7 +246,7 @@ const ProfileSettings = () => {
           </button>
         </div> */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

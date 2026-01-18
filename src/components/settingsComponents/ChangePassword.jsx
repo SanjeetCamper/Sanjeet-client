@@ -1,13 +1,17 @@
 import React from "react";
 import { useClerk } from "@clerk/clerk-react";
 import { Lock } from "lucide-react";
+import BackButton from "../BackButton";
 
 const ChangePassword = () => {
   const { openUserProfile } = useClerk();
 //   const passwordChange = openUserProfile.security();
 
   return (
-    <div className="mx-auto max-w-md py-27 min-h-screen bg-white px-4">
+    <div className="mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2">
+
+      <BackButton />
+
       <h1 className="text-xs font-semibold text-gray-500 mb-4">
         CHANGE PASSWORD
       </h1>

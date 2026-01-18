@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useToast } from "../../context/ToastContext.jsx";
+import BackButton from "../BackButton.jsx";
 
 const Toggle = ({ label, description }) => {
   const [enabled, setEnabled] = useState(false);
@@ -33,7 +34,10 @@ const Toggle = ({ label, description }) => {
 
 const NotificationSettings = () => {
   return (
-    <div className="mx-auto max-w-md py-27 min-h-screen bg-white px-4 py-6">
+    <div className="mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2">
+
+      <BackButton />
+
       <h1 className="text-xs font-semibold text-gray-500 mb-4">
         NOTIFICATIONS
       </h1>

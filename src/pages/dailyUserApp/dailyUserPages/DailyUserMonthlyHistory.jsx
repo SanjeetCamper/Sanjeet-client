@@ -7,6 +7,7 @@ import { getMonthName } from "../../../utils/monthUtils.js";
 import { useRef } from "react";
 import ExportReportModal from '../exportCsvPdf/ExportReportModal.jsx'
 import ExportButton from "../exportCsvPdf/ExportButton.jsx";
+import BackButton from "../../../components/BackButton.jsx";
 
 const DailyUserMonthlyHistory = () => {
   
@@ -113,11 +114,14 @@ const DailyUserMonthlyHistory = () => {
 
   return (
     <div
-      className="px-4 pt-4 pb-24 space-y-4 mx-auto"
+      className="px-4 pt-4 pb-24 space-y-4 mx-auto w-full"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
+
+      <BackButton />
+
       {/* 🔹 MONTH SWITCHER */}
       <div className="flex items-center justify-between bg-white border rounded-xl px-3 py-2">
         <button onClick={goPrev} className="p-1 active:scale-95">

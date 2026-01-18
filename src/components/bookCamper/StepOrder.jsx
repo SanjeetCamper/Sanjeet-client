@@ -30,7 +30,7 @@ const StepOrder = ({ form, setForm, next }) => {
         Continue
       </button>
       <button
-        onClick={() => navigate("/dashboard")}
+        onClick={() => navigate(-1)}
         className="w-full text-black border border-gray-300 active:bg-[#21c4cc] active:border-white active:text-white hover:bg-[#21c4cc] hover:border-white hover:text-white py-2.5 rounded-xl text-sm font-medium
     hover:opacity-90 transition"
       >

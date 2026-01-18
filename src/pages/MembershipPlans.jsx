@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useMembership } from "../context/MembershipContext.jsx";
 import { useNavigate } from "react-router-dom";
 import FullPageLoader from  '../components/FullPageLoader.jsx'
+import BackButton from "../components/BackButton.jsx";
 
 const DURATIONS = [
   { label: "1 Month", days: 30 },
@@ -43,6 +44,9 @@ const MembershipPlans = () => {
 
   return (
     <div className="fixed top-0 left-0 z-100 w-full p-4 py-4 space-y-3 bg-white h-screen">
+
+    <BackButton />
+
       {activeMembership ? (
         <p className="text-xs bg-green-50 text-green-700 p-2 rounded-lg border border-green-200">
           You already have an active membership.
@@ -144,7 +148,7 @@ const MembershipPlans = () => {
       </button>
 
       <button
-        onClick={() => navigate("/dashboard")}
+        onClick={() => navigate(-1)}
         className="w-full text-black border border-gray-300 active:bg-[#21c4cc] active:border-white active:text-white hover:bg-[#21c4cc] hover:border-white hover:text-white py-2.5 rounded-xl text-sm font-medium
     hover:opacity-90 transition"
       >

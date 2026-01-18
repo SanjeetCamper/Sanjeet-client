@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDailyUserCredentials } from "../context/DailyUserCredentialsContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../context/ToastContext.jsx";
+import BackButton from "../components/BackButton.jsx";
 
 const CreateDailyUserCredentials = () => {
   const { showToast } = useToast();
@@ -52,6 +53,9 @@ const CreateDailyUserCredentials = () => {
   return (
     <div className="fixed top-0 left-0 w-full z-100 h-screen bg-white flex items-center justify-center p-4">
       <div className="bg-white border border-gray-200 rounded-xl p-4 w-full max-w-sm space-y-3 shadow-sm">
+
+      <BackButton />
+
         <h1 className="text-lg font-semibold text-gray-900">
           Create Daily User Login
         </h1>

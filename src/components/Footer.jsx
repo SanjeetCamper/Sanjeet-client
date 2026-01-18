@@ -66,7 +66,7 @@ const Footer = () => {
             { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
             // { to: "/membership/plans", label: "Membership", icon: Plane },
             { to: "/notification", label: "Notification", icon: BellIcon },
-            { to: "/dailyuser", label: "Daily User", icon: Handshake },
+            { to: "/dailyuser", label: "Daily User", icon: Handshake  },
             { to: "/setting", label: "Setting", icon: Settings },
           ].map((item, i) => {
             const Icon = item.icon;

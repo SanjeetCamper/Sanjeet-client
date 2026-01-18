@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDailyUser } from "../dailyUserContext/DailyUserContext.jsx";
 import { useHistoryEngine } from "../onlyLogicJs/useHistoryEngine.js";
-
+import BackButton from '../../../components/BackButton.jsx'
 import DailyUserHistoryFilterBar from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryFilterBar.jsx";
 import DailyUserHistoryDateGroup from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryDateGroup.jsx";
 import FullPageLoader from "../../../components/FullPageLoader.jsx";
@@ -64,6 +64,9 @@ const DailyUserEntryHistory = () => {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
+
+      <BackButton />
+
       {/* FILTER BAR */}
       <div className="">
         <DailyUserHistoryFilterBar
