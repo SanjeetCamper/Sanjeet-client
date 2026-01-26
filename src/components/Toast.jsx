@@ -7,12 +7,18 @@ const Toast = ({ message, type }) => {
   };
 
   return (
-    <div className="fixed max-w-md w-[100%] top-0 left-1/2 -translate-x-1/2 z-100">
+    <div className="fixed w-full flex justify-center top-0 left-0 z-100 p-4 pt-1">
+      <div className="w-full md:md lg:w-md">
       <div
-        className={`px-4 py-3 text-sm text-white text-center shadow-lg animate-slideUp ${styles[type]}`}
+        className={`
+          px-4 py-3 rounded shadow-lg text-sm text-white text-center
+          animate-slideUp
+          ${styles[type]}
+        `}
       >
         {message}
       </div>
+    </div>
     </div>
   );
 };

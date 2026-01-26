@@ -10,6 +10,8 @@ import { ToastProvider } from "./context/ToastContext.jsx";
 import { MembershipProvider } from "./context/MembershipContext.jsx";
 import { DailyUserCredentialsProvider } from "./context/DailyUserCredentialsContext.jsx";
 import AppReloadProvider from "./appReload/AppReloadProvider.jsx";
+import { OrderProvider } from "./context/OrderContext.jsx";
+import { VillageProvider } from "./context/VillageContext.jsx";
 
 registerSW(); // 👈 call once, बस
 
@@ -37,12 +39,16 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <DailyUserCredentialsProvider>
           <MembershipProvider>
-            <ToastProvider>
-              <AppReloadProvider />
-            </ToastProvider>
+            <OrderProvider>
+              <VillageProvider>
+                <ToastProvider>
+                  <AppReloadProvider />
+                </ToastProvider>
+              </VillageProvider>
+            </OrderProvider>
           </MembershipProvider>
         </DailyUserCredentialsProvider>
       </BrowserRouter>
     </UserProvider>
-  </ClerkProvider>
+  </ClerkProvider>,
 );

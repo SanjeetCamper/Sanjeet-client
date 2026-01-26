@@ -1,12 +1,7 @@
-import DashboardHeader from "../components/dashboardComponents/DashboardHeader.jsx";
-import BookCamperCard from "../components/dashboardComponents/BookCamperCard";
-import DashboardStats from "../components/dashboardComponents/DashboardStats";
-import ActiveOrderCard from "../components/dashboardComponents/ActiveOrderCard";
-import RecentActivity from "../components/dashboardComponents/RecentActivity";
-import MembershipSummaryCard from '../components/membership/MembershipSummaryCard.jsx'
+import MembershipSummaryCard from "../components/membership/MembershipSummaryCard.jsx";
 import PendingCredentialsBanner from "../components/membership/PendingCredentialsBanner.jsx";
-import MembershipPlans from "./MembershipPlans.jsx";
 import MembershipPlanPurchaseBanner from "../components/dashboardComponents/MembershipPlanPurchaseBanner.jsx";
+import { ChevronRight, Truck } from "lucide-react";
 
 const MainDashboard = () => {
   // 🔹 Dummy data (replace later with backend)
@@ -19,39 +14,21 @@ const MainDashboard = () => {
       quantity: 3,
       status: "Confirmed",
     },
-    recentActivity: [
-      "Order placed",
-      "Payment received",
-      "Order confirmed",
-    ],
+    recentActivity: ["Order placed", "Payment received", "Order confirmed"],
   };
-
 
   return (
     <div className="mx-auto w-full max-w-md px-4 pt-23 text-justify pb-22 space-y-5">
       {/* <DashboardHeader /> */}
 
-      <div>
-        <PendingCredentialsBanner />  
-      </div>
-
-      <MembershipSummaryCard />  
-
       <MembershipPlanPurchaseBanner />
 
-      <BookCamperCard />
+      <div>
+        <PendingCredentialsBanner />
+      </div>
 
-      {/* <DashboardStats
-        activeOrders={data.activeOrders}
-        totalPaid={data.totalPaid}
-        pendingAmount={data.pendingAmount}
-      />
+      <MembershipSummaryCard />
 
-      {data.activeOrders > 0 && (
-        <ActiveOrderCard order={data.activeOrder} />
-      )} */}
-
-      {/* <RecentActivity list={data.recentActivity} /> */}
     </div>
   );
 };

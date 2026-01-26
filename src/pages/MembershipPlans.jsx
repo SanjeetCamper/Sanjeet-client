@@ -5,6 +5,7 @@ import FullPageLoader from  '../components/FullPageLoader.jsx'
 import BackButton from "../components/BackButton.jsx";
 
 const DURATIONS = [
+  { label: "1 Day", days: 1 },
   { label: "1 Month", days: 30 },
   { label: "3 Months", days: 90 },
   { label: "6 Months", days: 180 },

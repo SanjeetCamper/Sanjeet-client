@@ -60,3 +60,11 @@ textarea {
   -ms-user-select: text;
   user-select: text;
 }
+
+
+.inp{border:1px solid #21c4cc;padding:12px;border-radius:12px;width:100%}
+.btn{background:#21c4cc;color:#fff;padding:12px;border-radius:12px;width:100%}
+.btn-outline{border:1px solid #21c4cc;color:#21c4cc;padding:12px;border-radius:12px}
+.card{border:1px dashed #21c4cc;padding:10px;border-radius:10px}
+.overlay{position:fixed;inset:0;background:#0006;display:flex;align-items:center;justify-content:center}
+.modal{background:#fff;padding:16px;border-radius:16px;width:90%}

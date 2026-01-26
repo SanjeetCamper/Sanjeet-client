@@ -9,6 +9,9 @@ import {
   BellIcon,
   ChevronRight,
   Plane,
+  Book,
+  TruckElectric,
+  LucideTruck,
   // BarChart,
 } from "lucide-react";
 
@@ -63,6 +66,7 @@ const Footer = () => {
         >
           {[
             { to: "/", label: "Home", icon: HomeIcon },
+            { to: "/order-place", label: "Book Camper", icon: LucideTruck },
             { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
             // { to: "/membership/plans", label: "Membership", icon: Plane },
             { to: "/notification", label: "Notification", icon: BellIcon },

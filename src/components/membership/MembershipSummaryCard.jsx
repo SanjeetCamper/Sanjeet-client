@@ -10,7 +10,7 @@ const formatDate = (date) =>
 const MembershipSummaryCard = () => {
   const { activeMembership } = useMembership();
 
-  if (!activeMembership) {
+  if (!activeMembership || activeMembership.status !== "active") {
     return (
       <div className="border rounded-xl p-4 bg-white text-sm text-gray-500">
         No active membership
@@ -20,13 +20,26 @@ const MembershipSummaryCard = () => {
 
   const { plan, startDate, endDate, status } = activeMembership;
 
+  if (!plan) {
+    return (
+      <div className="border rounded-xl p-4 bg-white text-sm text-gray-500">
+        Membership expired
+      </div>
+    );
+  }
+
+  const durationLabel =
+    plan.durationDays < 30
+      ? `${plan.durationDays} Day`
+      : `${plan.durationDays / 30} Month`;
+
   return (
     <div className="border rounded-xl p-4 bg-white space-y-2">
       <h3 className="text-sm font-semibold">Membership Status</h3>
 
       <div className="text-xs text-gray-600">
         <p>
-          <b>Duration:</b> {plan.durationDays / 30} Month
+          <b>Duration:</b> {durationLabel}
         </p>
         <p>
           <b>Campers/day:</b> {plan.campersPerDay}

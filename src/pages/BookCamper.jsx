@@ -1,39 +1,58 @@
+// pages/BookCamper.jsx
 import { useState } from "react";
-import StepOrder from "../components/bookCamper/StepOrder.jsx";
-import StepAddress from "../components/bookCamper/StepAddress.jsx";
-import StepPayment from "../components/bookCamper/StepPayments.jsx";
-import StepReview from "../components/bookCamper/StepReview.jsx";
+import StepUserDetails from "../components/order/StepUserDetails.jsx";
+import StepCamperLocation from "../components/order/StepCamperLocation.jsx";
+import StepSchedulePayment from "../components/order/StepSchedulePayment.jsx";
+import ConfirmOrderModal from "../components/order/ConfirmOrderModal.jsx";
 import BackButton from '../components/BackButton.jsx'
-// import { useNavigate } from "react-router-dom";
 
 const BookCamper = () => {
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState({
-    quantity: "",
-    date: "",
-    name: "",
-    phone: "",
-    address: "",
-    paymentMethod: "online",
-  });
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const next = () => setStep((s) => s + 1);
-  const back = () => setStep((s) => s - 1);
+  /* ---------------------------
+     STEP NAVIGATION
+  ---------------------------- */
+  const nextStep = () => setStep((s) => s + 1);
+  const prevStep = () => setStep((s) => s - 1);
 
   return (
-    <div className="fixed top-0 left-0 z-[100] h-screen bg-white w-full w-full p-4 text-justify space-y-5">
-      <div>
-        <BackButton />
-      </div>
-      {step === 1 && <StepOrder form={form} setForm={setForm} next={next} />}
-      {step === 2 && (
-        <StepAddress form={form} setForm={setForm} next={next} back={back} />
-      )}
-      {step === 3 && (
-        <StepPayment form={form} setForm={setForm} next={next} back={back} />
-      )}
-      {step === 4 && <StepReview form={form} back={back} />}
+    <div className="fixed top-0 left-0 h-screen w-full bg-white z-100 pt-4 pb-20 px-6 space-y-5">
 
+      <BackButton />
+
+      {/* STEP INDICATOR */}
+      <div className="flex justify-between text-xs text-gray-500 my-4">
+        <span className={step === 1 ? "text-[#21c4cc]" : ""}>Details</span>
+        <span className={step === 2 ? "text-[#21c4cc]" : ""}>Location</span>
+        <span className={step === 3 ? "text-[#21c4cc]" : ""}>Schedule</span>
+        <span className={step === 4 ? "text-[#21c4cc]" : ""}>Confirm</span>
+      </div>
+
+      {/* STEPS */}
+      {step === 1 && <StepUserDetails onNext={nextStep} />}
+
+      {step === 2 && (
+        <StepCamperLocation onNext={nextStep} onBack={prevStep} />
+      )}
+
+      {step === 3 && (
+        <StepSchedulePayment
+          onNext={() => setConfirmOpen(true)}
+          onBack={prevStep}
+        />
+      )}
+
+      {/* CONFIRM MODAL */}
+      {confirmOpen && (
+        <ConfirmOrderModal
+          onClose={() => setConfirmOpen(false)}
+          onSuccess={() => {
+            setConfirmOpen(false);
+            // redirect handled inside modal after success
+          }}
+        />
+      )}
     </div>
   );
 };

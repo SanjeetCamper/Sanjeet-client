@@ -25,7 +25,7 @@ export const UserProvider = ({ children }) => {
       if (isSignedIn === false) {
         setLoading(false);
         return;
-      }
+      } 
 
       if (!clerkUser) return;
 

@@ -26,12 +26,15 @@ import NotificationSettings from "./components/settingsComponents/NotificationSe
 import EditProfileMainBox from "./components/settingsComponents/EditProfileMainBox.jsx";
 import { useContextUser } from "./context/UserContext.jsx";
 import ProfileGuard from "./routes/ProfileGaurd.jsx";
-import NetworkListener from "./components/NetworkListener.jsx";
-import BookCamper from "./pages/BookCamper.jsx";
+// import NetworkListener from "./components/NetworkListener.jsx";
 import MembershipPlans from "./pages/MembershipPlans.jsx";
 import CreateDailyUserCredentials from "./pages/CreateDailyUserCredentials.jsx";
 import DailyUserWrapper from "./pages/dailyUserApp/DailyUserWrapper.jsx";
 import ReloadAppButton from "./appReload/ReloadAppButton.jsx";
+import OrderCamper from "./pages/OrderCamper.jsx";
+import BookCamper from "./pages/BookCamper.jsx";
+import MyOrder from "./pages/MyOrder.jsx";
+import NetworkListener from "./components/network/NetworkListener.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -64,6 +67,33 @@ const App = () => {
           />
 
           <Route
+            path="/order-place"
+            element={
+              <ProtectedRoute>
+                <OrderCamper />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/book-camper"
+            element={
+              <ProtectedRoute>
+                <BookCamper />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/my-orders"
+            element={
+              <ProtectedRoute>
+                <MyOrder />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/dashboard/membership/plans"
             element={
               <ProtectedRoute>
@@ -86,15 +116,6 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/dashboard/book-camper"
-            element={
-              <ProtectedRoute>
-                <BookCamper />
               </ProtectedRoute>
             }
           />
@@ -184,8 +205,6 @@ const App = () => {
           <ReloadAppButton />
         </ProtectedRoute>
       )}
-
-      
     </>
   );
 };

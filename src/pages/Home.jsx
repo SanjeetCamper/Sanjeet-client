@@ -6,7 +6,7 @@ import HomeUser from './HomeUser.jsx';
 const Home = () => {
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 pt-27 text-justify pb-20 overflow-y-auto">
+    <div className="mx-auto w-full max-w-md px-4 pt-23 text-justify pb-20 overflow-y-auto">
       <HomeUser />
     </div>
   )
