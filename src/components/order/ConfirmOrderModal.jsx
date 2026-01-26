@@ -51,11 +51,12 @@ const ConfirmOrderModal = ({ onClose, onSuccess }) => {
   return (
     <div
       onClick={() => onClose()}
-      className="fixed inset-0 bg-black/50 z-100 flex items-end"
+      className="fixed inset-0 bg-black/50 z-100 flex items-end justify-center"
     >
+      
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white w-full rounded-t-2xl p-4 space-y-4"
+        className="bg-white w-full rounded-t-2xl p-4 space-y-4 max-auto w-full max-w-md"
       >
         <h3 className="text-lg font-semibold text-[#21c4cc]">
           ऑर्डर की पुष्टि
@@ -123,6 +124,7 @@ const ConfirmOrderModal = ({ onClose, onSuccess }) => {
           </button>
         </div>
       </div>
+      
     </div>
   );
 };

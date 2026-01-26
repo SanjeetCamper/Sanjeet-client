@@ -8,7 +8,7 @@ const OrderCamper = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='p-4 py-23 space-y-5'>
+    <div className='mx-auto w-full max-w-md px-4 p-4 py-23 space-y-5'>
       <BookCamperCard />
        <div
        onClick={()=>navigate('/my-orders')}

@@ -5,12 +5,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE & Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+}
+
+
 /* For Toaster or in any Components or Pages */
 @keyframes slideUp {
   from {
     opacity: 0;
     transform: translateY(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -23,12 +36,18 @@
 }
 
 
-html, body {
-  touch-action: pan-x pan-y; /* ✅ scroll allowed */
-  overscroll-behavior: none; /* pull-to-refresh off */
-   -webkit-user-select: none; /* Safari */
-  -ms-user-select: none;     /* IE/Edge */
-  user-select: none;         /* Chrome, Firefox */
+html,
+body {
+  touch-action: pan-x pan-y;
+  /* ✅ scroll allowed */
+  overscroll-behavior: none;
+  /* pull-to-refresh off */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE/Edge */
+  user-select: none;
+  /* Chrome, Firefox */
 }
 
 * {
@@ -62,9 +81,46 @@ textarea {
 }
 
 
-.inp{border:1px solid #21c4cc;padding:12px;border-radius:12px;width:100%}
-.btn{background:#21c4cc;color:#fff;padding:12px;border-radius:12px;width:100%}
-.btn-outline{border:1px solid #21c4cc;color:#21c4cc;padding:12px;border-radius:12px}
-.card{border:1px dashed #21c4cc;padding:10px;border-radius:10px}
-.overlay{position:fixed;inset:0;background:#0006;display:flex;align-items:center;justify-content:center}
-.modal{background:#fff;padding:16px;border-radius:16px;width:90%}
+.inp {
+  border: 1px solid #21c4cc;
+  padding: 12px;
+  border-radius: 12px;
+  width: 100%
+}
+
+.btn {
+  background: #21c4cc;
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  width: 100%
+}
+
+.btn-outline {
+  border: 1px solid #21c4cc;
+  color: #21c4cc;
+  padding: 12px;
+  border-radius: 12px
+}
+
+.card {
+  border: 1px dashed #21c4cc;
+  padding: 10px;
+  border-radius: 10px
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #0006;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.modal {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  width: 90%
+}

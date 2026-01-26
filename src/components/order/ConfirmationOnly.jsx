@@ -2,8 +2,8 @@ import React from 'react'
 
 const ConfirmationOnly = ({title ,message,confirmText,cancelText,onConfirm,onCancel}) => {
   return (
-    <div className="fixed inset-0 bg-black/50 z-100 flex items-end">
-       <div className="bg-white w-full rounded-t-2xl p-4 space-y-4">
+    <div onClick={()=>onCancel()} className="fixed inset-0 bg-black/50 z-100 flex items-end justify-center">
+       <div onClick={(e)=>e.stopPropagation()} className="bg-white w-full rounded-t-2xl p-4 space-y-4 w-full max-w-md">
         <h3 className="text-lg font-semibold text-[#21c4cc]">
           {title}
         </h3>
