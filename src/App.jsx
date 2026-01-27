@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./index.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 
@@ -7,42 +7,40 @@ import Dashboard from "./pages/Dashboard";
 import DailyUser from "./pages/DailyUser";
 import Setting from "./pages/Setting";
 import Notification from "./pages/Notification";
-import IndexDailyUser from "./pages/dailyUserApp/indexDailyUser.jsx";
 import CompleteProfile from "./pages/CompleteProfile.jsx";
 
 import NavBar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import InstallPWA from "./InstallPWA.jsx";
-
-import ProtectedRoute from "./routes/ProtectedRoute.jsx";
-// import PublicRoute from "./routes/PublicRoute.jsx";
 import HeaderHome from "./components/HeaderHome.jsx";
 
-import { useUser } from "@clerk/clerk-react";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import ProfileGuard from "./routes/ProfileGaurd.jsx";
+
 import ProfileSettings from "./components/settingsComponents/ProfileSettings.jsx";
 import ChangePassword from "./components/settingsComponents/ChangePassword.jsx";
 import NotificationSettings from "./components/settingsComponents/NotificationSettings.jsx";
-// import ProfileImageChange from "./components/settingsComponents/ProfileImageChange.jsx";
 import EditProfileMainBox from "./components/settingsComponents/EditProfileMainBox.jsx";
-import { useContextUser } from "./context/UserContext.jsx";
-import ProfileGuard from "./routes/ProfileGaurd.jsx";
-// import NetworkListener from "./components/NetworkListener.jsx";
+
 import MembershipPlans from "./pages/MembershipPlans.jsx";
 import CreateDailyUserCredentials from "./pages/CreateDailyUserCredentials.jsx";
 import DailyUserWrapper from "./pages/dailyUserApp/DailyUserWrapper.jsx";
+
 import ReloadAppButton from "./appReload/ReloadAppButton.jsx";
 import OrderCamper from "./pages/OrderCamper.jsx";
 import BookCamper from "./pages/BookCamper.jsx";
 import MyOrder from "./pages/MyOrder.jsx";
-import NetworkListener from "./components/network/NetworkListener.jsx";
 import ToastSettings from "./pages/ToastSettings.jsx";
+
+import NetworkListener from "./components/network/NetworkListener.jsx";
+import { useContextUser } from "./context/UserContext.jsx";
 
 const App = () => {
   const location = useLocation();
-  const { user, loading } = useContextUser();
+  const { user } = useContextUser();
+
   const noFrame = location.pathname.startsWith("/dailyuser/app");
-  const { isSignedIn } = useUser();
-  const showHeaderHome = !noFrame && !isSignedIn;
+  const showHeaderHome = !noFrame && !user;
 
   return (
     <>
@@ -52,17 +50,16 @@ const App = () => {
       {!noFrame && <NavBar />}
       {showHeaderHome && <HeaderHome />}
 
-      {/* 🔥 PROFILE BLOCKER */}
-      {user && !user.isProfileComplete && <CompleteProfile />}
-
       <div className="pb-0">
         <Routes>
-          {/* 🔒 Protected App */}
+          {/* 🔒 Protected + Profile Guarded Routes */}
           <Route
             path="/"
             element={
               <ProtectedRoute>
-                <Home />
+                <ProfileGuard>
+                  <Home />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -71,7 +68,9 @@ const App = () => {
             path="/order-place"
             element={
               <ProtectedRoute>
-                <OrderCamper />
+                <ProfileGuard>
+                  <OrderCamper />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -80,7 +79,9 @@ const App = () => {
             path="/book-camper"
             element={
               <ProtectedRoute>
-                <BookCamper />
+                <ProfileGuard>
+                  <BookCamper />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -89,25 +90,9 @@ const App = () => {
             path="/my-orders"
             element={
               <ProtectedRoute>
-                <MyOrder />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/dashboard/membership/plans"
-            element={
-              <ProtectedRoute>
-                <MembershipPlans />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/daily-user/create-credentials"
-            element={
-              <ProtectedRoute>
-                <CreateDailyUserCredentials />
+                <ProfileGuard>
+                  <MyOrder />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -116,7 +101,31 @@ const App = () => {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <ProfileGuard>
+                  <Dashboard />
+                </ProfileGuard>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard/membership/plans"
+            element={
+              <ProtectedRoute>
+                <ProfileGuard>
+                  <MembershipPlans />
+                </ProfileGuard>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/daily-user/create-credentials"
+            element={
+              <ProtectedRoute>
+                <ProfileGuard>
+                  <CreateDailyUserCredentials />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -125,7 +134,9 @@ const App = () => {
             path="/notification"
             element={
               <ProtectedRoute>
-                <Notification />
+                <ProfileGuard>
+                  <Notification />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
@@ -134,86 +145,109 @@ const App = () => {
             path="/dailyuser/*"
             element={
               <ProtectedRoute>
-                <DailyUser />
+                <ProfileGuard>
+                  <DailyUser />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-          {/* 🎯 Full screen app (still protected) */}
+          {/* 🔲 Full screen Daily User App */}
           <Route
             path="/dailyuser/app/*"
             element={
               <ProtectedRoute>
-                <DailyUserWrapper />
+                <ProfileGuard>
+                  <DailyUserWrapper />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-          {/* Settings Maing Page */}
+          {/* ⚙️ Settings */}
           <Route
             path="/setting"
             element={
               <ProtectedRoute>
-                <Setting />
+                <ProfileGuard>
+                  <Setting />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-          {/* Settings Sub Pages Started Here */}
-
-          <Route //Setting ke andar Edit Profile Page
+          <Route
             path="/setting/edit-profile"
             element={
               <ProtectedRoute>
-                <EditProfileMainBox />
+                <ProfileGuard>
+                  <EditProfileMainBox />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-          <Route // Edit Profile ke andar
+          <Route
             path="/setting/open-change-profile-details"
             element={
               <ProtectedRoute>
-                <ProfileSettings />
+                <ProfileGuard>
+                  <ProfileSettings />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-          <Route //Setting me change password
+          <Route
             path="/setting/change-password"
             element={
               <ProtectedRoute>
-                <ChangePassword />
+                <ProfileGuard>
+                  <ChangePassword />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
 
-          <Route // setting me notification controller
+          <Route
             path="/setting/notifications"
             element={
               <ProtectedRoute>
-                <NotificationSettings />
+                <ProfileGuard>
+                  <NotificationSettings />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
-          
-          <Route // setting me notification controller
+
+          <Route
             path="/setting/toast-notifications"
             element={
               <ProtectedRoute>
-                <ToastSettings />
+                <ProfileGuard>
+                  <ToastSettings />
+                </ProfileGuard>
               </ProtectedRoute>
             }
           />
-          {/* Settings Sub Pages Ended Here */}
+
+          {/* 🧩 Profile Completion Page */}
+          <Route
+            path="/complete-profile"
+            element={
+              <ProtectedRoute>
+                <CompleteProfile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
 
       {!noFrame && (
-        <ProtectedRoute>
+        <>
           <Footer />
           <ReloadAppButton />
-        </ProtectedRoute>
+        </>
       )}
     </>
   );
