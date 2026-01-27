@@ -12,25 +12,38 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+// UseEffect
   useEffect(() => {
     const syncUser = async () => {
-      if (!isLoaded) return; // ⏳ wait for Clerk
+      if (!isLoaded) return;
 
-      // Clerk abhi auth decide nahi kar paaya
-      if (typeof isSignedIn === "undefined") {
+      // 📴 OFFLINE MODE
+      if (!navigator.onLine) {
+        const cached = localStorage.getItem("cachedUser");
+        if (cached) {
+          setUser(JSON.parse(cached));
+        }
+        setLoading(false);
         return;
       }
 
-      // Clerk ready hai, user logged out
+      if (typeof isSignedIn === "undefined") return;
+
       if (isSignedIn === false) {
         setLoading(false);
         return;
-      } 
+      }
 
       if (!clerkUser) return;
 
       try {
-        const token = await getToken();
+        let token;
+        try {
+          token = await getToken();
+        } catch {
+          setLoading(false);
+          return;
+        }
 
         const res = await fetch(`${backendUrl}/api/users/sync`, {
           method: "POST",
@@ -57,8 +70,10 @@ export const UserProvider = ({ children }) => {
     };
 
     syncUser();
-  }, [isSignedIn, clerkUser]);
+  }, [isSignedIn, clerkUser, isLoaded]);
 
+
+  // Refresh Users
   const refreshUser = async () => {
     try {
       const token = await getToken();

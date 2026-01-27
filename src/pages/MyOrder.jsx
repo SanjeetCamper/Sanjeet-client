@@ -7,12 +7,14 @@ import OrdersSkeleton from "../components/myOrders/OrdersSkeleton.jsx";
 import EmptyOrdersState from "../components/myOrders/EmptyOrdersState.jsx";
 import { useToast } from "../context/ToastContext.jsx";
 import BackButton from "../components/BackButton.jsx";
-
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 const POLL_INTERVAL = 15000; // 15 sec
 
 const MyOrders = () => {
   const { showToast } = useToast();
   const { fetchMyOrders, loading } = useOrder();
+  const navigate = useNavigate();
 
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState("all");
@@ -102,7 +104,8 @@ const MyOrders = () => {
   return (
     <div className="fixed bg-white left-0 top-0 w-full h-screen z-100 p-4 pt-39 pb-5 overflow-y-auto">
       <div className="fixed bg-white top-0 left-0 w-full z-100 p-4 space-y-2">
-        <BackButton />
+        {/* <BackButton /> */}
+        <p className="text-xs text-gray-500" onClick={()=>navigate("/order-place")}><ArrowLeft /></p>
         <MyOrdersHeader />
         <OrderFilterBar active={filter} onChange={setFilter} />
       </div>

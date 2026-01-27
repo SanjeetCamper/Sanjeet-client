@@ -5,11 +5,14 @@ import StepCamperLocation from "../components/order/StepCamperLocation.jsx";
 import StepSchedulePayment from "../components/order/StepSchedulePayment.jsx";
 import ConfirmOrderModal from "../components/order/ConfirmOrderModal.jsx";
 import BackButton from "../components/BackButton.jsx";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const BookCamper = () => {
   const [step, setStep] = useState(1);
   const [confirmOpen, setConfirmOpen] = useState(false);
-
+  const navigate = useNavigate();
+ 
   /* ---------------------------
      STEP NAVIGATION
   ---------------------------- */
@@ -19,7 +22,9 @@ const BookCamper = () => {
   return (
     <div className="fixed top-0 left-0 h-screen w-full bg-white z-100 pt-4 pb-20 px-6 space-y-5">
       <div className="mx-auto w-full max-w-md h-screen overflow-y-auto no-scrollbar pb-20">
-        <BackButton />
+        {/* <BackButton /> */}
+
+      <p className="text-xs text-gray-500" onClick={()=>navigate("/order-place")}><ArrowLeft /></p>
 
         {/* STEP INDICATOR */}
         <div className="flex justify-between text-xs text-gray-500 my-4">
