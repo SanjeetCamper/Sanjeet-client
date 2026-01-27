@@ -12,6 +12,7 @@ import { DailyUserCredentialsProvider } from "./context/DailyUserCredentialsCont
 import AppReloadProvider from "./appReload/AppReloadProvider.jsx";
 import { OrderProvider } from "./context/OrderContext.jsx";
 import { VillageProvider } from "./context/VillageContext.jsx";
+import { ToastSettingsProvider } from "./context/ToastSettingsContext.jsx";
 
 registerSW(); // 👈 call once, बस
 
@@ -41,11 +42,11 @@ createRoot(document.getElementById("root")).render(
           <MembershipProvider>
             <OrderProvider>
               <VillageProvider>
+                <ToastSettingsProvider>
                 <ToastProvider>
-                  
                     <AppReloadProvider />
-                  
                 </ToastProvider>
+                </ToastSettingsProvider>
               </VillageProvider>
             </OrderProvider>
           </MembershipProvider>

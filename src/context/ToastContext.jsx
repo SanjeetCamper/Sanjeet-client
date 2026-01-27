@@ -1,10 +1,10 @@
 import { createContext, useContext, useRef, useState } from "react";
 import Toast from "../components/Toast.jsx";
+import { useToastSettings } from "./ToastSettingsContext";
 
 const ToastContext = createContext();
 export const useToast = () => useContext(ToastContext);
 
-// 🔊 sound map
 const sounds = {
   success: new Audio("/toast-success.mp3"),
   error: new Audio("/toast-error.mp3"),
@@ -17,25 +17,32 @@ Object.values(sounds).forEach((a) => (a.preload = "auto"));
 export const ToastProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
   const timeoutRef = useRef(null);
+  const { soundEnabled, vibrationEnabled } = useToastSettings();
 
   const playSound = (type) => {
+    if (!soundEnabled) return;
     const audio = sounds[type];
     if (!audio) return;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  };
 
-    try {
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    } catch {}
+  const vibrate = () => {
+    if (!vibrationEnabled) return;
+    if (navigator.vibrate) {
+      navigator.vibrate(80);
+    }
   };
 
   const showToast = (message, type = "success", options = {}) => {
-    const { duration = 3000, sound = true } = options;
+    const { duration = 3000 } = options;
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
     setToast({ message, type });
 
-    if (sound) playSound(type);
+    playSound(type);
+    vibrate();
 
     timeoutRef.current = setTimeout(() => {
       setToast(null);

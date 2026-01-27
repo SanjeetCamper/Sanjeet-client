@@ -35,6 +35,7 @@ import OrderCamper from "./pages/OrderCamper.jsx";
 import BookCamper from "./pages/BookCamper.jsx";
 import MyOrder from "./pages/MyOrder.jsx";
 import NetworkListener from "./components/network/NetworkListener.jsx";
+import ToastSettings from "./pages/ToastSettings.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -192,6 +193,15 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <NotificationSettings />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route // setting me notification controller
+            path="/setting/toast-notifications"
+            element={
+              <ProtectedRoute>
+                <ToastSettings />
               </ProtectedRoute>
             }
           />

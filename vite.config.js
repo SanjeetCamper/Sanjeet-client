@@ -10,28 +10,45 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
 
-      workbox: {
-        cleanupOutdatedCaches: true, // 👈 सबसे जरूरी
-      },
-
       includeAssets: [
         "logo.png",
         "bg_img.png",
-        // "hand_wave.png",
-        // "header_img.png",
         "favicon.ico",
         "Campers.png",
-        "RO.png"
-
+        "RO.png",
+        "toast-success.mp3",
+        "toast-error.mp3",
+        "toast-info.mp3",
+        "toast-warning.mp3",
+        "network-offline.mp3",
+        "network-online.mp3",
       ],
+
+      workbox: {
+        cleanupOutdatedCaches: true,
+
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.destination === "audio",
+            handler: "CacheFirst",
+            options: {
+              cacheName: "audio-cache",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              },
+            },
+          },
+        ],
+      },
 
       manifest: {
         name: "Sanjeet Water Supplier",
         short_name: "SWS",
         start_url: "/",
         display: "standalone",
-        background_color: "#ffffffff", // splash background
-        theme_color: "#a5f3fc", // light aqua
+        background_color: "#ffffff",
+        theme_color: "#a5f3fc",
         icons: [
           {
             src: "logo.png",

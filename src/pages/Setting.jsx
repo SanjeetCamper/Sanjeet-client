@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
-import { User, Lock, Bell, ChevronRight, LogOut } from "lucide-react";
+import { User, Lock, Bell, ChevronRight, LogOut, AlertCircle, AlarmCheck } from "lucide-react";
 import SignOutApp from "../components/settingsComponents/SignOutApp.jsx";
+import ToastSettings from './ToastSettings.jsx'
+
+
 const Section = ({ title, children }) => (
   <div className="mb-6">
     <h2 className="text-xs font-semibold text-gray-500 uppercase mb-2">
@@ -61,6 +64,11 @@ const Setting = () => {
           label="App Notifications"
           onClick={() => navigate("/setting/notifications")}
         />
+        <Item
+          icon={AlarmCheck}
+          label="Toast Notifications"
+          onClick={() => navigate("/setting/toast-notifications")}
+        />
       </Section>
 
       <div className="mb-6" onClick={()=>setLogOutApp(true)}>
@@ -83,6 +91,8 @@ const Setting = () => {
         onClose={()=>setLogOutApp(false)}
         onConfirm={()=>signOut()}
       />
+
+      
     </div>
     // </div>
   );
