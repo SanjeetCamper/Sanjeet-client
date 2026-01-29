@@ -18,6 +18,7 @@ const CreateDailyUserCredentials = () => {
   const submit = async () => {
     if (!username || !password) {
       setError("All fields required");
+      showToast("All fields required" , "warning");
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -25,6 +26,7 @@ const CreateDailyUserCredentials = () => {
     }
     if (password !== confirm) {
       setError("Passwords do not match");
+      showToast("Passwords do not match" , "warning");
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -41,6 +43,7 @@ const CreateDailyUserCredentials = () => {
       navigate("/dailyuser");
     } catch (err) {
       setError(err?.response?.data?.message || "Failed to create credentials");
+      showToast(err?.response?.data?.message || "Failed to create credentials" , "error");
 
       setTimeout(() => {
         setError("");

@@ -128,7 +128,7 @@ const DailyUserLogin = () => {
           </h3>
 
           <button
-            onClick={() => showToast("Cooming Soon" , "info")}
+            onClick={() => navigate("/cash-user-request")}
             className="w-full flex items-center gap-3 border rounded-xl px-4 py-3 active:bg-gray-50"
           >
             <Wallet size={18} className="text-green-600" />

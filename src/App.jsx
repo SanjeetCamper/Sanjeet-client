@@ -36,6 +36,7 @@ import BookCamper from "./pages/BookCamper.jsx";
 import MyOrder from "./pages/MyOrder.jsx";
 import NetworkListener from "./components/network/NetworkListener.jsx";
 import ToastSettings from "./pages/ToastSettings.jsx";
+import CashUserInfoPage from "./components/CashUserInfoPage.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -126,6 +127,15 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Notification />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/cash-user-request"
+            element={
+              <ProtectedRoute>
+                <CashUserInfoPage />
               </ProtectedRoute>
             }
           />

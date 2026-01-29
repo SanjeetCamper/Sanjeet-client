@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useClerk, UserButton } from "@clerk/clerk-react";
 import { useContextUser } from "../context/UserContext";
+import NotchNotification from "./NotchNotification.jsx"
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const NavBar = () => {
             onClick={() => navigate("/")}
           />
 
-          {/* {user && user?.isProfileComplete ? <NotchNotification /> : ""} */}
+          {user && user?.isProfileComplete ? <NotchNotification user={user} /> : ""}
 
           {user && user?.isProfileComplete ? (
             <UserButton
