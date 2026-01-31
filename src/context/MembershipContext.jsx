@@ -13,7 +13,7 @@ export const MembershipProvider = ({ children }) => {
   const [error, setError] = useState("");
 
   const [activeMembership, setActiveMembership] = useState(null);
-  const [status, setStatus] = useState(""); // idle | processing | verifying | success | failed
+  const [status, setStatus] = useState("idle"); // idle | processing | verifying | success | failed
 
   // 🔹 fetch active membership (DASHBOARD + BLOCK BUY)
   const fetchMyMembership = async () => {
@@ -99,8 +99,10 @@ export const MembershipProvider = ({ children }) => {
 
         modal: {
           ondismiss: () => {
-            setStatus("idle");
+            if(status !== "success"){
+              setStatus("idle");
             setError("Payment cancelled. No amount deducted.");
+            }
           },
         },
 

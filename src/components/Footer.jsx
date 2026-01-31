@@ -66,10 +66,10 @@ const Footer = () => {
         >
           {[
             { to: "/", label: "Home", icon: HomeIcon },
-            { to: "/order-place", label: "Book Camper", icon: LucideTruck },
             { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+            { to: "/order-place", label: "Book Camper", icon: LucideTruck },
             // { to: "/membership/plans", label: "Membership", icon: Plane },
-            { to: "/notification", label: "Notification", icon: BellIcon },
+            { to: "/notifications", label: "Notification", icon: BellIcon },
             { to: "/dailyuser", label: "Daily User", icon: Handshake  },
             { to: "/setting", label: "Setting", icon: Settings },
           ].map((item, i) => {

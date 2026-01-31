@@ -66,7 +66,7 @@ const DailyUserLogin = () => {
   };
 
   return (
-    <div className="bg-white flex flex-col items-center justify-center px-4">
+    <div className="bg-white flex flex-col items-center justify-center px-8">
       <div className="w-full max-w-md space-y-6">
         {/* LOGIN CARD */}
         <div className="bg-white border border-gray-200 rounded-2xl p-5">

@@ -13,6 +13,7 @@ import AppReloadProvider from "./appReload/AppReloadProvider.jsx";
 import { OrderProvider } from "./context/OrderContext.jsx";
 import { VillageProvider } from "./context/VillageContext.jsx";
 import { ToastSettingsProvider } from "./context/ToastSettingsContext.jsx";
+import { NotificationProvider } from "./context/NotificationContext.jsx";
 
 registerSW(); // 👈 call once, बस
 
@@ -36,22 +37,24 @@ document.addEventListener("contextmenu", (e) => {
 
 createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-    <UserProvider>
-      <BrowserRouter>
-        <DailyUserCredentialsProvider>
-          <MembershipProvider>
-            <OrderProvider>
-              <VillageProvider>
-                <ToastSettingsProvider>
-                <ToastProvider>
-                    <AppReloadProvider />
-                </ToastProvider>
-                </ToastSettingsProvider>
-              </VillageProvider>
-            </OrderProvider>
-          </MembershipProvider>
-        </DailyUserCredentialsProvider>
-      </BrowserRouter>
-    </UserProvider>
+    <BrowserRouter>
+      <ToastSettingsProvider>
+        <ToastProvider>
+          <UserProvider>
+            <NotificationProvider>
+              <DailyUserCredentialsProvider>
+                <MembershipProvider>
+                  <OrderProvider>
+                    <VillageProvider>
+                      <AppReloadProvider />
+                    </VillageProvider>
+                  </OrderProvider>
+                </MembershipProvider>
+              </DailyUserCredentialsProvider>
+            </NotificationProvider>
+          </UserProvider>
+        </ToastProvider>
+      </ToastSettingsProvider>
+    </BrowserRouter>
   </ClerkProvider>,
 );

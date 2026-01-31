@@ -123,7 +123,7 @@ const App = () => {
           />
 
           <Route
-            path="/notification"
+            path="/notifications"
             element={
               <ProtectedRoute>
                 <Notification />
