@@ -63,7 +63,7 @@ const DailyUserFooterNavbar = () => {
           {[
             { to: "/dailyuser/app/dashboard", label: "Dashboard", icon: LayoutDashboard },
             { to: "/dailyuser/app/history", label: "History", icon: HistoryIcon },
-            { to: "/dailyuser/app/notification", label: "Notification", icon: BellIcon },
+            // { to: "/dailyuser/app/notification", label: "Notification", icon: BellIcon },
             { to: "/dailyuser/app/setting", label: "Setting", icon: Settings },
           ].map((item, i) => {
             const Icon = item.icon;

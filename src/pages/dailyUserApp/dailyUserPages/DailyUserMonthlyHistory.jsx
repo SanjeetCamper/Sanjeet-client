@@ -7,7 +7,7 @@ import { getMonthName } from "../../../utils/monthUtils.js";
 import { useRef } from "react";
 import ExportReportModal from '../exportCsvPdf/ExportReportModal.jsx'
 import ExportButton from "../exportCsvPdf/ExportButton.jsx";
-import BackButton from "../../../components/BackButton.jsx";
+import BackButtonByNavigate from "../../../components/BackButtonByNavigate.jsx";
 
 const DailyUserMonthlyHistory = () => {
   
@@ -120,7 +120,7 @@ const DailyUserMonthlyHistory = () => {
       onTouchEnd={onTouchEnd}
     >
 
-      <BackButton />
+      <BackButtonByNavigate urlHeading={"Monthly View"} urlPath={"/dailyuser/app/history"} />
 
       {/* 🔹 MONTH SWITCHER */}
       <div className="flex items-center justify-between bg-white border rounded-xl px-3 py-2">

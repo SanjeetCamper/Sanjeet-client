@@ -5,6 +5,7 @@ import BackButton from '../../../components/BackButton.jsx'
 import DailyUserHistoryFilterBar from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryFilterBar.jsx";
 import DailyUserHistoryDateGroup from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryDateGroup.jsx";
 import FullPageLoader from "../../../components/FullPageLoader.jsx";
+import BackButtonByNavigate from "../../../components/BackButtonByNavigate.jsx";
 
 const DailyUserEntryHistory = () => {
   const { history, loading } = useDailyUser();
@@ -65,7 +66,7 @@ const DailyUserEntryHistory = () => {
       onTouchEnd={onTouchEnd}
     >
 
-      <BackButton />
+        <BackButtonByNavigate urlHeading={"Entry View"} urlPath={"/dailyuser/app/history"} />
 
       {/* FILTER BAR */}
       <div className="">

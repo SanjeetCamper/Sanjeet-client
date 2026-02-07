@@ -51,7 +51,7 @@ const StepUserDetails = ({ onNext }) => {
         placeholder="पूरा नाम *"
         value={order.name}
         onChange={(e) => setOrder({ ...order, name: e.target.value })}
-        className="w-full border border-[#21c4cc] rounded-xl p-3"
+        className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3"
       />
 
       <input
@@ -60,7 +60,7 @@ const StepUserDetails = ({ onNext }) => {
         value={order.phone}
         maxLength={10}
         onChange={(e) => setOrder({ ...order, phone: e.target.value })}
-        className="w-full border border-[#21c4cc] rounded-xl p-3"
+        className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3"
       />
 
       <input
@@ -68,7 +68,7 @@ const StepUserDetails = ({ onNext }) => {
         placeholder="ईमेल (optional)"
         value={order.email}
         onChange={(e) => setOrder({ ...order, email: e.target.value })}
-        className="w-full border border-[#21c4cc] rounded-xl p-3"
+        className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3"
       />
 
       <textarea
@@ -76,7 +76,7 @@ const StepUserDetails = ({ onNext }) => {
         value={order.address}
         onChange={(e) => setOrder({ ...order, address: e.target.value })}
         rows={3}
-        className="w-full border border-[#21c4cc] rounded-xl p-3"
+        className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3"
       />
 
       <button

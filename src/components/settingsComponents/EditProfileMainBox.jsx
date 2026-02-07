@@ -1,8 +1,9 @@
-import React from 'react'
+import React from "react";
 import { useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Image, User2 } from 'lucide-react';
-import BackButton from '../BackButton.jsx'
+import { ChevronRight, Image, User2 } from "lucide-react";
+import BackButtonByNavigate from "../BackButtonByNavigate.jsx";
+
 const Section = ({ title, children }) => (
   <div className="mb-2">
     <h2 className="text-xs font-semibold text-gray-500 uppercase mb-2">
@@ -28,32 +29,32 @@ const Item = ({ icon: Icon, label, onClick }) => (
 );
 
 const EditProfileMainBox = () => {
-
-    const {openUserProfile} = useClerk();
-    const navigate = useNavigate();
+  const { openUserProfile } = useClerk();
+  const navigate = useNavigate();
 
   return (
-    <div className='mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2'>
+    <div className="mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2">
+      <BackButtonByNavigate urlPath={"/setting"} urlHeading={"Profile Details"} />
 
-      <BackButton />
+      <div className="px-2">
+        <Section>
+          <Item
+            icon={Image}
+            label="Change Profile Image"
+            onClick={openUserProfile}
+          />
+        </Section>
 
-      <Section title="Profile Details">
-        <Item
-          icon={Image}
-          label="Change Profile Image"
-          onClick={openUserProfile}
-        />
-      </Section>
-
-      <Section>
-         <Item
-          icon={User2}
-          label="Edit Details"
-          onClick={() => navigate("/setting/open-change-profile-details")}
-        />
-      </Section>
+        <Section>
+          <Item
+            icon={User2}
+            label="Edit Details"
+            onClick={() => navigate("/setting/open-change-profile-details")}
+          />
+        </Section>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default EditProfileMainBox
+export default EditProfileMainBox;

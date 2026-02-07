@@ -6,9 +6,9 @@ const BackButtonByNavigate = ({urlPath , urlHeading}) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex gap-3">
-      <ChevronLeft className="text-gray-500" size={22} onClick={() => navigate(urlPath)} />
-      <h1 className="text-gray-600">{urlHeading}</h1>
+    <div className="flex gap-1">
+      <ChevronLeft className="text-gray-500" size={18} onClick={() => navigate(urlPath)} />
+      <h1 className="text-gray-600 text-[13px]">{urlHeading}</h1>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useMembership } from "../context/MembershipContext.jsx";
-import BackButton from "../components/BackButton.jsx";
+import BackButtonByNavigate from "../components/BackButtonByNavigate.jsx";
 import FullPageLoader from "../components/FullPageLoader.jsx";
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL;
@@ -58,9 +58,12 @@ const MembershipPlans = () => {
   }
 
   return (
-    <div className="fixed w-full h-screen left-0 top-0 z-100 bg-white p-4 overflow-y-auto">
-      <div className="max-w-md mx-auto space-y-4">
-        <BackButton />
+    <div className="space-y-4 fixed w-full h-screen left-0 top-0 z-100 bg-white p-4 overflow-y-auto scroll-hide">
+      
+      <BackButtonByNavigate urlHeading={"Choose Membership"} urlPath={-1}/>
+
+      <div className="max-w-md mx-auto space-y-4 px-2 overflow-y-auto">
+        
 
         {!activeMembership ? (
           <p className="text-xs bg-blue-50 text-blue-700 p-2 rounded">
@@ -71,10 +74,10 @@ const MembershipPlans = () => {
             You already have an active membership.
           </p>
         )}
-
+{/* 
         <h1 className="text-sm font-semibold text-gray-700">
           Choose Membership
-        </h1>
+        </h1> */}
 
         {planError && (
           <p className="text-xs bg-red-50 text-red-600 p-2 rounded">{planError}</p>

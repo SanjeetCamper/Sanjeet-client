@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ChevronLeft } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 const BackButton = () => {
@@ -7,7 +7,7 @@ const BackButton = () => {
 
   return (
     <div className='text-gray-500' onClick={()=>navigate(-1)}>
-      <ArrowLeft />
+      <ChevronLeft className='' />
     </div>
   )
 }

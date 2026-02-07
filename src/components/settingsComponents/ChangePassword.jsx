@@ -1,7 +1,7 @@
 import React from "react";
 import { useClerk } from "@clerk/clerk-react";
 import { Lock } from "lucide-react";
-import BackButton from "../BackButton";
+import BackButtonByNavigate from "../BackButtonByNavigate.jsx";
 
 const ChangePassword = () => {
   const { openUserProfile } = useClerk();
@@ -10,13 +10,10 @@ const ChangePassword = () => {
   return (
     <div className="mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2">
 
-      <BackButton />
+      <BackButtonByNavigate urlPath={"/setting"} urlHeading={"Change Password"} />
 
-      <h1 className="text-xs font-semibold text-gray-500 mb-4">
-        CHANGE PASSWORD
-      </h1>
-
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
+      <div className="px-1">
+        <div className="bg-white border border-gray-200 rounded-xl p-4">
         <div className="flex items-start gap-3">
           <Lock className="text-gray-500 mt-1" size={20} />
           <div>
@@ -35,6 +32,7 @@ const ChangePassword = () => {
         >
           Open Security Settings
         </button>
+      </div>
       </div>
     </div>
   );

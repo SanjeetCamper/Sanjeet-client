@@ -70,7 +70,9 @@ const StepCamperLocation = ({ onNext, onBack }) => {
 
       {/* CAMPER QTY */}
       <div>
-        <label className="text-sm text-gray-600">कैम्पर की संख्या (कम से कम 10)</label>
+        <label className="text-sm text-gray-600">
+          कैम्पर की संख्या (कम से कम 10)
+        </label>
         <input
           type="number"
           min={10}
@@ -78,7 +80,7 @@ const StepCamperLocation = ({ onNext, onBack }) => {
           onChange={(e) =>
             setOrder({ ...order, camperQty: Number(e.target.value) })
           }
-          className="w-full border border-[#21c4cc] rounded-xl p-3 mt-1"
+          className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3 mt-1"
         />
       </div>
 
@@ -94,7 +96,7 @@ const StepCamperLocation = ({ onNext, onBack }) => {
         <select
           value={order.villageId || ""}
           onChange={(e) => setOrder({ ...order, villageId: e.target.value })}
-          className="w-full border border-[#21c4cc] rounded-xl p-3 mt-1"
+          className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3 mt-1"
         >
           <option value="">गाँव चुने</option>
           {villages.map((v) => (

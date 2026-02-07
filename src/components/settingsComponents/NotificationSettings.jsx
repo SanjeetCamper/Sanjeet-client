@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useToast } from "../../context/ToastContext.jsx";
 import BackButton from "../BackButton.jsx";
+import BackButtonByNavigate from "../BackButtonByNavigate.jsx";
 
 const Toggle = ({ label, description }) => {
   const [enabled, setEnabled] = useState(false);
@@ -36,13 +37,14 @@ const NotificationSettings = () => {
   return (
     <div className="mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2">
 
-      <BackButton />
+      <BackButtonByNavigate urlPath={"/setting"} urlHeading={"Notifications Toggle"} />
 
-      <h1 className="text-xs font-semibold text-gray-500 mb-4">
+      {/* <h1 className="text-xs font-semibold text-gray-500 mb-4">
         NOTIFICATIONS
-      </h1>
+      </h1> */}
 
-      <div className="bg-white border border-gray-200 rounded-xl divide-y px-4">
+     <div className="px-1">
+       <div className="bg-white border border-gray-200 rounded-xl divide-y px-4">
         <Toggle
           label="App Notifications"
           description="Receive important updates inside the app"
@@ -56,6 +58,7 @@ const NotificationSettings = () => {
           description="Receive messages sent by admin"
         />
       </div>
+     </div>
     </div>
   );
 };

@@ -5,11 +5,13 @@ import DailyUserSettingItems from "../dailyUserComponents/dailyUserSetting/Daily
 import { useDailyUser } from "../dailyUserContext/DailyUserContext.jsx";
 import { useNavigate } from "react-router-dom";
 import DailyUserLogoutConfirm from "../dailyUserComponents/dailyUserSetting/DailyUserLogoutConfirm.jsx";
+import { useToast } from "../../../context/ToastContext.jsx";
 
 const DailyUserSetting = () => {
   const { dailyUser } = useDailyUser();
   const navigate = useNavigate();
   const [showLogout, setShowLogout] = useState(false);
+  const {showToast} = useToast();
 
   const handleLogout = () => {
     localStorage.removeItem("dailyUserToken");
@@ -43,7 +45,7 @@ const DailyUserSetting = () => {
           icon={Bell}
           label="App Notifications"
           value="Enabled"
-          onClick={() => {}}
+          onClick={() => showToast("Cooming Soon" , "warning")}
         />
       </DailyUserSettingSection>
 

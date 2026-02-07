@@ -5,8 +5,9 @@ import StepCamperLocation from "../components/order/StepCamperLocation.jsx";
 import StepSchedulePayment from "../components/order/StepSchedulePayment.jsx";
 import ConfirmOrderModal from "../components/order/ConfirmOrderModal.jsx";
 import BackButton from "../components/BackButton.jsx";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import BackButtonByNavigate from "../components/BackButtonByNavigate.jsx"
 
 const BookCamper = () => {
   const [step, setStep] = useState(1);
@@ -20,11 +21,14 @@ const BookCamper = () => {
   const prevStep = () => setStep((s) => s - 1);
 
   return (
-    <div className="fixed top-0 left-0 h-screen w-full bg-white z-100 pt-4 pb-20 px-6 space-y-5">
-      <div className="mx-auto w-full max-w-md h-screen overflow-y-auto no-scrollbar pb-20">
-        {/* <BackButton /> */}
+    <div className="fixed top-0 left-0 h-screen w-full bg-white z-100 pt-4 pb-20 px-6 space-y-1">
 
-      <p className="text-xs text-gray-500" onClick={()=>navigate("/order-place")}><ArrowLeft /></p>
+      
+      <BackButtonByNavigate urlPath={"/order-place"} urlHeading={"Book Campers"} />
+
+      {/* <p className="text-xs text-gray-500" onClick={()=>navigate()}><ChevronLeft /></p> */}
+
+      <div className="mx-auto w-full max-w-md h-screen overflow-y-auto no-scrollbar pb-20 px-2 overflow-y-auto">
 
         {/* STEP INDICATOR */}
         <div className="flex justify-between text-xs text-gray-500 my-4">

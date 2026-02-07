@@ -90,7 +90,7 @@ const StepSchedulePayment = ({ onNext, onBack }) => {
           onChange={(e) =>
             setOrder({ ...order, deliveryDate: e.target.value })
           }
-          className="w-full border border-[#21c4cc] rounded-xl p-3 mt-1"
+          className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3 mt-1"
         />
       </div>
 
@@ -102,7 +102,7 @@ const StepSchedulePayment = ({ onNext, onBack }) => {
           onChange={(e) =>
             setOrder({ ...order, deliveryTimeSlot: e.target.value })
           }
-          className="w-full border border-[#21c4cc] rounded-xl p-3 mt-1"
+          className="w-full border border-[#21c4cc] outline-[#21c4cc] rounded-xl p-3 mt-1"
         >
           <option value="">समय चुनें</option>
           {slots.map((s) => (

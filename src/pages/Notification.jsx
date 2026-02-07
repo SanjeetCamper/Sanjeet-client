@@ -42,11 +42,9 @@ const Notification = () => {
   });
 
   return (
-    <div className="p-4 fixed top-0 left-0 w-full h-screen z-100 bg-white overflow-y-auto">
-      <BackButtonByNavigate urlPath={"/"} urlHeading={"Notifications"}/>
-
-      <div className="space-y-4 mt-3 px-1">
-        {/* <h1 className="text-lg font-semibold">Notifications</h1> */}
+    <div className="p-4 fixed top-0 left-0 w-full h-screen z-100 bg-white overflow-y-auto scroll-hide pt-20">
+      <div className="fixed top-0 left-0 w-full z-100 bg-white p-4 space-y-3">
+      <BackButtonByNavigate urlPath={"/order-place"} urlHeading={"Notifications"} />
         {/* FILTERS */}
         <div className="flex gap-2">
           {FILTERS.map((f) => (
@@ -64,10 +62,12 @@ const Notification = () => {
             </button>
           ))}
         </div>
+      </div>
 
+      <div className="space-y-4 mt-3 px-1">
         {/* LIST */}
-        <div className="border border-gray-300 rounded shadow divide-y divide-gray-300 overflow-y-auto ">
-          {loading && <p className="p-4 text-sm text-gray-400">Loading...</p>}
+        <div className="rounded divide-y divide-gray-300 overflow-y-auto space-y-3">
+          {loading && <p className="p-4 text-sm text-gray-400 text-center">Loading...</p>}
 
           {!loading && filtered.length === 0 && (
             <p className="p-4 text-sm text-gray-400 text-center">
@@ -80,7 +80,7 @@ const Notification = () => {
               key={n._id}
               id={n._id}
               onClick={() => openNotification(n)}
-              className={`p-4 cursor-pointer
+              className={`p-4 cursor-pointer border border-gray-200 shadow rounded-xl
               ${
                 n._id === openId
                   ? "bg-[#21c4cc]/20 border-l-4 border-[#21c4cc]"
@@ -90,7 +90,7 @@ const Notification = () => {
               }`}
             >
               <p className="font-medium text-sm">{n.title}</p>
-              <p className="text-xs text-gray-500 mt-1">{n.message}</p>
+              <p className="text-xs text-gray-500 mt-1 whitespace-pre-line">{n.message}</p>
               <p className="text-[10px] text-gray-400 mt-1">
                 {new Date(n.createdAt).toLocaleString()}
               </p>

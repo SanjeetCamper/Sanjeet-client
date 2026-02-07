@@ -3,16 +3,17 @@ import DailyUserSettingSection from "./DailyUserSettingSection";
 import DailyUserSettingItems from "./DailyUserSettingItems";
 import {Info} from "lucide-react";
 import BackButton from '../../../../components/BackButton.jsx'
+import BackButtonByNavigate from "../../../../components/BackButtonByNavigate.jsx";
 
 const DailyUserAdminInfo = () => {
   return (
     <div className=" px-4 pt-4 pb-20 bg-white min-h-screen overflow-auto space-y-2">
       {/* <h1 className="text-lg font-semibold text-gray-800 mb-4">Admin/Owner Information</h1> */}
 
-      <BackButton />
+        <BackButtonByNavigate urlHeading={"Admin Info"} urlPath={"/dailyuser/app/setting"} />
 
       {/* NOTIFICATIONS */}
-      <DailyUserSettingSection title="Owner/Admin">
+      <DailyUserSettingSection >
         <DailyUserSettingItems
           icon={Info}
           label="Sanjeet Water Supplier"

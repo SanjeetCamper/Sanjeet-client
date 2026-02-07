@@ -1,5 +1,5 @@
 import { useToastSettings } from "../context/ToastSettingsContext";
-import BackButton from "../components/BackButton";
+import BackButtonByNavigate from "../components/BackButtonByNavigate.jsx";
 
 const ToastSettings = () => {
   const {
@@ -11,9 +11,9 @@ const ToastSettings = () => {
 
   return (
     <div className="mx-auto max-w-md py-24 min-h-screen bg-white px-4 space-y-2">
-      <BackButton />
+      <BackButtonByNavigate urlHeading={"Toast Notifications"} urlPath={"/setting"} />
 
-      <h1 className="text-xs font-semibold text-gray-500 mb-4">TOAST NOTIFICATIONS</h1>
+      {/* <h1 className="text-xs font-semibold text-gray-500 mb-4">TOAST NOTIFICATIONS</h1> */}
 
       <div className="flex justify-between items-center border border-gray-200 p-3 rounded-lg">
         <span className="text-sm text-gray-500">Toast Sound</span>

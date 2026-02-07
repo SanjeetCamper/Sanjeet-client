@@ -13,7 +13,7 @@ const DailyUser = () => {
   }, [navigate]);
 
   return (
-    <div className="mx-auto w-full max-w-md  my-27">
+    <div className="mx-auto w-full max-w-md  my-23">
       <DailyUserLogin />
     </div>
   );

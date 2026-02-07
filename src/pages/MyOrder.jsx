@@ -9,6 +9,7 @@ import { useToast } from "../context/ToastContext.jsx";
 import BackButton from "../components/BackButton.jsx";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import BackButtonByNavigate from "../components/BackButtonByNavigate.jsx";
 const POLL_INTERVAL = 15000; // 15 sec
 
 const MyOrders = () => {
@@ -54,17 +55,17 @@ const MyOrders = () => {
         const status = updated.orderStatus;
 
         if (status === "accepted" || status === "delivered") {
-          showToast(`ORDER ${status.toUpperCase()}` , "success");
+          showToast(`ORDER ${status.toUpperCase()}`, "success");
         } else if (status === "rejected" || status === "cancelled") {
-          showToast(`ORDER ${status.toUpperCase()}` , "error");
+          showToast(`ORDER ${status.toUpperCase()}`, "error");
         }
       }
 
       if (oldOrder.paymentStatus !== updated.paymentStatus) {
         if (updated.paymentStatus === "paid") {
-          showToast(`आपकी आर्डर राशी पूर्ण रूप से जमा हुई` , "success");
+          showToast(`आपकी आर्डर राशी पूर्ण रूप से जमा हुई`, "success");
         } else {
-          showToast("आपकी आर्डर राशी अभी बाकी है " , "warning");
+          showToast("आपकी आर्डर राशी अभी बाकी है ", "warning");
         }
       }
     });
@@ -104,10 +105,11 @@ const MyOrders = () => {
   return (
     <div className="fixed bg-white left-0 top-0 w-full h-screen z-100 p-4 pt-39 pb-5 overflow-y-auto">
       <div className="fixed bg-white top-0 left-0 w-full z-100 p-4 space-y-2">
-        {/* <BackButton /> */}
-        <p className="text-xs text-gray-500" onClick={()=>navigate("/order-place")}><ArrowLeft /></p>
-        <MyOrdersHeader />
-        <OrderFilterBar active={filter} onChange={setFilter} />
+        <BackButtonByNavigate urlPath={"/order-place"} />
+        <div className="px-2 space-y-2">
+          <MyOrdersHeader />
+          <OrderFilterBar active={filter} onChange={setFilter} />
+        </div>
       </div>
       <div>
         {loading && <OrdersSkeleton />}
