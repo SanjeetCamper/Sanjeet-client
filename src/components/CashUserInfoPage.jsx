@@ -1,11 +1,11 @@
 import { useState } from "react";
-import BackButton from "../components/BackButton";
+import BackButtonByNavigate from "../components/BackButtonByNavigate.jsx";
 import { useContextUser } from "../context/UserContext.jsx";
 
 const ADMINS = [
   { name: "Altamash Mansuri", phone: "918989465886" },
   { name: "Alisher Sayyad", phone: "918982621556" },
-  { name: "Yusuf Pathan", phone: "919009299504" },
+  { name: "Rihan Pathan", phone: "917067418473" },
 ];
 
 const CashUserInfoPage = () => {
@@ -15,7 +15,7 @@ const CashUserInfoPage = () => {
   if (!user) return null;
 
   const message =
-    "नमस्ते 👋\n" +
+    "Hey 👋\n" +
     "मैं कैश डिलीवरी सेवा के लिए Cash User Access चाहता/चाहती हूँ।\n\n" +
     "👤 नाम: " +
     (user.name || "") +
@@ -46,10 +46,11 @@ const CashUserInfoPage = () => {
   };
 
   return (
-    <div className="fixed w-full h-screen top-0 left-0 z-100 bg-white p-4 space-y-4">
-      <BackButton />
+    <div className="fixed w-full h-screen top-0 left-0 z-100 bg-white p-4 space-y-2">
+      <BackButtonByNavigate urlHeading={"Be A Cash User"} urlPath={-1} />
 
-      <h1 className="text-lg font-semibold text-gray-800">कैश डिलीवरी सेवा</h1>
+     <div className="px-2 space-y-4">
+       <h1 className="text-lg font-semibold text-gray-800">कैश डिलीवरी सेवा</h1>
 
       <div className="text-sm text-gray-600 space-y-2">
         <p>
@@ -106,6 +107,7 @@ const CashUserInfoPage = () => {
           </div>
         </div>
       )}
+     </div>
     </div>
   );
 };
