@@ -21,6 +21,8 @@ const MembershipPlans = () => {
   const { buyMembership, loading, activeMembership, status, error } =
     useMembership();
 
+  const [showPopup, setShowPopup] = useState(false);
+
   const [plans, setPlans] = useState([]);
   const [planError, setPlanError] = useState("");
   const [durationDays, setDurationDays] = useState(30);
@@ -195,6 +197,76 @@ const MembershipPlans = () => {
             <p className="text-xs text-red-600">
               गलत स्थान से किए गए Service पर रिफंड उपलब्ध नहीं होगा।
             </p>
+
+            <div className="text-blue-700 flex gap-3 text-sm leading-relaxed">
+              <p className="underline">किसी तरह की सहायता के लिए कॉल करे</p>{" "}
+              <p>:</p>
+              <button
+                onClick={() => setShowPopup(true)}
+                className="px-3 border rounded-full border-yellow-500 text-gray-700 shadow"
+              >
+                Call Now
+              </button>
+            </div>
+
+            {/* POPUP */}
+            {showPopup && (
+              <div
+                onClick={() => setShowPopup(false)}
+                className="fixed inset-0 bg-black/50 bg-opacity-40 flex items-center justify-center z-[200]"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 120,
+                    damping: 18,
+                  }}
+                >
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-80 bg-white rounded-xl p-4 space-y-3 shadow-lg"
+                  >
+                    <h2 className="text-lg font-semibold text-gray-800 text-center">
+                      Admin चुनें
+                    </h2>
+
+                    <button
+                      onClick={() =>
+                        (window.location.href = "tel:+917489089302")
+                      }
+                      className="w-full py-3 bg-[#21c4cc] text-white rounded-lg text-sm font-medium"
+                    >
+                      Altamash Mansuri
+                    </button>
+                    <button
+                      onClick={() =>
+                        (window.location.href = "tel:+918982621556")
+                      }
+                      className="w-full py-3 bg-[#21c4cc] text-white rounded-lg text-sm font-medium"
+                    >
+                      Alisher Sayyad
+                    </button>
+                    <button
+                      onClick={() =>
+                        (window.location.href = "tel:+917067418473")
+                      }
+                      className="w-full py-3 bg-[#21c4cc] text-white rounded-lg text-sm font-medium"
+                    >
+                      Rihan Pathan
+                    </button>
+
+                    <button
+                      onClick={() => setShowPopup(false)}
+                      className="w-full py-2 bg-gray-200 text-gray-800 rounded-lg text-sm"
+                    >
+                      रद्द करें
+                    </button>
+                  </div>
+                </motion.div>
+              </div>
+            )}
           </div>
         </div>
       </motion.div>

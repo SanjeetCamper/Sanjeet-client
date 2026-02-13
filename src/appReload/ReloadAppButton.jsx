@@ -24,7 +24,7 @@ const ReloadAppButton = () => {
       {/* SMALL EDGE TOGGLE ICON */}
       <button
         onClick={() => setOpen((p) => !p)}
-        className="fixed bottom-20 left-0 z-50 bg-[#21c4cc] text-white p-2 px-1 rounded-r-lg shadow"
+        className="fixed bottom-28 left-0 z-50 bg-[#21c4cc] text-white p-2 px-1 rounded-r-lg shadow"
       >
         {open ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
       </button>
@@ -38,7 +38,7 @@ const ReloadAppButton = () => {
             exit={{ x: -120, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
             onClick={reloadApp}
-            className="fixed bottom-20 left-0 z-40 flex items-center gap-2 px-3 py-2 rounded-lg bg-[#21c4cc] text-white shadow-lg"
+            className="fixed bottom-28 left-0 z-40 flex items-center gap-2 px-3 py-2 rounded-lg bg-[#21c4cc] text-white shadow-lg"
           >
             <motion.div
               whileTap={{ rotate: -180 }}

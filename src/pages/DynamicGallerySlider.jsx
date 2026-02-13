@@ -19,7 +19,7 @@ const DynamicImageGallery = () => {
   }, [items]);
 
 
-  if (!items.length) return null;
+  if (!items.length) return <div>hello</div>;
 
   const current = items[mainIndex];
 
