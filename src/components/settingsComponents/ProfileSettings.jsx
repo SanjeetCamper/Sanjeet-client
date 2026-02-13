@@ -16,7 +16,7 @@ import { useContextUser } from "../../context/UserContext.jsx";
 import { useToast } from "../../context/ToastContext.jsx";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
-import BackButton from "../BackButton.jsx";
+import BackButtonByNavigate from "../BackButtonByNavigate.jsx";
 import { motion } from "framer-motion";
 
 const safe = (v) => v ?? "";
@@ -140,103 +140,108 @@ const ProfileSettings = () => {
   };
 
   return (
-    <motion.div
-      // initial={{ opacity: 0, y: -200 }}
-      // animate={{ opacity: 1, y: 0 }}
-      // transition={{
-      //   duration: 0.1,
-      //   ease: [0.25, 0.25, 0.25, 0.25],
-      // }}
-      className="fixed left-0 top-0 z-100 w-full  h-screen bg-white p-4 pb-15 space-y-4 overflow-y-auto transition-all animate-pageUp"
-    >
-      <div className="text-gray-500">
-        <BackButton />
-      </div>
-      <div>
-        <h1 className="text-xs font-semibold text-gray-500 mb-4">
+    <div className="fixed top-0 left-0 w-full bg-white h-screen z-100">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 120,
+          damping: 18,
+        }}
+        className="fixed left-0 top-0 z-100 w-full  h-screen bg-white p-4 pb-15 space-y-4 overflow-y-auto scroll-hide transition-all animate-pageUp"
+      >
+        <div className="text-gray-500">
+          <BackButtonByNavigate
+            urlHeading={"EDIT USER DETAILS"}
+            urlPath={"/setting/edit-profile"}
+          />
+        </div>
+        <div>
+          {/* <h1 className="text-xs font-semibold text-gray-500 mb-4">
           EDIT USER DETAILS
-        </h1>
+        </h1> */}
 
-        <div className="space-y-4">
-          <InputField
-            icon={User}
-            label="Full Name"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-          />
+          <div className="space-y-4">
+            <InputField
+              icon={User}
+              label="Full Name"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+            />
 
-          <InputField icon={Mail} label="Email" value={user.email} disabled />
+            <InputField icon={Mail} label="Email" value={user.email} disabled />
 
-          <InputField
-            icon={Phone}
-            label="Phone Number"
-            name="phone"
-            value={form.phone}
-            required
-            maxLength={10}
-            onChange={handleChange}
-          />
+            <InputField
+              icon={Phone}
+              label="Phone Number"
+              name="phone"
+              value={form.phone}
+              required
+              maxLength={10}
+              onChange={handleChange}
+            />
 
-          <InputField
-            icon={Store}
-            label="Shop Name"
-            name="shop"
-            value={form.shop}
-            onChange={handleChange}
-          />
+            <InputField
+              icon={Store}
+              label="Shop Name"
+              name="shop"
+              value={form.shop}
+              onChange={handleChange}
+            />
 
-          <InputField
-            icon={MapPin}
-            label="Village / City"
-            name="village"
-            value={form.village}
-            onChange={handleChange}
-          />
+            <InputField
+              icon={MapPin}
+              label="Village / City"
+              name="village"
+              value={form.village}
+              onChange={handleChange}
+            />
 
-          <InputField
-            icon={MapPin}
-            label="Address"
-            name="address"
-            value={form.address}
-            onChange={handleChange}
-          />
+            <InputField
+              icon={MapPin}
+              label="Address"
+              name="address"
+              value={form.address}
+              onChange={handleChange}
+            />
 
-          <InputField
-            icon={Calendar}
-            label="Birthday"
-            type="date"
-            name="birthday"
-            value={form.birthday}
-            onChange={handleChange}
-          />
+            <InputField
+              icon={Calendar}
+              label="Birthday"
+              type="date"
+              name="birthday"
+              value={form.birthday}
+              onChange={handleChange}
+            />
 
-          <InputField
-            icon={Cake}
-            label="Age"
-            disabled
-            value={user?.age ? user?.age : "Enter Birth Date"}
-          />
-        </div>
+            <InputField
+              icon={Cake}
+              label="Age"
+              disabled
+              value={user?.age ? user?.age : "Enter Birth Date"}
+            />
+          </div>
 
-        {/* Save Button */}
-        <div className="mt-6">
-          <button
-            onClick={handleSave}
-            className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition  ${
-              isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#21c4cc] hover:bg-[#21c4cc]"
-            }`}
-            disabled={isSubmitting}
-          >
-            {isSubmitting && <Loader2 className="animate-spin" size={18} />}
-            {isSubmitting ? "Submitting..." : "Submit Changes"}
-          </button>
-        </div>
+          {/* Save Button */}
+          <div className="mt-6">
+            <button
+              onClick={handleSave}
+              className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition  ${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#21c4cc] hover:bg-[#21c4cc]"
+              }`}
+              disabled={isSubmitting}
+            >
+              {isSubmitting && <Loader2 className="animate-spin" size={18} />}
+              {isSubmitting ? "Submitting..." : "Submit Changes"}
+            </button>
+          </div>
 
-        {/* Back Button */}
-        {/* <div className="mt-3">
+          {/* Back Button */}
+          {/* <div className="mt-3">
           <button
             className={`flex justify-center items-center gap-3 w-full text-white py-3 rounded-xl text-sm font-medium active:scale-95 transition bg-gray-400 cursor-not-allowed`}
             disabled={isSubmitting}
@@ -245,8 +250,9 @@ const ProfileSettings = () => {
             {isSubmitting ? "Submitting..." : "Submit Changes"}
           </button>
         </div> */}
-      </div>
-    </motion.div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

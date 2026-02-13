@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDailyUser } from "../dailyUserContext/DailyUserContext.jsx";
 import { useHistoryEngine } from "../onlyLogicJs/useHistoryEngine.js";
-import BackButton from '../../../components/BackButton.jsx'
+import BackButton from "../../../components/BackButton.jsx";
 import DailyUserHistoryFilterBar from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryFilterBar.jsx";
 import DailyUserHistoryDateGroup from "../dailyUserComponents/dailyUserHistory/DailyUserHistoryDateGroup.jsx";
 import FullPageLoader from "../../../components/FullPageLoader.jsx";
@@ -55,18 +55,24 @@ const DailyUserEntryHistory = () => {
 
   // ❌ NO HISTORY EVER
   if (isLifetimeEmpty) {
-    return <div className="px-4 pt-6 text-sm">No entries found</div>;
+    return (
+      <div className="fixed top-0 left-0 w-full h-screen z-100 bg-white px-4 pt-6 text-sm">
+        No entries found
+      </div>
+    );
   }
 
   return (
     <div
-      className="h-screen px-4 pt-4 pb-24 space-y-4"
+      className="fixed top-0 left-0 w-full h-screen z-100 bg-white  px-4 pt-4 pb-24 space-y-4"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-
-        <BackButtonByNavigate urlHeading={"Entry View"} urlPath={"/dailyuser/app/history"} />
+      <BackButtonByNavigate
+        urlHeading={"Entry View"}
+        urlPath={"/dailyuser/app/history"}
+      />
 
       {/* FILTER BAR */}
       <div className="">

@@ -21,7 +21,7 @@ const DailyUserHistory = () => {
     if (!history?.length) return 0;
     const today = new Date().toDateString();
     return history.filter(
-      (e) => new Date(e.date || e.createdAt).toDateString() === today
+      (e) => new Date(e.date || e.entryDate).toDateString() === today
     ).length;
   }, [history]);
 

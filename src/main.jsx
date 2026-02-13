@@ -14,6 +14,9 @@ import { OrderProvider } from "./context/OrderContext.jsx";
 import { VillageProvider } from "./context/VillageContext.jsx";
 import { ToastSettingsProvider } from "./context/ToastSettingsContext.jsx";
 import { NotificationProvider } from "./context/NotificationContext.jsx";
+// import { DynamicBannerProvider } from "./context/DynamicBannerContext.jsx";
+import { ClientScrollBannerProvider } from "./context/ClientScrollBannerContext.jsx";
+import { ClientGalleryProvider } from "./context/ClientGalleryContext.jsx";
 
 registerSW(); // 👈 call once, बस
 
@@ -46,7 +49,13 @@ createRoot(document.getElementById("root")).render(
                 <MembershipProvider>
                   <OrderProvider>
                     <VillageProvider>
-                      <AppReloadProvider />
+                      {/* <DynamicBannerProvider> */} 
+                      <ClientScrollBannerProvider>
+                        <ClientGalleryProvider>
+                          <AppReloadProvider />
+                        </ClientGalleryProvider>
+                      </ClientScrollBannerProvider>
+                      {/* </DynamicBannerProvider> */}
                     </VillageProvider>
                   </OrderProvider>
                 </MembershipProvider>

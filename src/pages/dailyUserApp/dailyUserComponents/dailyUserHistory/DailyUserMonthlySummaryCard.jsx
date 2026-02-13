@@ -15,7 +15,7 @@ const DailyUserMonthlySummaryCard = ({ history = [] }) => {
     let totalReceived = 0;
 
     history.forEach((e) => {
-      const d = new Date(e.date || e.createdAt);
+      const d = new Date(e.date || e.entryDate);
       if (d.getMonth() === month && d.getFullYear() === year) {
         totalEntries++;
         totalAmount += e.totalAmount || 0;

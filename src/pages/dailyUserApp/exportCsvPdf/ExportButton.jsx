@@ -6,7 +6,8 @@ const ExportButton = ({ history }) => {
 
   return (
     <div className="fixed z-100 bottom-25 right-10">
-      <button
+      <div>
+        <button
         onClick={() => setOpenExport(true)}
         className="bg-[#21c4cc] text-white shadow border border-gray-300 py-2 px-5 rounded-full"
       >
@@ -20,6 +21,7 @@ const ExportButton = ({ history }) => {
           onClose={() => setOpenExport(false)}
         />
       )}
+      </div>
     </div>
   );
 };

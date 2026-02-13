@@ -16,12 +16,12 @@ const BookCamperCard = () => {
         <h2 className="text-sm font-semibold">Book Water Camper</h2>
         <p className="text-xs opacity-90 mt-1">Quick & easy water delivery</p>
 
-        <button
-          onClick={() => navigate("/book-camper")}
-          className="mt-3 bg-white text-[#21c4cc] text-xs font-medium px-4 py-2 rounded-full"
-        >
-          Book Camper
-        </button>
+          <button
+            onClick={() => navigate("/book-camper")}
+            className="mt-3 bg-white text-[#21c4cc] text-xs font-medium px-4 py-2 rounded-full"
+          >
+            Book Camper
+          </button>
       </div>
     </div>
   );

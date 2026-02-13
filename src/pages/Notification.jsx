@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNotifications } from "../context/NotificationContext.jsx";
 import { useSearchParams } from "react-router-dom";
 import BackButtonByNavigate from "../components/BackButtonByNavigate.jsx";
+import { motion } from "framer-motion";
 
 const FILTERS = [
   { key: "today", label: "Today" },
@@ -42,9 +43,22 @@ const Notification = () => {
   });
 
   return (
-    <div className="p-4 fixed top-0 left-0 w-full h-screen z-100 bg-white overflow-y-auto scroll-hide pt-20">
+    <div className="fixed top-0 left-0 w-full h-screen z-100 bg-white">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+      }}
+      className="p-4 fixed top-0 left-0 w-full h-screen z-100 bg-white overflow-y-auto scroll-hide pt-20"
+    >
       <div className="fixed top-0 left-0 w-full z-100 bg-white p-4 space-y-3">
-      <BackButtonByNavigate urlPath={"/order-place"} urlHeading={"Notifications"} />
+        <BackButtonByNavigate
+          urlPath={"/order-place"}
+          urlHeading={"Notifications"}
+        />
         {/* FILTERS */}
         <div className="flex gap-2">
           {FILTERS.map((f) => (
@@ -67,7 +81,9 @@ const Notification = () => {
       <div className="space-y-4 mt-3 px-1">
         {/* LIST */}
         <div className="rounded divide-y divide-gray-300 overflow-y-auto space-y-3">
-          {loading && <p className="p-4 text-sm text-gray-400 text-center">Loading...</p>}
+          {loading && (
+            <p className="p-4 text-sm text-gray-400 text-center">Loading...</p>
+          )}
 
           {!loading && filtered.length === 0 && (
             <p className="p-4 text-sm text-gray-400 text-center">
@@ -90,7 +106,9 @@ const Notification = () => {
               }`}
             >
               <p className="font-medium text-sm">{n.title}</p>
-              <p className="text-xs text-gray-500 mt-1 whitespace-pre-line">{n.message}</p>
+              <p className="text-xs text-gray-500 mt-1 whitespace-pre-line">
+                {n.message}
+              </p>
               <p className="text-[10px] text-gray-400 mt-1">
                 {new Date(n.createdAt).toLocaleString()}
               </p>
@@ -98,6 +116,7 @@ const Notification = () => {
           ))}
         </div>
       </div>
+    </motion.div>
     </div>
   );
 };

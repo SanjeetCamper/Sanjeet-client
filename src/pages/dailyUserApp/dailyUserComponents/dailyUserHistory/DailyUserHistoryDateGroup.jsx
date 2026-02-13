@@ -29,8 +29,8 @@ const item = {
 const DailyUserHistoryDateGroup = ({ date, entries, minuteTick, scrolle }) => {
   const sortedEntries = [...entries].sort(
     (a, b) =>
-      new Date(b.entryDate || b.createdAt) -
-      new Date(a.entryDate || a.createdAt)
+      new Date(b.createdAt) -
+      new Date(a.createdAt)
   );
 
   return (

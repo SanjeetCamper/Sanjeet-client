@@ -69,14 +69,14 @@ const DailyUserMonthlyHistory = () => {
   const filtered = useMemo(() => {
     if (!history) return [];
     return history.filter((e) => {
-      const d = new Date(e.date || e.createdAt);
+      const d = new Date(e.date || e.entryDate);
       return d.getFullYear() === y && d.getMonth() === m;
     });
   }, [history, y, m]);
 
   const grouped = useMemo(() => {
     return filtered.reduce((acc, entry) => {
-      const key = new Date(entry.date || entry.createdAt).toDateString();
+      const key = new Date(entry.date || entry.entryDate).toDateString();
       acc[key] = acc[key] || [];
       acc[key].push(entry);
       return acc;
@@ -109,12 +109,12 @@ const DailyUserMonthlyHistory = () => {
   }, [filtered]);
 
   if (loading) {
-    return <div className="p-4 text-sm">Loading...</div>;
+    return <div className="fixed top-0 left-0 w-full h-screen z-100 bg-white p-4 text-sm">Loading...</div>;
   }
 
   return (
     <div
-      className="px-4 pt-4 pb-24 space-y-4 mx-auto w-full"
+      className="fixed top-0 left-0 w-full h-screen z-100 bg-white px-4 pt-4 pb-24 space-y-4 mx-auto w-full overflow-y-auto scroll-hide"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}

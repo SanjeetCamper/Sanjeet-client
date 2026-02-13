@@ -37,6 +37,7 @@ import MyOrder from "./pages/MyOrder.jsx";
 import NetworkListener from "./components/network/NetworkListener.jsx";
 import ToastSettings from "./pages/ToastSettings.jsx";
 import CashUserInfoPage from "./components/CashUserInfoPage.jsx";
+import AdminInfoDiv from "./components/settingsComponents/AdminInfoDiv.jsx"
 
 const App = () => {
   const location = useLocation();
@@ -203,6 +204,16 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <NotificationSettings />
+              </ProtectedRoute>
+            }
+          />
+
+
+          <Route // setting me notification controller
+            path="/setting/admin-info"
+            element={
+              <ProtectedRoute>
+                <AdminInfoDiv />
               </ProtectedRoute>
             }
           />

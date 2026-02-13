@@ -22,7 +22,7 @@ const ExportReportModal = ({ history = [], onClose ,open }) => {
     const now = new Date();
 
     return history.filter((e) => {
-      const d = new Date(e.date || e.createdAt);
+      const d = new Date(e.date || e.entryDate);
 
       if (range === "week") {
         const last7 = new Date();
@@ -82,12 +82,14 @@ const ExportReportModal = ({ history = [], onClose ,open }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 bg-black/40 flex items-end"
+      onClick={onClose}
+        className=" fixed inset-0 z-50 bg-black/40 flex items-end"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         <motion.div
+        onClick={(e)=>e.stopPropagation()}
           className="bg-white w-full rounded-t-2xl p-4 space-y-4"
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

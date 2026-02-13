@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
-import { User, Lock, Bell, ChevronRight, LogOut, AlertCircle, AlarmCheck } from "lucide-react";
+import { User, Lock, Bell, ChevronRight, LogOut, AlertCircle, AlarmCheck, Info } from "lucide-react";
 import SignOutApp from "../components/settingsComponents/SignOutApp.jsx";
 import ToastSettings from './ToastSettings.jsx'
 
@@ -68,6 +68,16 @@ const Setting = () => {
           icon={AlarmCheck}
           label="Toast Notifications"
           onClick={() => navigate("/setting/toast-notifications")}
+        />
+      </Section>
+
+
+      {/* NOTIFICATIONS */}
+      <Section title="Help Center">
+        <Item
+          icon={Info}
+          label="Admin & Owner Information"
+          onClick={() => navigate("/setting/admin-info")}
         />
       </Section>
 

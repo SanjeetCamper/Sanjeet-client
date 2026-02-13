@@ -16,6 +16,38 @@
   }
 }
 
+@layer utilities {
+  /* X axis scroll hide */
+  .scroll-hide-x {
+    @apply overflow-x-auto whitespace-nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scroll-hide-x::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Y axis scroll hide */
+  .scroll-hide-y {
+    @apply overflow-y-auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scroll-hide-y::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Both axis scroll hide */
+  .scroll-hide {
+    @apply overflow-auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 
 /* For Toaster or in any Components or Pages */
 @keyframes slideUp {
